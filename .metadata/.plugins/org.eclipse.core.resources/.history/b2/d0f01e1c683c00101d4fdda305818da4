@@ -1,0 +1,17 @@
+package org.casaca.gpx4j.core.exception;
+
+public class GpxReaderException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3137364129788613594L;
+
+	public GpxReaderException(){
+		super();
+	}
+	
+	publi GpxReaderException(String message){
+		super(message);
+	}
+}

@@ -1,0 +1,17 @@
+package org.casaca.gpx4j.core.properties;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+public class GpxProperties {
+	private Properties properties = null;
+	
+	private GpxProperties(String filePath){
+		this.properties = new Properties();
+		this.properties.load(new FileInputStream(filePath));
+	}
+	
+	private static GpxProperties gpxProperties;
+	
+	public static load()
+}

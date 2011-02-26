@@ -1,0 +1,5 @@
+package org.casaca.gpx4j.core.properties;
+
+public class GpxProperties {
+
+}

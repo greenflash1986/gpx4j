@@ -1,0 +1,9 @@
+package org.casaca.gpx4j.core.driver.reader;
+
+import java.io.InputStream;
+
+import org.casaca.gpx4j.core.data.GpxDocument;
+
+public interface IGpxReader {
+	public GpxDocument readGpxDocument(InputStream input);
+}

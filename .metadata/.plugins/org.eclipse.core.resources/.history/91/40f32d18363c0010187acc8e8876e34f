@@ -1,0 +1,58 @@
+package org.casaca.gpx4j.core.data;
+
+import java.util.Calendar;
+
+public class Waypoint {
+	//POSITION INFO
+	private Double elevation;
+	private Calendar time;
+	private Degrees magvar;
+	private Double geoIdHeight;
+	private Double latitude;
+	private Double longitude;
+	
+	//DESCRIPTION INFO
+	private String name;
+	private String cmt;
+	private String description;
+	private String src;
+	private Link link;
+	private String sym;
+	private String type;
+	
+	//ACCURACY INFO
+	private Fix fix;
+	private Integer sat;
+	private Double hdop;
+	private Double vdop;
+	private Double pdop;
+	private Double ageOfDgpsData;
+	private DgpsStation dGpsId;
+	private Extensions extensions;
+	
+	public Waypoint(){
+		this.elevation = null;
+		this.time = null;
+		this.magvar = null;
+		this.geoIdHeight = null;
+		this.latitude = null;
+		this.longitude = null;
+		
+		this.name = null;
+		this.cmt = null;
+		this.description = null;
+		this.src = null;
+		this.link = null;
+		this.sym = null;
+		this.type = null;
+		
+		this.fix = null;
+		this.sat = null;
+		this.hdop = null;
+		this.vdop = null;
+		this.pdop = null;
+		this.ageOfDgpsData = null;
+		this.dGpsId = null;
+		this.extensions = new Extensions();
+	}
+}

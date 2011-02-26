@@ -1,0 +1,7 @@
+package org.casaca.gpx4j.core.exception;
+
+import java.io.FileNotFoundException;
+
+public class GpxFileNotFoundException extends FileNotFoundException {
+
+}

@@ -1,0 +1,7 @@
+package org.casaca.gpx4j.core.exception;
+
+import java.io.IOException;
+
+public class GpxIOException extends IOException {
+
+}

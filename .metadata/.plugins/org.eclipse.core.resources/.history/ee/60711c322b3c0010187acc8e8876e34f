@@ -1,0 +1,60 @@
+package org.casaca.gpx4j.core.data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GPXDocument {
+	private String version;
+	private String creator;
+	
+	private Track track;
+	private List<Waypoint> waypoints;
+	private Route route;
+	private Extensions extensions;
+	
+	public GPXDocument(){
+		this.version = null;
+		this.creator = null;
+		this.track = null;
+		this.waypoints = new ArrayList<Waypoint>();
+		this.route = null;
+		this.extensions = null;
+	}
+	
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+	public Track getTrack() {
+		return track;
+	}
+	public void setTrack(Track track) {
+		this.track = track;
+	}
+	public ArrayList<Waypoint> getWaypoints() {
+		return waypoints;
+	}
+	public void setWaypoints(ArrayList<Waypoint> waypoints) {
+		this.waypoints = waypoints;
+	}
+	public Route getRoute() {
+		return route;
+	}
+	public void setRoute(Route route) {
+		this.route = route;
+	}
+	public Extensions getExtensions() {
+		return extensions;
+	}
+	public void setExtensions(Extensions extensions) {
+		this.extensions = extensions;
+	}
+}

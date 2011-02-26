@@ -1,0 +1,12 @@
+package org.casaca.gpx4j.core.util;
+
+public class Logger extends org.apache.log4j.Logger{
+
+	protected Logger(String name) {
+		super(name);
+	}
+	
+	public static Logger getLogger(String name){
+		return (Logger)org.apache.log4j.Logger.getLogger(name);
+	}
+}

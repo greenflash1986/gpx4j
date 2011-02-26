@@ -1,0 +1,94 @@
+package org.casaca.gpx4j.core.util;
+
+public class Constants {
+
+	private Constants(){
+		
+	}
+	
+	public static final String GPX = "GPX";
+	public static final String GPX_VERSION = "GPX_VERSION";
+	public static final String GPX_CREATOR = "GPX_CREATOR";
+	public static final String GPX_EXTENSIONS = "GPX_EXTENSIONS";
+	public static final String METADATA = "METADATA";
+	public static final String METADATA_NAME = "METADATA_NAME";
+	public static final String METADATA_DESC = "METADATA_DESC";
+	public static final String METADATA_AUTHOR = "METADATA_AUTHOR";
+	public static final String METADATA_COPYRIGHT = "METADATA_COPYRIGHT";
+	public static final String METADATA_LINK = "METADATA_LINK";
+	public static final String METADATA_TIME = "METADATA_TIME";
+	public static final String METADATA_KEYWORDS = "METADATA_KEYWORDS";
+	public static final String METADATA_BOUNDS = "METADATA_BOUNDS";
+	public static final String METADATA_EXTENSIONS = "METADATA_EXTENSIONS";
+	public static final String WPT = "WPT";
+	public static final String WPT_LAT = "WPT_LAT";
+	public static final String WPT_LON = "WPT_LON";
+	public static final String WPT_ELE = "WPT_ELE";
+	public static final String WPT_TIME = "WPT_TIME";
+	public static final String WPT_MAGVAR = "WPT_MAGVAR";
+	public static final String WPT_GEOIDHEIGHT = "WPT_GEOIDHEIGHT";
+	public static final String WPT_NAME = "WPT_NAME";
+	public static final String WPT_CMT = "WPT_CMT";
+	public static final String WPT_DESC = "WPT_DESC";
+	public static final String WPT_SRC = "WPT_SRC";
+	public static final String WPT_LINK = "WPT_LINK";
+	public static final String WPT_SYM = "WPT_SYM";
+	public static final String WPT_TYPE = "WPT_TYPE";
+	public static final String WPT_FIX = "WPT_FIX";
+	public static final String WPT_SAT = "WPT_SAT";
+	public static final String WPT_HDOP = "WPT_HDOP";
+	public static final String WPT_VDOP = "WPT_VDOP";
+	public static final String WPT_PDOP = "WPT_PDOP";
+	public static final String WPT_AGEOFDGPSDATA = "WPT_AGEOFDGPSDATA";
+	public static final String WPT_DGPSID = "WPT_DGPSID";
+	public static final String WPT_EXTENSIONS = "WPT_EXTENSIONS";
+	public static final String RTE = "RTE";
+	public static final String RTE_NAME = "RTE_NAME";
+	public static final String RTE_CMT = "RTE_CMT";
+	public static final String RTE_DESC = "RTE_DESC";
+	public static final String RTE_SRC = "RTE_SRC";
+	public static final String RTE_LINK = "RTE_LINK";
+	public static final String RTE_NUMBER = "RTE_NUMBER";
+	public static final String RTE_TYPE = "RTE_TYPE";
+	public static final String RTE_EXTENSIONS = "RTE_EXTENSIONS";
+	public static final String TRK = "TRK";
+	public static final String TRK_NAME = "TRK_NAME";
+	public static final String TRK_CMT = "TRK_CMT";
+	public static final String TRK_DESC = "TRK_DESC";
+	public static final String TRK_SRC = "TRK_SRC";
+	public static final String TRK_LINK = "TRK_LINK";
+	public static final String TRK_NUMBER = "TRK_NUMBER";
+	public static final String TRK_TYPE = "TRK_TYPE";
+	public static final String TRK_EXTENSIONS = "TRK_EXTENSIONS";
+	public static final String TRK_TRKSEG = "TRK_TRKSEG";
+	public static final String TRKSEG = "TRKSEG";
+	public static final String TRKSEG_TRKPT = "TRKSEG_TRKPT";
+	public static final String TRKSEG_EXTENSIONS = "TRKSEG_EXTENSIONS";
+	public static final String BOUNDS = "BOUNDS";
+	public static final String BOUNDS_MINLAT = "BOUNDS_MINLAT";
+	public static final String BOUNDS_MINLON = "BOUNDS_MINLON";
+	public static final String BOUNDS_MAXLAT = "BOUNDS_MAXLAT";
+	public static final String BOUNDS_MAXLON = "BOUNDS_MAXLON";
+	public static final String PT = "PT";
+	public static final String PT_LAT = "PT_LAT";
+	public static final String PT_LON = "PT_LON";
+	public static final String PT_ELE = "PT_ELE";
+	public static final String PT_TIME = "PT_TIME";
+	public static final String PTSEG = "PT_PTSEG";
+	public static final String PTSEG_PT = "PT_PT";
+	public static final String PERSON = "PERSON";
+	public static final String PERSON_NAME = "PERSON_NAME";
+	public static final String PERSON_EMAIL = "PERSON_EMAIL";
+	public static final String PERSON_LINK = "PERSON_LINK";
+	public static final String EMAIL = "EMAIL";
+	public static final String EMAIL_ID = "EMAIL_ID";
+	public static final String EMAIL_DOMAIN = "EMAIL_DOMAIN";
+	public static final String LINK = "LINK";
+	public static final String LINK_HREF = "LINK_HREF";
+	public static final String LINK_TEXT = "LINK_TEXT";
+	public static final String LINK_TYPE = "LINK_TYPE";
+	public static final String COPYRIGHT = "COPYRIGHT"
+	public static final String COPYRIGHT_AUTHOR = "COPYRIGHT_AUTHOR";
+	public static final String COPYRIGHT_YEAR = "COPYRIGHT_YEAR";
+	public static final String COPYRIGHT_LICENSE = "COPYRIGHT_LICENSE";
+}

@@ -1,0 +1,20 @@
+package org.casaca.gpx4j.core.util;
+
+public class Logging {
+
+	private Logging(){
+		
+	}
+	
+	public void info(String message){
+		
+	}
+	
+	public void warning(String message){
+		
+	}
+	
+	public void error(String message){
+		
+	}
+}

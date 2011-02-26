@@ -1,0 +1,13 @@
+package org.casaca.gpx4j.core.properties;
+
+import java.util.Properties;
+
+public class GpxProperties {
+	private Properties properties = null;
+	
+	private GpxProperties(){
+		this.properties = new Properties();
+	}
+	
+	public
+}

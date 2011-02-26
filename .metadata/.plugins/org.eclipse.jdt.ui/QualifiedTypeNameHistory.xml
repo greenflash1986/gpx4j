@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.media.j3d.Link"/>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Waypoint"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.exception.GpxFileNotFoundException"/>
+<fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Metadata"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Email"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Link"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Bounds"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Extensions"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Extension"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.util.Logger"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.DgpsStation"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.Track"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.data.TrackSegment"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.driver.reader.sax.GpxReader"/>
+<fullyQualifiedTypeName name="org.apache.log4j.BasicConfigurator"/>
+<fullyQualifiedTypeName name="java.util.logging.Logger"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.driver.reader.IGpxReader"/>
+<fullyQualifiedTypeName name="org.apache.log4j.PropertyConfigurator"/>
+<fullyQualifiedTypeName name="org.jdom.Namespace"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.util.Constants"/>
+<fullyQualifiedTypeName name="org.casaca.gpx4j.core.driver.GpxDriver"/>
+</qualifiedTypeNameHistroy>

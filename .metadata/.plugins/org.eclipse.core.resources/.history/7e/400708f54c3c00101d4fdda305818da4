@@ -1,0 +1,27 @@
+package org.casaca.gpx4j.core.data;
+
+import java.util.Calendar;
+
+public class Metadata {
+	private String name;
+	private String desc;
+	private Person author;
+	private Copyright copyright;
+	private Link link;
+	private Calendar date;
+	private String keywords;
+	private Bounds bounds;
+	private Extensions extensions;
+	
+	public Metadata(){
+		this.name = null;
+		this.desc = null;
+		this.author = null;
+		this.copyright = null;
+		this.link = null;
+		this.date = null;
+		this.keywords = null;
+		this.bounds = null;
+		this.extensions = new Extensions();
+	}
+}

@@ -1,0 +1,17 @@
+package org.casaca.gpx4j.core.driver;
+
+import java.util.Properties;
+
+import org.casaca.gpx4j.core.driver.reader.IGpxReader;
+
+public class GpxDriver {
+	private IGpxReader reader;
+	//private IGpxWriter writer;
+	private Properties properties;
+	
+	private static GpxDriver driver = null;
+	
+	private GpxDriver(){
+		this.properties = new Properties();
+	}
+}
