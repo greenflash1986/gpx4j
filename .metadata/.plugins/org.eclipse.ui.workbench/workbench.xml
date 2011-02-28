@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="30" version="2.0">
+<workbench progressCount="23" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="33">
 <fastViewData fastViewLocation="1024"/>
@@ -17,14 +17,14 @@
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="100" y="22"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="84" y="22"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="84" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="120" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="54" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -36,13 +36,43 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Logger.java" partName="Logger.java" path="/Users/Kiko/Documents/workspaces/gpx4j/libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java" title="Logger.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="826" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxWriter.java" partName="GpxWriter.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/driver/writer/jdom/GpxWriter.java" title="GpxWriter.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/writer/jdom/GpxWriter.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/writer/jdom/GpxWriter.java"/>
+<editorState selectionHorizontalPixel="16" selectionLength="0" selectionOffset="20176" selectionTopPixel="6000"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Bounds.java" partName="Bounds.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/data/Bounds.java" title="Bounds.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Bounds.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Bounds.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="86" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxDriver.java" partName="GpxDriver.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxDriver.java" title="GpxDriver.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/GpxDriver.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxDriver.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1228" selectionTopPixel="918"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxReader.java" partName="GpxReader.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java" title="GpxReader.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="20259" selectionTopPixel="7200"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxReader.java" partName="GpxReader.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java" title="GpxReader.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10853" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/Test/src/org/casaca/gpx4j/test/Main.java" title="Main.java" tooltip="Test/src/org/casaca/gpx4j/test/Main.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/src/org/casaca/gpx4j/test/Main.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1003" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="gpx4j_default.properties" partName="gpx4j_default.properties" path="/Users/Kiko/Documents/workspaces/gpx4j/svn/trunk/libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties" title="gpx4j_default.properties" tooltip="libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="172" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -70,9 +100,7 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings (20 items)"/>
+<expanded>&#x0A;<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="84" org.eclipse.ui.ide.markerType="114" org.eclipse.ui.ide.pathField="144" org.eclipse.ui.ide.resourceField="114" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -119,7 +147,7 @@
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 <view id="com.google.gwt.eclipse.DevModeView" partName="Development Mode"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PropertiesFileEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
@@ -187,13 +215,13 @@
 <perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
 <perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
-<view id="org.eclipse.jdt.ui.TypeHierarchy"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.jdt.ui.TypeHierarchy"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -372,178 +400,161 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/writer/jdom/GpxWriter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/util/Constants.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxKeys_1.1.properties"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Test/src/org/casaca/gpx4j/test/Main.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxDriver.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/IGpxReader.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Bounds.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/BaseObect.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Copyright.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Degrees.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/DgpsStation.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Email.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Extension.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Extensions.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Fix.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/GpxDocument.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Metadata.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Person.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Point.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/PointsSequence.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Route.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Track.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/TrackSegment.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/data/Waypoint.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" path="/libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties"/>
 </editors>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="20646" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="2990" y="0"/>
 </item>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="20990" y="0"/>
-</item>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="20893" y="94"/>
-</item>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="1792" y="0"/>
-</item>
-<item historyLabel="IGpxReader.java" index="2">
-<position info="not_deleted" x="701" y="0"/>
-</item>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="2317" y="0"/>
-</item>
-<item historyLabel="GpxDriver.java" index="1">
-<position info="not_deleted" x="2691" y="0"/>
-</item>
-<item historyLabel="GpxReader.java" index="0">
-<position info="not_deleted" x="9805" y="0"/>
-</item>
-<item historyLabel="Bounds.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="BaseObect.java" index="4">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="BaseObect.java" index="4">
-<position info="not_deleted" x="101" y="0"/>
-</item>
-<item historyLabel="BaseObect.java" index="4">
-<position info="not_deleted" x="166" y="0"/>
-</item>
-<item historyLabel="Bounds.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Copyright.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Degrees.java" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DgpsStation.java" index="7">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Email.java" index="8">
+<item historyLabel="Constants.java" index="1">
 <position/>
 </item>
-<item historyLabel="Extension.java" index="9">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="2990" y="0"/>
 </item>
-<item historyLabel="Extensions.java" index="10">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="GpxKeys_1.1.properties" index="2">
+<position info="not_deleted" x="1642" y="49"/>
 </item>
-<item historyLabel="Fix.java" index="11">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="2990" y="0"/>
 </item>
-<item historyLabel="GpxDocument.java" index="12">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Link.java" index="13">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Metadata.java" index="14">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Person.java" index="15">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Point.java" index="16">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="PointsSequence.java" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Route.java" index="18">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Track.java" index="19">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="TrackSegment.java" index="20">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Waypoint.java" index="21">
-<position info="not_deleted" x="138" y="19"/>
-</item>
-<item historyLabel="TrackSegment.java" index="20">
-<position info="not_deleted" x="134" y="0"/>
-</item>
-<item historyLabel="Track.java" index="19">
-<position info="not_deleted" x="127" y="0"/>
-</item>
-<item historyLabel="Route.java" index="18">
-<position info="not_deleted" x="127" y="0"/>
-</item>
-<item historyLabel="PointsSequence.java" index="17">
-<position info="not_deleted" x="136" y="0"/>
-</item>
-<item historyLabel="Point.java" index="16">
-<position info="not_deleted" x="103" y="0"/>
-</item>
-<item historyLabel="Person.java" index="15">
-<position info="not_deleted" x="76" y="0"/>
-</item>
-<item historyLabel="Metadata.java" index="14">
-<position info="not_deleted" x="157" y="0"/>
-</item>
-<item historyLabel="Link.java" index="13">
-<position info="not_deleted" x="96" y="0"/>
-</item>
-<item historyLabel="GpxDocument.java" index="12">
-<position info="not_deleted" x="133" y="0"/>
-</item>
-<item historyLabel="Fix.java" index="11">
-<position info="not_deleted" x="174" y="0"/>
-</item>
-<item historyLabel="Extensions.java" index="10">
-<position info="not_deleted" x="151" y="0"/>
-</item>
-<item historyLabel="Extension.java" index="9">
-<position info="not_deleted" x="79" y="0"/>
-</item>
-<item historyLabel="Email.java" index="8">
+<item historyLabel="Constants.java" index="1">
 <position/>
 </item>
-<item historyLabel="DgpsStation.java" index="7">
-<position info="not_deleted" x="81" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="2990" y="0"/>
 </item>
-<item historyLabel="Degrees.java" index="6">
-<position info="not_deleted" x="77" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="3647" y="0"/>
 </item>
-<item historyLabel="Copyright.java" index="5">
-<position info="not_deleted" x="79" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="16974" y="10"/>
 </item>
-<item historyLabel="Bounds.java" index="3">
-<position info="not_deleted" x="76" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="3802" y="0"/>
 </item>
-<item historyLabel="Email.java" index="8">
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="11281" y="10"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="3955" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="15243" y="10"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="3648" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="16974" y="10"/>
+</item>
+<item historyLabel="Main.java" index="3">
+<position info="not_deleted" x="1443" y="0"/>
+</item>
+<item historyLabel="Main.java" index="3">
+<position info="not_deleted" x="630" y="0"/>
+</item>
+<item historyLabel="GpxReader.java" index="4">
+<position info="not_deleted" x="20259" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18381" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18406" y="20"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18381" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18406" y="20"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18480" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="18532" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="21029" y="0"/>
+</item>
+<item historyLabel="Main.java" index="3">
+<position info="not_deleted" x="1003" y="0"/>
+</item>
+<item historyLabel="gpx4j_default.properties" index="5">
+<position/>
+</item>
+<item historyLabel="Constants.java" index="1">
+<position/>
+</item>
+<item historyLabel="Main.java" index="3">
+<position info="not_deleted" x="1003" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
+</item>
+<item historyLabel="gpx4j_default.properties" index="5">
+<position/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20169" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position/>
+</item>
+<item historyLabel="Constants.java" index="1">
+<position info="not_deleted" x="5834" y="0"/>
+</item>
+<item historyLabel="gpx4j_default.properties" index="5">
+<position/>
+</item>
+<item historyLabel="Constants.java" index="1">
+<position info="not_deleted" x="6020" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20143" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
+</item>
+<item historyLabel="gpx4j_default.properties" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Email.java" index="8">
-<position info="not_deleted" x="277" y="0"/>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20432" y="0"/>
 </item>
-<item active="true" historyLabel="Logger.java" index="22">
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20428" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20299" y="0"/>
+</item>
+<item historyLabel="GpxWriter.java" index="0">
+<position info="not_deleted" x="20176" y="0"/>
+</item>
+<item active="true" historyLabel="gpx4j_default.properties" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
@@ -553,12 +564,11 @@
 <actionBarAdvisor/>
 <trimLayout>
 <trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
+<trimItem IMemento.internal.id="left"/>
 </trimArea>
 <trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.ConsoleFolderView"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.ToolsFolderView"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.OutlineFolderView"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+<trimItem IMemento.internal.id="right"/>
 </trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -572,50 +582,32 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Logger.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/logging/Logger.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="gpx4j_default.properties" tooltip="libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties">
+<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/util/gpx4j_default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Email.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Email.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Email.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Constants.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/util/Constants.java">
+<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/util/Constants.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Waypoint.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Waypoint.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Waypoint.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="Test/src/org/casaca/gpx4j/test/Main.java">
+<persistable path="/Test/src/org/casaca/gpx4j/test/Main.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TrackSegment.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/TrackSegment.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/TrackSegment.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="GpxKeys_Default.properties" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/GpxKeys_Default.properties">
+<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxKeys_Default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Track.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Track.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Track.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Route.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Route.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Route.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PointsSequence.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/PointsSequence.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/PointsSequence.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Point.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Point.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Point.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Person.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Person.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Person.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Metadata.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Metadata.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Metadata.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Link.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Link.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxDocument.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/GpxDocument.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/GpxDocument.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Fix.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Fix.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Fix.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="GpxKeys_1.1.properties" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/GpxKeys_1.1.properties">
+<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/driver/GpxKeys_1.1.properties"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Extensions.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Extensions.java">
 <persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Extensions.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Extension.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/data/Extension.java">
-<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/data/Extension.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GpxReader.java" tooltip="libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java">
+<persistable path="/libGpx4J/src/org/casaca/gpx4j/core/driver/reader/sax/GpxReader.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Element.class" tooltip="org.jdom.Element">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=libGpx4J/lib\/jdom.jar&lt;org.jdom(Element.class"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ContentList.class" tooltip="org.jdom.ContentList">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=libGpx4J/lib\/jdom.jar&lt;org.jdom(ContentList.class"/>
 </file>
 </mruList>
 </workbench>

@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.apache.log4j.PropertyConfigurator;
 import org.casaca.gpx4j.core.exception.GpxFileNotFoundException;
 import org.casaca.gpx4j.core.exception.GpxIOException;
+import org.jdom.output.XMLOutputter;
 
 
 

@@ -19,6 +19,10 @@ public class Extensions extends BaseObject {
 		return this.extensions.keySet();
 	}
 	
+	public int count(){
+		return this.extensions.size();
+	}
+	
 	public void addExtension(Extension extension){
 		this.extensions.put(extension.getKey(), extension);
 	}

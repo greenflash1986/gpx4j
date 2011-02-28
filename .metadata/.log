@@ -5903,3 +5903,89 @@ java.lang.NullPointerException
 
 !ENTRY com.instantiations.eclipse 1 0 2011-02-26 13:21:58.317
 !MESSAGE StartupPlugin: could not remove workbench property change listener (1) ... workbench might already be shut down.
+!SESSION 2011-02-26 13:38:45.674 -----------------------------------------------
+eclipse.buildId=
+java.version=1.6.0_22
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/Kiko/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -product org.eclipse.epp.package.java.product -keyring /Users/Kiko/.eclipse_keyring -showlocation
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-26 13:39:49.323
+!MESSAGE Failed to determine version of plugin com.instantiations.eclipse.application.audit
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-26 13:39:49.373
+!MESSAGE Failed to determine version of plugin com.instantiations.profiler.ui
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-26 13:39:49.374
+!MESSAGE Failed to determine version of plugin com.windowtester.runtime
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-26 13:39:49.377
+!MESSAGE Failed to determine version of plugin com.windowtester.runtime
+
+!ENTRY com.instantiations.designer.core 4 4 2011-02-27 14:23:12.446
+!MESSAGE Designer [8.0.0.r35x201009160631]: java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at com.instantiations.designer.core.utils.xml.FileDocumentEditContext.<init>(FileDocumentEditContext.java:31)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createTemplateChange(UiField_RenameParticipant.java:165)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createChangeEx(UiField_RenameParticipant.java:86)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.access$0(UiField_RenameParticipant.java:78)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant$1.runObject(UiField_RenameParticipant.java:71)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant$1.runObject(UiField_RenameParticipant.java:1)
+	at com.instantiations.designer.core.utils.execution.ExecutionUtils.runObjectLog(ExecutionUtils.java:268)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createChange(UiField_RenameParticipant.java:69)
+	at org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring.createChange(ProcessorBasedRefactoring.java:308)
+	at org.eclipse.jdt.internal.ui.refactoring.RefactoringExecutionHelper$Operation.run(RefactoringExecutionHelper.java:97)
+	at org.eclipse.jdt.internal.core.BatchOperation.executeOperation(BatchOperation.java:39)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:728)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1800)
+	at org.eclipse.jdt.core.JavaCore.run(JavaCore.java:4694)
+	at org.eclipse.jdt.internal.ui.actions.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:106)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:21:49.779
+!MESSAGE StartupPlugin: could not remove workbench property change listener (1) ... workbench might already be shut down.
+!SESSION 2011-02-28 15:21:55.752 -----------------------------------------------
+eclipse.buildId=
+java.version=1.6.0_22
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/Kiko/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -product org.eclipse.epp.package.java.product -keyring /Users/Kiko/.eclipse_keyring -showlocation
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:22:43.612
+!MESSAGE Failed to determine version of plugin com.instantiations.eclipse.application.audit
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:22:43.662
+!MESSAGE Failed to determine version of plugin com.instantiations.profiler.ui
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:22:43.663
+!MESSAGE Failed to determine version of plugin com.windowtester.runtime
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:22:43.678
+!MESSAGE Failed to determine version of plugin com.windowtester.runtime
+
+!ENTRY com.instantiations.designer.core 4 4 2011-02-28 15:38:59.084
+!MESSAGE Designer [8.0.0.r35x201009160631]: java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at com.instantiations.designer.core.utils.xml.FileDocumentEditContext.<init>(FileDocumentEditContext.java:31)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createTemplateChange(UiField_RenameParticipant.java:165)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createChangeEx(UiField_RenameParticipant.java:86)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.access$0(UiField_RenameParticipant.java:78)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant$1.runObject(UiField_RenameParticipant.java:71)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant$1.runObject(UiField_RenameParticipant.java:1)
+	at com.instantiations.designer.core.utils.execution.ExecutionUtils.runObjectLog(ExecutionUtils.java:268)
+	at com.instantiations.designer.gwt.uibinder.refactoring.UiField_RenameParticipant.createChange(UiField_RenameParticipant.java:69)
+	at org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring.createChange(ProcessorBasedRefactoring.java:308)
+	at org.eclipse.jdt.internal.ui.refactoring.RefactoringExecutionHelper$Operation.run(RefactoringExecutionHelper.java:97)
+	at org.eclipse.jdt.internal.core.BatchOperation.executeOperation(BatchOperation.java:39)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:728)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1800)
+	at org.eclipse.jdt.core.JavaCore.run(JavaCore.java:4694)
+	at org.eclipse.jdt.internal.ui.actions.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:106)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+
+!ENTRY com.instantiations.eclipse 1 0 2011-02-28 15:45:57.966
+!MESSAGE StartupPlugin: could not remove workbench property change listener (1) ... workbench might already be shut down.

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="300" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_WIDTH"/>
-	<item value="184" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_X_ORIGIN"/>
-	<item value="411" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_Y_ORIGIN"/>
+	<item value="324" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_X_ORIGIN"/>
+	<item value="419" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_Y_ORIGIN"/>
 	<item value="250" key="org.eclipse.jdt.internal.debug.ui.actions.PopupInspectAction$2DIALOG_HEIGHT"/>
 	<section name="org.eclipse.debug.ui.SCOPED_SAVE_SELECTION_DIALOG">
 		<item value="350" key="DIALOG_WIDTH"/>

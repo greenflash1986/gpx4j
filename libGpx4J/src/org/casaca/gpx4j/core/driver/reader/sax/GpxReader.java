@@ -55,12 +55,14 @@ public class GpxReader implements IGpxReader {
 	private Namespace namespace;
 	
 	public GpxReader() throws GpxFileNotFoundException{
+		String defaultPropertiesFileName = Constants.APPLICATION_KEYS_FILE_PREFIX_FILENAME+Constants.APPLICATION_KEYS_FILE_DEFAULT_BODY_FILENAME+Constants.APPLICATION_KEYS_FILE_SUFIX_FILENAME;
 		try {
 			this.logger = Logger.getLogger(GpxReader.class);
 			this.tags = new Properties();
-			this.tags.load(IGpxReader.class.getResourceAsStream("GpxKeys_Default.properties"));
+			this.logger.debug("Loading properties file: "+defaultPropertiesFileName);
+			this.tags.load(GpxDriver.class.getResourceAsStream(defaultPropertiesFileName));
 		} catch (IOException e) {
-			throw new GpxFileNotFoundException("GpxKeys.properties properties file does not found.\n"+e.getMessage());
+			throw new GpxFileNotFoundException(defaultPropertiesFileName+" properties file does not found.\n"+e.getMessage());
 		}
 	}
 	
@@ -74,8 +76,9 @@ public class GpxReader implements IGpxReader {
 		document.setVersion(root.getAttributeValue(this.tags.getProperty(Constants.TAG_GPX_VERSION)));
 		logger.info("Gpx document version: "+document.getVersion());
 		try {
-			this.tags.load(IGpxReader.class.getResourceAsStream("GpxKeys_"+document.getVersion()+".properties"));
-			logger.debug("Loading new properties file: "+"GpxKeys_"+document.getVersion()+".properties");
+			String propertiesFileName = Constants.APPLICATION_KEYS_FILE_PREFIX_FILENAME+document.getVersion()+Constants.APPLICATION_KEYS_FILE_SUFIX_FILENAME;
+			this.tags.load(GpxDriver.class.getResourceAsStream(propertiesFileName));
+			logger.debug("Loading new properties file: "+propertiesFileName);
 		}
 		catch(FileNotFoundException except){
 			this.logger.error("Does not exists a tags file for this version. Using default tags file");
@@ -249,6 +252,8 @@ public class GpxReader implements IGpxReader {
 			TrackSegment trackSegment = null;
 			while(iterator.hasNext()){
 				trackSegment = this.readTrackSegment(iterator.next());
+				if(trackSegment!=null)
+					trackSegments.add(trackSegment);
 			}
 		}
 		
@@ -265,6 +270,7 @@ public class GpxReader implements IGpxReader {
 			Track track = null;
 			while(iterator.hasNext()){
 				track = this.readTrack(iterator.next());
+				if(track!=null) tracks.add(track);
 			}
 		}
 		
@@ -379,7 +385,7 @@ public class GpxReader implements IGpxReader {
 	
 	
 	private Calendar readDate(String date){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//2011-02-03T13:41:04Z
+		SimpleDateFormat sdf = new SimpleDateFormat(this.tags.getProperty(Constants.DATE_FORMAT));//2011-02-03T13:41:04Z
 		try {
 			Date d = sdf.parse(date);
 			Calendar c = Calendar.getInstance();
