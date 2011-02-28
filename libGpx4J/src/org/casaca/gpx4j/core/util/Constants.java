@@ -98,7 +98,7 @@ public class Constants {
 	public static final String APPLICATION_KEYS_FILE_PREFIX_FILENAME = "GpxKeys_";
 	public static final String APPLICATION_KEYS_FILE_DEFAULT_BODY_FILENAME = "Default";
 	public static final String APPLICATION_KEYS_FILE_SUFIX_FILENAME = ".properties";
-	public static final String APPLICATION_NAMESPACE_1_1 = "http://www.topografix.com/GPX/1/1";
+	public static final String APPLICATION_NAMESPACE_1_1 = "NAMESPACE_1.1";
 	
 	public static final String DRIVER_READER_CLASS_NAME = "DRIVER_READER_CLASS_NAME";
 	public static final String DRIVER_WRITER_CLASS_NAME = "DRIVER_WRITER_CLASS_NAME";

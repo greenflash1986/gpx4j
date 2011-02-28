@@ -1,5 +1,0 @@
-package org.casaca.gpx4j.core.exception;
-
-public class GpxPropertiesException extends Exception {
-
-}

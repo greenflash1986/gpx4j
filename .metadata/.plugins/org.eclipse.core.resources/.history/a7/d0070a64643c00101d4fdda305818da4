@@ -1,5 +1,0 @@
-package org.casaca.gpx4j.core.driver.reader.sax;
-
-public interface IGpxReader {
-
-}
