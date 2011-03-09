@@ -1,15 +1,17 @@
 package org.casaca.gpx4j.core.data;
 
+import java.math.BigDecimal;
+
 public class Degrees extends BaseObject {
-	private Double degrees;
+	private BigDecimal degrees;
 	
-	public Degrees(Double degrees) throws IllegalArgumentException{
-		if(degrees<0 || degrees>360) throw new IllegalArgumentException("Degrees must be greater than zero and less than 360");
+	public Degrees(BigDecimal degrees) throws IllegalArgumentException{
+		if(degrees.compareTo(BigDecimal.valueOf(0.0))==-1 || degrees.compareTo(BigDecimal.valueOf(360.0))==1) throw new IllegalArgumentException("Degrees must be greater than zero and less than 360");
 		
 		this.degrees=degrees;
 	}
 	
-	public Double getDegrees(){
+	public BigDecimal getDegrees(){
 		return this.degrees;
 	}
 }

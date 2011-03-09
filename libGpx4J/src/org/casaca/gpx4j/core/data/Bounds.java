@@ -1,13 +1,15 @@
 package org.casaca.gpx4j.core.data;
 
+import java.math.BigDecimal;
+
 public class Bounds extends BaseObject {
-	private Double minLatitude;
-	private Double minLongitude;
-	private Double maxLatitude;
-	private Double maxLongitude;
+	private BigDecimal minLatitude;
+	private BigDecimal minLongitude;
+	private BigDecimal maxLatitude;
+	private BigDecimal maxLongitude;
 	
-	public Bounds(Double minLatitude, Double minLongitude, Double maxLatitude,Double maxLongitude) throws IllegalArgumentException{
-		if(this.minLatitude == null || this.minLongitude == null || this.maxLatitude == null || this.maxLongitude == null)
+	public Bounds(BigDecimal minLatitude, BigDecimal minLongitude, BigDecimal maxLatitude,BigDecimal maxLongitude) throws IllegalArgumentException{
+		if(minLatitude == null || minLongitude == null || maxLatitude == null || maxLongitude == null)
 			throw new IllegalArgumentException("Error creating bounds. Latitudes and longitudes must not be null");
 		
 		this.minLatitude = minLatitude;
@@ -16,19 +18,19 @@ public class Bounds extends BaseObject {
 		this.maxLongitude = maxLongitude;
 	}
 
-	public Double getMinLatitude() {
+	public BigDecimal getMinLatitude() {
 		return minLatitude;
 	}
 
-	public Double getMinLongitude() {
+	public BigDecimal getMinLongitude() {
 		return minLongitude;
 	}
 
-	public Double getMaxLatitude() {
+	public BigDecimal getMaxLatitude() {
 		return maxLatitude;
 	}
 
-	public Double getMaxLongitude() {
+	public BigDecimal getMaxLongitude() {
 		return maxLongitude;
 	}
 }

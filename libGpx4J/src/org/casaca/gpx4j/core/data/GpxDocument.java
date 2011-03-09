@@ -3,6 +3,8 @@ package org.casaca.gpx4j.core.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.casaca.gpx4j.core.util.Constants;
+
 public class GpxDocument extends BaseObject {
 	private String version;
 	private String creator;
@@ -15,7 +17,7 @@ public class GpxDocument extends BaseObject {
 	
 	public GpxDocument(){
 		this.version = null;
-		this.creator = null;
+		this.creator = Constants.APPLICATION_NAME;
 		this.tracks = new ArrayList<Track>();
 		this.waypoints = new ArrayList<Waypoint>();
 		this.routes = new ArrayList<Route>();

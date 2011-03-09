@@ -12,14 +12,14 @@ public class Email extends BaseObject {
 	}
 
 	public String getUser() {
-		return user;
+		return this.user;
 	}
 
 	public String getDomain() {
-		return domain;
+		return this.domain;
 	}
 	
 	public String toString(){
-		return user+"@"+domain;
+		return this.user+"@"+this.domain;
 	}
 }

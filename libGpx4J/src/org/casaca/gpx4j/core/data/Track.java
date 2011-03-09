@@ -1,5 +1,6 @@
 package org.casaca.gpx4j.core.data;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Track extends BaseObject {
 	private String desc;
 	private String src;
 	private List<Link> links;
-	private Integer number;
+	private BigInteger number;
 	private String type;
 	private Extensions extensions;
 	private List<TrackSegment> trackSegments;
@@ -70,11 +71,11 @@ public class Track extends BaseObject {
 		this.links.add(link);
 	}
 
-	public Integer getNumber() {
+	public BigInteger getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(BigInteger number) {
 		this.number = number;
 	}
 

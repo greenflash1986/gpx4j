@@ -1,17 +1,19 @@
 package org.casaca.gpx4j.core.data;
 
+import java.util.Calendar;
+
 public class Copyright extends BaseObject {
-	private Integer year;
+	private Calendar year;
 	private String author;
 	private String license;
 	
-	public Copyright(Integer year, String author, String license){
+	public Copyright(Calendar year, String author, String license){
 		this.year = year;
 		this.author = author;
 		this.license = license;
 	}
 
-	public Integer getYear() {
+	public Calendar getYear() {
 		return year;
 	}
 

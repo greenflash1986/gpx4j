@@ -1,17 +1,19 @@
 package org.casaca.gpx4j.core.data;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class Waypoint extends BaseObject {
 	//POSITION INFO
-	private Double elevation;
+	private BigDecimal elevation;
 	private Calendar time;
 	private Degrees magvar;
-	private Double geoIdHeight;
-	private Double latitude;
-	private Double longitude;
+	private BigDecimal geoIdHeight;
+	private BigDecimal latitude;
+	private BigDecimal longitude;
 	
 	//DESCRIPTION INFO
 	private String name;
@@ -24,15 +26,15 @@ public class Waypoint extends BaseObject {
 	
 	//ACCURACY INFO
 	private Fix fix;
-	private Integer sat;
-	private Double hdop;
-	private Double vdop;
-	private Double pdop;
-	private Double ageOfDgpsData;
+	private BigInteger sat;
+	private BigDecimal hdop;
+	private BigDecimal vdop;
+	private BigDecimal pdop;
+	private BigDecimal ageOfDgpsData;
 	private DgpsStation dGpsId;
 	private Extensions extensions;
 	
-	public Waypoint(Double latitude, Double longitude) throws IllegalArgumentException{
+	public Waypoint(BigDecimal latitude, BigDecimal longitude) throws IllegalArgumentException{
 		if(latitude == null || longitude == null) throw new IllegalArgumentException("Error creating waypoint. Latitude and longitude must not be null");
 		
 		this.elevation = null;
@@ -60,11 +62,11 @@ public class Waypoint extends BaseObject {
 		this.extensions = new Extensions();
 	}
 
-	public Double getElevation() {
+	public BigDecimal getElevation() {
 		return elevation;
 	}
 
-	public void setElevation(Double elevation) {
+	public void setElevation(BigDecimal elevation) {
 		this.elevation = elevation;
 	}
 
@@ -84,27 +86,27 @@ public class Waypoint extends BaseObject {
 		this.magvar = magvar;
 	}
 
-	public Double getGeoIdHeight() {
+	public BigDecimal getGeoIdHeight() {
 		return geoIdHeight;
 	}
 
-	public void setGeoIdHeight(Double geoIdHeight) {
+	public void setGeoIdHeight(BigDecimal geoIdHeight) {
 		this.geoIdHeight = geoIdHeight;
 	}
 
-	public Double getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
-	public Double getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
@@ -176,43 +178,43 @@ public class Waypoint extends BaseObject {
 		this.fix = fix;
 	}
 
-	public Integer getSat() {
+	public BigInteger getSat() {
 		return sat;
 	}
 
-	public void setSat(Integer sat) {
+	public void setSat(BigInteger sat) {
 		this.sat = sat;
 	}
 
-	public Double getHdop() {
+	public BigDecimal getHdop() {
 		return hdop;
 	}
 
-	public void setHdop(Double hdop) {
+	public void setHdop(BigDecimal hdop) {
 		this.hdop = hdop;
 	}
 
-	public Double getVdop() {
+	public BigDecimal getVdop() {
 		return vdop;
 	}
 
-	public void setVdop(Double vdop) {
+	public void setVdop(BigDecimal vdop) {
 		this.vdop = vdop;
 	}
 
-	public Double getPdop() {
+	public BigDecimal getPdop() {
 		return pdop;
 	}
 
-	public void setPdop(Double pdop) {
+	public void setPdop(BigDecimal pdop) {
 		this.pdop = pdop;
 	}
 
-	public Double getAgeOfDgpsData() {
+	public BigDecimal getAgeOfDgpsData() {
 		return ageOfDgpsData;
 	}
 
-	public void setAgeOfDgpsData(Double ageOfDgpsData) {
+	public void setAgeOfDgpsData(BigDecimal ageOfDgpsData) {
 		this.ageOfDgpsData = ageOfDgpsData;
 	}
 

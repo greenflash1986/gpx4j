@@ -63,7 +63,7 @@ public class Metadata extends BaseObject {
 		return links;
 	}
 
-	public void setLink(List<Link> links) {
+	public void setLinks(List<Link> links) {
 		this.links = links;
 	}
 	

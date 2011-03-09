@@ -1,23 +1,10 @@
 package org.casaca.gpx4j.core.logging;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-
-import org.apache.log4j.PropertyConfigurator;
-import org.casaca.gpx4j.core.exception.GpxFileNotFoundException;
-import org.casaca.gpx4j.core.exception.GpxIOException;
-import org.jdom.output.XMLOutputter;
-
-
-
 public class Logger {
 
 	private org.apache.log4j.Logger logger4j;
 	
-	protected Logger(String name) {
+	protected Logger(String name){
 		this.logger4j = org.apache.log4j.Logger.getLogger(name);
 	}
 	
@@ -26,83 +13,26 @@ public class Logger {
 		this.logger4j = org.apache.log4j.Logger.getLogger(clazz);
 	}
 	
+	//STATIC
 	private static Logger logger = null;
 	
-	public static Logger getLogger(String name) throws GpxIOException{
+	public static Logger getLogger(String name){
 		if(logger == null){
-			Properties p = new Properties();
-			try {
-				p.load(Logger.class.getResourceAsStream("log4j.properties"));
-				PropertyConfigurator.configure(p);
-			} catch (IOException e) {
-				throw new GpxIOException("Error loading default log properties");
-			}
+			logger = new Logger(name);
 		}
 		
-		return new Logger(name);
-	}
-	
-	public static Logger getLogger(String name, String propertiesFilePath) throws GpxFileNotFoundException, GpxIOException{
-		if(logger == null){
-			Properties p = new Properties();
-			File file = new File(propertiesFilePath);
-			if(!file.exists()) throw new GpxFileNotFoundException("Properties file \""+propertiesFilePath+"\" not exists");
-			try {
-				p.load(new FileInputStream(file));
-				PropertyConfigurator.configure(p);
-			} catch (FileNotFoundException e) {
-				try {
-					p.load(Logger.class.getResourceAsStream("log4j.properties"));
-				} catch (IOException e1) {
-					throw new GpxIOException("Fatal error loading the user-passed properties and the default properties.");
-				}
-				throw new GpxFileNotFoundException("Properties file \""+propertiesFilePath+"\" not exists. Using default properties\n"+e.getMessage());
-			} catch (IOException e) {
-				throw new GpxIOException("Error loading the properties. Using default properties.\n", e);
-			}
-		}
-		
-		return new Logger(name);
+		return logger;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static Logger getLogger(Class clazz) throws GpxIOException{
+	public static Logger getLogger(Class clazz){
 		if(logger == null){
-			Properties p = new Properties();
-			try {
-				p.load(Logger.class.getResourceAsStream("log4j.properties"));
-				PropertyConfigurator.configure(p);
-			} catch (IOException e) {
-				throw new GpxIOException("Error loading default log properties");
-			}
+			logger = new Logger(clazz);
 		}
 		
-		return new Logger(clazz);
+		return logger;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static Logger getLogger(Class clazz, String propertiesFilePath) throws GpxIOException, GpxFileNotFoundException {
-		if(logger == null){
-			Properties p = new Properties();
-			File file = new File(propertiesFilePath);
-			if(!file.exists()) throw new GpxFileNotFoundException("Properties file \""+propertiesFilePath+"\" not exists");
-			try{
-				p.load(new FileInputStream(file));
-				PropertyConfigurator.configure(p);
-			} catch (FileNotFoundException e) {
-				try {
-					p.load(Logger.class.getResourceAsStream("log4j.properties"));
-				} catch (IOException e1) {
-					throw new GpxIOException("Fatal error loading the user-passed properties and the default properties.");
-				}
-				throw new GpxFileNotFoundException("Properties file \""+propertiesFilePath+"\" not exists. Using default properties\n"+e.getMessage());
-			} catch (IOException e) {
-				throw new GpxIOException("Error loading the properties. Using default properties.\n", e);
-			}
-		}
-		
-		return new Logger(clazz);
-	}
+	//END STATIC
 	
 	public void info(String message){
 		this.logger4j.info(message);

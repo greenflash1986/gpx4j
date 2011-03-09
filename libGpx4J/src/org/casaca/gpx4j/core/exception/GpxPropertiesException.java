@@ -15,6 +15,10 @@ public class GpxPropertiesException extends Exception {
 		super(message);
 	}
 	
+	public GpxPropertiesException(Throwable t){
+		super(t);
+	}
+	
 	public GpxPropertiesException(String message, Throwable t){
 		super(message, t);
 	}

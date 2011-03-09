@@ -1,14 +1,15 @@
 package org.casaca.gpx4j.core.data;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class Point extends BaseObject {
-	private Double elevation;
+	private BigDecimal elevation;
 	private Calendar date;
-	private Double latitude;
-	private Double longitude;
+	private BigDecimal latitude;
+	private BigDecimal longitude;
 	
-	public Point(Double elevation, Calendar date, Double latitude, Double longitude) throws IllegalArgumentException{
+	public Point(BigDecimal elevation, Calendar date, BigDecimal latitude, BigDecimal longitude) throws IllegalArgumentException{
 		if(latitude == null || longitude == null) throw new IllegalArgumentException("Latitude and longitude must not be null");
 		
 		this.elevation = elevation;
@@ -17,7 +18,7 @@ public class Point extends BaseObject {
 		this.longitude = longitude;
 	}
 	
-	public Point(Double latitude, Double longitude){
+	public Point(BigDecimal latitude, BigDecimal longitude){
 		if(latitude == null || longitude == null) throw new IllegalArgumentException("Latitude and longitude must not be null");
 		
 		this.elevation = null;
@@ -26,11 +27,11 @@ public class Point extends BaseObject {
 		this.longitude = longitude;
 	}
 
-	public Double getElevation() {
+	public BigDecimal getElevation() {
 		return elevation;
 	}
 
-	public void setElevation(Double elevation) {
+	public void setElevation(BigDecimal elevation) {
 		this.elevation = elevation;
 	}
 
@@ -42,11 +43,11 @@ public class Point extends BaseObject {
 		this.date = date;
 	}
 
-	public Double getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public Double getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 }

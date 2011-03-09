@@ -92,18 +92,24 @@ public class Constants {
 	public static final String TAG_COPYRIGHT_AUTHOR = "COPYRIGHT_AUTHOR";
 	public static final String TAG_COPYRIGHT_YEAR = "COPYRIGHT_YEAR";
 	public static final String TAG_COPYRIGHT_LICENSE = "COPYRIGHT_LICENSE";
-	public static final String DATE_FORMAT = "DATE_FORMAT";
 	
-	public static final String APPLICATION_DEFAULT_PROPERTIES_FILENAME = "gpx4j_default.properties";
+	public static final String APPLICATION_NAME = "gpx4j";
+	public static final String APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME = "gpx4j_default.properties";
+	public static final String APPLICATION_DEFAULT_LOGGER_PROPERTIES_FILENAME = "log4j_default.properties";
+	public static final String APPLICATION_DEFAULT_GPX_DTD_1_1_FILENAME = "gpx_1.1.xsd";
 	public static final String APPLICATION_KEYS_FILE_PREFIX_FILENAME = "GpxKeys_";
 	public static final String APPLICATION_KEYS_FILE_DEFAULT_BODY_FILENAME = "Default";
 	public static final String APPLICATION_KEYS_FILE_SUFIX_FILENAME = ".properties";
+	public static final String APPLICATION_LOGGER_PROPERTIES_FILEPATH = "APPLICATION_LOGGER_PROPERTIES_FILEPATH";
 	public static final String APPLICATION_NAMESPACE_1_1 = "NAMESPACE_1.1";
 	
 	public static final String DRIVER_READER_CLASS_NAME = "DRIVER_READER_CLASS_NAME";
 	public static final String DRIVER_WRITER_CLASS_NAME = "DRIVER_WRITER_CLASS_NAME";
 	public static final String DRIVER_WRITER_INDENTATION_TEXT = "DRIVER_WRITER_INDENTATION_TEXT";
 	public static final String DRIVER_WRITER_NEW_LINE = "DRIVER_WRITER_NEW_LINE";
+	public static final String DRIVER_WRITER_ENCODING = "DRIVER_WRITER_ENCODING";
 	public static final String DRIVER_EXPAND_EMPTY_ELEMENTS = "DRIVER_EXPAND_EMPTY_ELEMENTS";
 	public static final String DRIVER_VALIDATE_GPX_FILE = "DRIVER_VALIDATE_GPX_FILE";
+	public static final String DRIVER_DTD_URL_GPX_1_1 = "DRIVER_DTD_URL_GPX_1.1";
+	public static final String DRIVER_DATE_FORMAT = "DRIVER_DATE_FORMAT";
 }

@@ -1,8 +1,5 @@
 package org.casaca.gpx4j.core.data;
 
-import org.casaca.gpx4j.core.exception.GpxIOException;
-import org.casaca.gpx4j.core.logging.Logger;
-
 public class Fix extends BaseObject {
 	public static final int FIX_NONE = 1;
 	public static final int FIX_2D = 2;
@@ -18,12 +15,9 @@ public class Fix extends BaseObject {
 	
 	private Integer fix;
 	
-	public static Fix createFix(String text) throws GpxIOException {
-		if(text == null){
-			Logger logger = Logger.getLogger(Fix.class);
-			logger.error("Error creating fix. Argument is not valid. Fix must be NONE, 2D, 3D, DGPS or PPS");
-			return null;
-		}
+	public static Fix createFix(String text) throws IllegalArgumentException {
+		if(text == null)
+			throw new IllegalArgumentException("Error creating fix. Argument is not valid. Fix must be NONE, 2D, 3D, DGPS or PPS");
 		
 		Integer choice = null;
 		if(text.toUpperCase().equals(VALUE_FIX_NONE))
