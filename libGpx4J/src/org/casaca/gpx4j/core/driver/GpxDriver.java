@@ -3,6 +3,7 @@ package org.casaca.gpx4j.core.driver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -45,25 +46,35 @@ public class GpxDriver {
 		this.writer = null;
 	}
 	
-	public void loadDriverProperties(String filePath) throws GpxFileNotFoundException, GpxIOException{
-		this.driverProperties = new Properties();
+	public void loadDriverProperties(String filePath) throws GpxIOException{
 		try {
-			this.driverProperties.load(new FileInputStream(filePath));
-		} catch (FileNotFoundException e) {
-			throw new GpxFileNotFoundException("Not found the driver properties file \""+filePath+"\"");
-		} catch (IOException e) {
+			this.loadDriverProperties(new FileInputStream(filePath));
+		}catch (IOException e) {
 			throw new GpxIOException(e);
 		}
 	}
 	
-	public void loadDefaultDriverProperties() throws GpxFileNotFoundException, GpxIOException {
+	public void loadDriverProperties(InputStream input) throws GpxIOException{
 		this.driverProperties = new Properties();
 		try {
-			this.driverProperties.load(Constants.class.getResourceAsStream(Constants.APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME));
-		} catch (FileNotFoundException e) {
-			throw new GpxFileNotFoundException("Error loading default driver properties");
-		} catch (IOException e) {
+			this.driverProperties.load(input);
+		}catch (IOException e) {
 			throw new GpxIOException(e);
+		}
+	}
+	
+	public void loadDriverProperties(Properties properties){
+		if(properties==null)
+			throw new IllegalArgumentException("Error loading driver properties. Properties must not be null");
+		
+		this.driverProperties = properties;
+	}
+	
+	public void loadDefaultDriverProperties() throws GpxFileNotFoundException, GpxIOException {
+		try {
+			this.loadDriverProperties(Constants.class.getResourceAsStream(Constants.APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME));
+		}catch (IOException e) {
+			throw new GpxIOException("Error loading default driver properties.", e);
 		}
 	}
 	
@@ -214,22 +225,22 @@ public class GpxDriver {
 	
 	public IGpxWriter createWriter() throws GpxWriterException, GpxPropertiesException {
 		IGpxWriter writer = null;
-			if(this.driverProperties == null)
-				throw new GpxPropertiesException("Driver properties not loaded. Please load properties before use the writer");
-			
-			String className = this.driverProperties.getProperty(Constants.DRIVER_WRITER_CLASS_NAME);
-			if(className == null)
-				throw new GpxWriterException("Property "+Constants.DRIVER_WRITER_CLASS_NAME+" not found in properties file");
-			
-			try {
-				writer = (IGpxWriter)Class.forName(className).newInstance();
-				return writer;
-			} catch (InstantiationException e) {
-				throw new GpxWriterException(e);
-			} catch (IllegalAccessException e) {
-				throw new GpxWriterException(e);
-			} catch (ClassNotFoundException e) {
-				throw new GpxWriterException(e);
-			}
+		if(this.driverProperties == null)
+			throw new GpxPropertiesException("Driver properties not loaded. Please load properties before use the writer");
+
+		String className = this.driverProperties.getProperty(Constants.DRIVER_WRITER_CLASS_NAME);
+		if(className == null)
+			throw new GpxWriterException("Property "+Constants.DRIVER_WRITER_CLASS_NAME+" not found in properties file");
+
+		try {
+			writer = (IGpxWriter)Class.forName(className).newInstance();
+			return writer;
+		} catch (InstantiationException e) {
+			throw new GpxWriterException(e);
+		} catch (IllegalAccessException e) {
+			throw new GpxWriterException(e);
+		} catch (ClassNotFoundException e) {
+			throw new GpxWriterException(e);
+		}
 	}
 }

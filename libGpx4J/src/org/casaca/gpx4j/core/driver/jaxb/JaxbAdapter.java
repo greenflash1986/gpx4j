@@ -69,7 +69,7 @@ public class JaxbAdapter implements IGpxAdapter {
 			return null;
 		
 		CopyrightType cType = (CopyrightType)copyright;
-		Copyright c = new Copyright(cType.getYear().toGregorianCalendar(), cType.getAuthor(), cType.getLicense());
+		Copyright c = new Copyright((cType.getYear()==null)?null:cType.getYear().toGregorianCalendar(), cType.getAuthor(), cType.getLicense());
 		
 		return c;
 	}
@@ -83,7 +83,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		cType.setAuthor(copyright.getAuthor());
 		cType.setLicense(copyright.getLicense());
 		try {
-			cType.setYear(DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)copyright.getYear()));
+			cType.setYear((copyright.getYear()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)copyright.getYear()));
 		} catch (DatatypeConfigurationException e) {
 			this.logger.error(e.getMessage());
 			return null;
@@ -257,7 +257,7 @@ public class JaxbAdapter implements IGpxAdapter {
 			return null;
 		
 		LinkType lType = new LinkType();
-		lType.setHref(link.getHref().toString());
+		lType.setHref((link.getHref()==null)?null:link.getHref().toString());
 		lType.setText(link.getText());
 		lType.setType(link.getType());
 		
@@ -278,7 +278,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		Iterator<LinkType> iterator = mType.getLink().iterator();
 		while(iterator.hasNext())
 			m.addLink(this.toLink(iterator.next()));
-		m.setDate(mType.getTime().toGregorianCalendar());
+		m.setDate((mType.getTime()==null)?null:mType.getTime().toGregorianCalendar());
 		m.setKeywords(mType.getKeywords());
 		m.setBounds(this.toBounds(mType.getBounds()));
 		//m.setExtensions(this.toExtensions(mType.getExtensions()));
@@ -300,7 +300,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		mType.setKeywords(metadata.getKeywords());
 		mType.setName(metadata.getName());
 		try {
-			mType.setTime(DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)metadata.getDate()));
+			mType.setTime((metadata.getDate()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)metadata.getDate()));
 		} catch (DatatypeConfigurationException e) {
 			this.logger.error(e.getMessage());
 			return null;
@@ -343,7 +343,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		
 		PtType pType = (PtType)point;
 		Point p = new Point(pType.getLat(), pType.getLon());
-		p.setDate(pType.getTime().toGregorianCalendar());
+		p.setDate((pType.getTime()==null)?null:pType.getTime().toGregorianCalendar());
 		p.setElevation(pType.getEle());
 		
 		return p;
@@ -359,7 +359,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		pType.setLon(point.getLongitude());
 		pType.setEle(point.getElevation());
 		try {
-			pType.setTime(DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)point.getDate()));
+			pType.setTime((point.getDate()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)point.getDate()));
 		} catch (DatatypeConfigurationException e) {
 			this.logger.error(e.getMessage());
 			return null;
@@ -526,7 +526,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		WptType wType = (WptType)waypoint;
 		Waypoint w = new Waypoint(wType.getLat(), wType.getLon());
 		w.setElevation(wType.getEle());
-		w.setTime(wType.getTime().toGregorianCalendar());
+		w.setTime((wType.getTime()==null)?null:wType.getTime().toGregorianCalendar());
 		w.setMagvar(this.toDegrees(wType.getMagvar()));
 		w.setGeoIdHeight(wType.getGeoidheight());
 		w.setName(wType.getName());
@@ -558,7 +558,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		WptType wType = new WptType();
 		wType.setEle(waypoint.getElevation());
 		try {
-			wType.setTime(DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)waypoint.getTime()));
+			wType.setTime((waypoint.getTime()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)waypoint.getTime()));
 		} catch (DatatypeConfigurationException e) {
 			this.logger.error(e.getMessage());
 			return null;
