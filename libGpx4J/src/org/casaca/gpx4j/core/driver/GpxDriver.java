@@ -127,7 +127,10 @@ public class GpxDriver {
 		}
 	}
 	
-	public Properties getDriverProperties(){
+	public Properties getDriverProperties() throws GpxPropertiesException{
+		if(this.driverProperties == null)
+			throw new GpxPropertiesException("Driver properties not loaded. Please load properties before use the reader");
+		
 		return this.driverProperties;
 	}
 	
@@ -151,10 +154,9 @@ public class GpxDriver {
 	
 	public IGpxReader getReader() throws GpxReaderException, GpxPropertiesException{
 		if(this.reader == null){
-			if(this.driverProperties == null)
-				throw new GpxPropertiesException("Driver properties not loaded. Please load properties before use the reader");
+			Properties driverProp = this.getDriverProperties();
 			
-			String className = this.driverProperties.getProperty(Constants.DRIVER_READER_CLASS_NAME);
+			String className = driverProp.getProperty(Constants.DRIVER_READER_CLASS_NAME);
 			if(className == null)
 				throw new GpxReaderException("Property "+Constants.DRIVER_READER_CLASS_NAME+" not found in properties file");
 			
