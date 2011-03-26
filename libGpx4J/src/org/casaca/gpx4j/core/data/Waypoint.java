@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Waypoint extends BaseObject {
+public class Waypoint extends CoordinatesObject {
 	//POSITION INFO
-	private BigDecimal elevation;
-	private Calendar time;
 	private Degrees magvar;
 	private BigDecimal geoIdHeight;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
 	
 	//DESCRIPTION INFO
 	private String name;
@@ -35,14 +31,23 @@ public class Waypoint extends BaseObject {
 	private Extensions extensions;
 	
 	public Waypoint(BigDecimal latitude, BigDecimal longitude) throws IllegalArgumentException{
-		if(latitude == null || longitude == null) throw new IllegalArgumentException("Error creating waypoint. Latitude and longitude must not be null");
-		
-		this.elevation = null;
-		this.time = null;
+		super(latitude, longitude);
+		init();
+	}
+	
+	public Waypoint(BigDecimal latitude, BigDecimal longitude, BigDecimal elevation, Calendar time) {
+		super(latitude, longitude, elevation, time);
+		init();
+	}
+
+	public Waypoint(BigDecimal latitude, BigDecimal longitude, BigDecimal elevation) {
+		super(latitude, longitude, elevation);
+		init();
+	}
+
+	private void init(){
 		this.magvar = null;
 		this.geoIdHeight = null;
-		this.latitude = latitude;
-		this.longitude = longitude;
 		
 		this.name = null;
 		this.cmt = null;
@@ -62,22 +67,6 @@ public class Waypoint extends BaseObject {
 		this.extensions = new Extensions();
 	}
 
-	public BigDecimal getElevation() {
-		return elevation;
-	}
-
-	public void setElevation(BigDecimal elevation) {
-		this.elevation = elevation;
-	}
-
-	public Calendar getTime() {
-		return time;
-	}
-
-	public void setTime(Calendar time) {
-		this.time = time;
-	}
-
 	public Degrees getMagvar() {
 		return magvar;
 	}
@@ -92,22 +81,6 @@ public class Waypoint extends BaseObject {
 
 	public void setGeoIdHeight(BigDecimal geoIdHeight) {
 		this.geoIdHeight = geoIdHeight;
-	}
-
-	public BigDecimal getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
-	}
-
-	public BigDecimal getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
 	}
 
 	public String getName() {

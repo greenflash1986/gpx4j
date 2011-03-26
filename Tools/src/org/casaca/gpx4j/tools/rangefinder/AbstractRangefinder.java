@@ -3,6 +3,7 @@ package org.casaca.gpx4j.tools.rangefinder;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
+import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.Point;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
@@ -52,16 +53,31 @@ public abstract class AbstractRangefinder implements IRangefinder {
 		this.planetRadius = planetRadius;
 	}
 	
-	@Override
-	public BigDecimal getDistance(Waypoint w1, Waypoint w2) {
-		if(w1==null || w2==null) return new BigDecimal(0.0);
-		return this.getDistance(w1.getLatitude(), w1.getLongitude(), w2.getLatitude(), w2.getLongitude());
+	//PRIVATE METHODS
+	private BigDecimal[] getAscentDescent(CoordinatesObject[] array){
+		BigDecimal[] result = new BigDecimal[2];
+		result[0]=result[1]=BigDecimal.ZERO;
+		BigDecimal diff;
+		
+		if(array.length>1){
+			for (int i = 0; i < array.length-1; i++) {
+				diff = array[i].getElevation().subtract(array[i+1].getElevation());
+				if(diff.compareTo(BigDecimal.ZERO)==-1)
+					result[1] = result[1].add(diff.abs());
+				else
+					result[0] = result[0].add(diff);
+			}
+		}
+		
+		return result;
 	}
-
+	//END PRIVATE METHODS
+	
+	//IRangefinder methods
 	@Override
-	public BigDecimal getDistance(Point p1, Point p2) {
-		if(p1==null || p2==null) return new BigDecimal(0.0);
-		return this.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
+	public BigDecimal getDistance(CoordinatesObject c1, CoordinatesObject c2) {
+		if(c1==null || c2==null) return new BigDecimal(0.0);
+		return this.getDistance(c1.getLatitude(), c1.getLongitude(), c2.getLatitude(), c2.getLongitude());
 	}
 
 	@Override
@@ -120,4 +136,37 @@ public abstract class AbstractRangefinder implements IRangefinder {
 		
 		return d;
 	}
+
+	@Override
+	public BigDecimal[] getAscentDescent(PointsSequence ps) {
+		return this.getAscentDescent(ps.getPoints().toArray(new CoordinatesObject[ps.getPoints().size()]));
+	}
+
+	@Override
+	public BigDecimal[] getAscentDescent(Track t) {
+		BigDecimal[] result = new BigDecimal[2];
+		result[0] = result[1] = BigDecimal.ZERO;
+		BigDecimal[] temp;
+		TrackSegment ts;
+		Iterator<TrackSegment> i = t.getTrackSegments().iterator();
+		while(i.hasNext()){
+			ts = i.next();
+			temp = this.getAscentDescent(ts);
+			result[0] = result[0].add(temp[0]);
+			result[1] = result[1].add(temp[1]);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public BigDecimal[] getAscentDescent(TrackSegment ts) {
+		return this.getAscentDescent(ts.getWaypoints().toArray(new CoordinatesObject[ts.getWaypoints().size()]));
+	}
+
+	@Override
+	public BigDecimal[] getAscentDescent(Route r) {
+		return this.getAscentDescent(r.getWaypoints().toArray(new CoordinatesObject[r.getWaypoints().size()]));
+	}
+	//End IRangefinder methods
 }

@@ -2,12 +2,11 @@ package org.casaca.gpx4j.tools.speedo;
 
 import java.math.BigDecimal;
 
-import org.casaca.gpx4j.core.data.Point;
+import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
-import org.casaca.gpx4j.core.data.Waypoint;
 
 public interface ISpeedo {
 
@@ -23,8 +22,6 @@ public interface ISpeedo {
 	
 	public BigDecimal[] getSpeeds(Track t);
 	
-	public BigDecimal[] getSpeeds(Track t, int secondsInterval);
-	
 	public BigDecimal meanSpeed(TrackSegment ts);
 	
 	public BigDecimal medianSpeed(TrackSegment ts);
@@ -37,7 +34,7 @@ public interface ISpeedo {
 	
 	public BigDecimal[] getSpeeds(TrackSegment ts);
 	
-	public BigDecimal[] getSpeeds(TrackSegment ts, int secondsInterval);
+	public BigDecimal[] getSpeedPerSecond(TrackSegment ts);
 	
 	public BigDecimal meanSpeed(Route r);
 	
@@ -51,7 +48,7 @@ public interface ISpeedo {
 	
 	public BigDecimal[] getSpeeds(Route r);
 	
-	public BigDecimal[] getSpeeds(Route r, int secondsInterval);
+	public BigDecimal[] getSpeedPerSecond(Route r);
 	
 	public BigDecimal meanSpeed(PointsSequence ps);
 	
@@ -65,9 +62,7 @@ public interface ISpeedo {
 	
 	public BigDecimal[] getSpeeds(PointsSequence ps);
 	
-	public BigDecimal[] getSpeeds(PointsSequence ps, int secondsInterval);
+	public BigDecimal[] getSpeedPerSecond(PointsSequence ps);
 	
-	public BigDecimal getSpeed(Waypoint w1, Waypoint w2);
-	
-	public BigDecimal getSpeed(Point p1, Point p2);
+	public BigDecimal getSpeed(CoordinatesObject c1, CoordinatesObject c2);
 }

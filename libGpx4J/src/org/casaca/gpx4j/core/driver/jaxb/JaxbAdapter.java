@@ -343,7 +343,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		
 		PtType pType = (PtType)point;
 		Point p = new Point(pType.getLat(), pType.getLon());
-		p.setDate((pType.getTime()==null)?null:pType.getTime().toGregorianCalendar());
+		p.setTime((pType.getTime()==null)?null:pType.getTime().toGregorianCalendar());
 		p.setElevation(pType.getEle());
 		
 		return p;
@@ -359,7 +359,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		pType.setLon(point.getLongitude());
 		pType.setEle(point.getElevation());
 		try {
-			pType.setTime((point.getDate()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)point.getDate()));
+			pType.setTime((point.getTime()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)point.getTime()));
 		} catch (DatatypeConfigurationException e) {
 			this.logger.error(e.getMessage());
 			return null;
