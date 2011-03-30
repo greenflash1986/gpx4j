@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.casaca.gpx4j.core.util.SortedList;
+
 public class Route extends BaseObject {
 	private String name;
 	private String cmt;
@@ -13,7 +15,7 @@ public class Route extends BaseObject {
 	private BigInteger number;
 	private String type;
 	private Extensions extensions;
-	private List<Waypoint> waypoints;
+	private SortedList<Waypoint> waypoints;
 	
 	public Route(){
 		this.name = null;
@@ -24,7 +26,7 @@ public class Route extends BaseObject {
 		this.number = null;
 		this.type = null;
 		this.extensions = null;
-		this.waypoints = new ArrayList<Waypoint>();
+		this.waypoints = new SortedList<Waypoint>();
 	}
 
 	public String getName() {
@@ -95,11 +97,11 @@ public class Route extends BaseObject {
 		this.extensions = extensions;
 	}
 
-	public List<Waypoint> getWaypoints() {
-		return waypoints;
+	public SortedList<Waypoint> getWaypoints() {
+		return this.waypoints;
 	}
 
-	public void setWaypoints(List<Waypoint> waypoints) {
+	public void setWaypoints(SortedList<Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}
 }

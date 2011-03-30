@@ -43,6 +43,7 @@ import org.casaca.gpx4j.core.exception.GpxReaderException;
 import org.casaca.gpx4j.core.exception.GpxValidationException;
 import org.casaca.gpx4j.core.logging.Logger;
 import org.casaca.gpx4j.core.util.Constants;
+import org.casaca.gpx4j.core.util.SortedList;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -329,8 +330,8 @@ public class GpxReader implements IGpxReader {
 		}
 	}
 	
-	private List<Waypoint> readWaypoints(List<Element> elements) throws GpxIOException{
-		List<Waypoint> waypoints = new ArrayList<Waypoint>();
+	private SortedList<Waypoint> readWaypoints(List<Element> elements) throws GpxIOException{
+		SortedList<Waypoint> waypoints = new SortedList<Waypoint>();
 		if(elements == null || elements.size() == 0){
 			this.logger.info("Elements are null. Document has not waypoints");
 		}
@@ -413,7 +414,6 @@ public class GpxReader implements IGpxReader {
 			String author;
 			String license;
 			Calendar year;
-			String s = null;
 			
 			author = element.getAttributeValue(this.tags.getProperty(Constants.TAG_COPYRIGHT_AUTHOR));
 			if(author == null)
