@@ -20,9 +20,6 @@ import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.core.exception.GpxWriterException;
 import org.casaca.gpx4j.core.util.Constants;
-import org.jdom.Namespace;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 public class GpxWriter implements IGpxWriter {
 	

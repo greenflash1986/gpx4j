@@ -377,7 +377,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		PointsSequence p = new PointsSequence();
 		Iterator<PtType> iterator = pType.getPt().iterator();
 		while(iterator.hasNext())
-			p.addPoint(this.toPoint(iterator.next()));
+			p.getPoints().add(this.toPoint(iterator.next()));
 		
 		return p;
 	}
@@ -498,7 +498,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		TrackSegment t = new TrackSegment();
 		Iterator<WptType> iterator = tType.getTrkpt().iterator();
 		while(iterator.hasNext())
-			t.addWaypoint(this.toWaypoint(iterator.next()));
+			t.getWaypoints().add(this.toWaypoint(iterator.next()));
 		//t.setExtensions(this.toExtensions(tType.getExtensions()));
 		
 		return t;

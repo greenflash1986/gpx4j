@@ -4,22 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.casaca.gpx4j.core.util.Constants;
+import org.casaca.gpx4j.core.util.SortedList;
 
 public class GpxDocument extends BaseObject {
 	private String version;
 	private String creator;
 	
 	private List<Track> tracks;
-	private List<Waypoint> waypoints;
+	private SortedList<Waypoint> waypoints;
 	private List<Route> routes;
 	private Extensions extensions;
 	private Metadata metadata;
 	
 	public GpxDocument(){
-		this.version = null;
+		this.version = Constants.APPLICATION_GPX_VERSION;
 		this.creator = Constants.APPLICATION_NAME;
 		this.tracks = new ArrayList<Track>();
-		this.waypoints = new ArrayList<Waypoint>();
+		this.waypoints = new SortedList<Waypoint>();
 		this.routes = new ArrayList<Route>();
 		this.extensions = null;
 		this.metadata = null;
@@ -46,10 +47,10 @@ public class GpxDocument extends BaseObject {
 	public void addTrack(Track track){
 		this.tracks.add(track);
 	}
-	public List<Waypoint> getWaypoints() {
+	public SortedList<Waypoint> getWaypoints() {
 		return waypoints;
 	}
-	public void setWaypoints(List<Waypoint> waypoints) {
+	public void setWaypoints(SortedList<Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}
 	public List<Route> getRoutes() {

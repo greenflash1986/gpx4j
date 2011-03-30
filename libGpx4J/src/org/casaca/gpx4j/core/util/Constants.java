@@ -94,6 +94,7 @@ public class Constants {
 	public static final String TAG_COPYRIGHT_LICENSE = "COPYRIGHT_LICENSE";
 	
 	public static final String APPLICATION_NAME = "gpx4j";
+	public static final String APPLICATION_GPX_VERSION = "1.1";
 	public static final String APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME = "gpx4j_default.properties";
 	public static final String APPLICATION_DEFAULT_LOGGER_PROPERTIES_FILENAME = "log4j_default.properties";
 	public static final String APPLICATION_DEFAULT_GPX_DTD_1_1_FILENAME = "gpx_1.1.xsd";

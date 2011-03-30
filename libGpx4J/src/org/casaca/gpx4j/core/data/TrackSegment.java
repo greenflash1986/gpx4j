@@ -1,27 +1,22 @@
 package org.casaca.gpx4j.core.data;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.casaca.gpx4j.core.util.SortedList;
 
 public class TrackSegment extends BaseObject {
-	private List<Waypoint> waypoints;
+	private SortedList<Waypoint> waypoints;
 	private Extensions extensions;
 	
 	public TrackSegment(){
-		this.waypoints = new ArrayList<Waypoint>();
+		this.waypoints = new SortedList<Waypoint>();
 		this.extensions = new Extensions();
 	}
 
-	public List<Waypoint> getWaypoints() {
-		return waypoints;
+	public SortedList<Waypoint> getWaypoints() {
+		return this.waypoints;
 	}
 
-	public void setWaypoints(List<Waypoint> waypoints) {
+	public void setWaypoints(SortedList<Waypoint> waypoints) {;
 		this.waypoints = waypoints;
-	}
-	
-	public void addWaypoint(Waypoint waypoint){
-		this.waypoints.add(waypoint);
 	}
 
 	public Extensions getExtensions() {

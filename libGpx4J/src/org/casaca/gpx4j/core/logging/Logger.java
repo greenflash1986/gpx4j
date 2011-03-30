@@ -8,7 +8,6 @@ public class Logger {
 		this.logger4j = org.apache.log4j.Logger.getLogger(name);
 	}
 	
-	@SuppressWarnings("unchecked")
 	protected Logger(Class clazz){
 		this.logger4j = org.apache.log4j.Logger.getLogger(clazz);
 	}
@@ -24,7 +23,6 @@ public class Logger {
 		return logger;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static Logger getLogger(Class clazz){
 		if(logger == null){
 			logger = new Logger(clazz);

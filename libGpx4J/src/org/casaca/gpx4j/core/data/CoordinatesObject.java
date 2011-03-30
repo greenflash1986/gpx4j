@@ -3,7 +3,7 @@ package org.casaca.gpx4j.core.data;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-public abstract class CoordinatesObject extends BaseObject {
+public abstract class CoordinatesObject extends BaseObject implements Comparable<CoordinatesObject> {
 	private BigDecimal elevation;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
@@ -59,5 +59,17 @@ public abstract class CoordinatesObject extends BaseObject {
 	}
 	public void setTime(Calendar time) {
 		this.time = time;
+	}
+
+	//Comparable method
+	@Override
+	public int compareTo(CoordinatesObject o) {
+		if(this.time==null)
+			return 1;
+		else
+			if(o==null || o.getTime()==null)
+				return -1;
+			else
+				return this.getTime().compareTo(o.getTime());
 	}
 }
