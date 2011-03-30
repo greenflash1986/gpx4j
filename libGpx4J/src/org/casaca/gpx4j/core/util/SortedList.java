@@ -18,13 +18,13 @@ public class SortedList<E extends CoordinatesObject> extends ArrayList<E> implem
 	@Override
 	public boolean add(E e) {
 		if(this.size()==0)
-			return this.add(e);
+			return super.add(e);
 		else{
 			int index = Collections.binarySearch(this, e);
 			if(index<0)	
-				this.add(-index-1, e);
+				super.add(-index-1, e);
 			else
-				this.add(index+1, e);
+				super.add(index+1, e);
 			
 			return true;
 		}
