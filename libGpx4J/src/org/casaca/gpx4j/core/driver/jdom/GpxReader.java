@@ -534,6 +534,7 @@ public class GpxReader implements IGpxReader {
 			gpxDoc.setRoutes(this.readRoutes(root.getChildren(this.tags.getProperty(Constants.TAG_RTE), namespace)));
 			gpxDoc.setTracks(this.readTracks(root.getChildren(this.tags.getProperty(Constants.TAG_TRK), namespace)));
 			gpxDoc.setExtensions(this.readExtensions(root.getChild(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS), namespace)));
+			input.close();
 			
 			return gpxDoc;
 		} catch (JDOMException e) {
