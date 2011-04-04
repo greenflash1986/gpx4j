@@ -13,6 +13,11 @@ public class SphericalRangefinder extends AbstractRangefinder {
 	}
 
 	@Override
+	public String getUnit() {
+		return "m";
+	}
+
+	@Override
 	public BigDecimal getDistance(BigDecimal lat1, BigDecimal lon1, BigDecimal lat2, BigDecimal lon2) {
 		if(lat1==null || lon1==null || lat2==null || lon2==null) return new BigDecimal(0.0);
 		
@@ -26,6 +31,6 @@ public class SphericalRangefinder extends AbstractRangefinder {
 						*Math.cos(
 								Math.toRadians(lon2.doubleValue())
 								-Math.toRadians(lon1.doubleValue()))
-				)*this.getPlanetRadius().doubleValue());
+				)*this.getPlanetRadius().doubleValue()*1000);
 	}
 }

@@ -1,68 +1,81 @@
 package org.casaca.gpx4j.tools.speedo;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.data.ISpeed;
 
 public interface ISpeedo {
+	
+	public String getUnit();
+	
+	public ISpeed toMtSeg(ISpeed speed);
+	
+	public ISpeed toMph(ISpeed speed);
+	
+	public ISpeed toMinKm(ISpeed speed);
+	
+	public ISpeed toMinMile(ISpeed speed);
+	
+	public ISpeed toKmh(ISpeed speed);
 
-	public BigDecimal meanSpeed(Track t);
+	public ISpeed meanSpeed(Track t);
 	
-	public BigDecimal medianSpeed(Track t);
+	public ISpeed medianSpeed(Track t);
 	
-	public BigDecimal minSpeed(Track t);
+	public ISpeed minSpeed(Track t);
 	
-	public BigDecimal minSpeedNotZero(Track t);
+	public ISpeed minSpeedNotZero(Track t);
 	
-	public BigDecimal maxSpeed(Track t);
+	public ISpeed maxSpeed(Track t);
 	
-	public BigDecimal[] getSpeeds(Track t);
+	public List<ISpeed> getSpeeds(Track t);
 	
-	public BigDecimal meanSpeed(TrackSegment ts);
+	public ISpeed meanSpeed(TrackSegment ts);
 	
-	public BigDecimal medianSpeed(TrackSegment ts);
+	public ISpeed medianSpeed(TrackSegment ts);
 	
-	public BigDecimal minSpeed(TrackSegment ts);
+	public ISpeed minSpeed(TrackSegment ts);
 	
-	public BigDecimal minSpeedNotZero(TrackSegment ts);
+	public ISpeed minSpeedNotZero(TrackSegment ts);
 	
-	public BigDecimal maxSpeed(TrackSegment ts);
+	public ISpeed maxSpeed(TrackSegment ts);
 	
-	public BigDecimal[] getSpeeds(TrackSegment ts);
+	public List<ISpeed> getSpeeds(TrackSegment ts);
 	
-	public BigDecimal[] getSpeedPerSecond(TrackSegment ts);
+	public List<ISpeed> getSpeedPerSecond(TrackSegment ts);
 	
-	public BigDecimal meanSpeed(Route r);
+	public ISpeed meanSpeed(Route r);
 	
-	public BigDecimal medianSpeed(Route r);
+	public ISpeed medianSpeed(Route r);
 	
-	public BigDecimal minSpeed(Route r);
+	public ISpeed minSpeed(Route r);
 	
-	public BigDecimal minSpeedNotZero(Route r);
+	public ISpeed minSpeedNotZero(Route r);
 	
-	public BigDecimal maxSpeed(Route r);
+	public ISpeed maxSpeed(Route r);
 	
-	public BigDecimal[] getSpeeds(Route r);
+	public List<ISpeed> getSpeeds(Route r);
 	
-	public BigDecimal[] getSpeedPerSecond(Route r);
+	public List<ISpeed> getSpeedPerSecond(Route r);
 	
-	public BigDecimal meanSpeed(PointsSequence ps);
+	public ISpeed meanSpeed(PointsSequence ps);
 	
-	public BigDecimal medianSpeed(PointsSequence ps);
+	public ISpeed medianSpeed(PointsSequence ps);
 	
-	public BigDecimal minSpeed(PointsSequence ps);
+	public ISpeed minSpeed(PointsSequence ps);
 	
-	public BigDecimal minSpeedNotZero(PointsSequence ps);
+	public ISpeed minSpeedNotZero(PointsSequence ps);
 	
-	public BigDecimal maxSpeed(PointsSequence ps);
+	public ISpeed maxSpeed(PointsSequence ps);
 	
-	public BigDecimal[] getSpeeds(PointsSequence ps);
+	public List<ISpeed> getSpeeds(PointsSequence ps);
 	
-	public BigDecimal[] getSpeedPerSecond(PointsSequence ps);
+	public List<ISpeed> getSpeedPerSecond(PointsSequence ps);
 	
-	public BigDecimal getSpeed(CoordinatesObject c1, CoordinatesObject c2);
+	public ISpeed getSpeed(CoordinatesObject c1, CoordinatesObject c2);
 }

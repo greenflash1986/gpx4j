@@ -54,22 +54,54 @@ public abstract class AbstractRangefinder implements IRangefinder {
 	}
 	
 	//PRIVATE METHODS
-	private BigDecimal[] getAscentDescent(CoordinatesObject[] array){
+	private BigDecimal[] getAscentDescent(Iterator<? extends CoordinatesObject> i){
 		BigDecimal[] result = new BigDecimal[2];
 		result[0]=result[1]=BigDecimal.ZERO;
 		BigDecimal diff;
+		CoordinatesObject c1, c2;
 		
-		if(array.length>1){
-			for (int i = 0; i < array.length-1; i++) {
-				diff = array[i].getElevation().subtract(array[i+1].getElevation());
-				if(diff.compareTo(BigDecimal.ZERO)==-1)
-					result[1] = result[1].add(diff.abs());
+		if(i.hasNext()){
+			c1 = i.next();
+			while(i.hasNext()){
+				c2 = i.next();
+				diff = c2.getElevation().subtract(c1.getElevation());
+				if(diff.signum()==-1)
+					result[0] = result[0].add(diff.abs());
 				else
-					result[0] = result[0].add(diff);
+					result[1] = result[1].add(diff);
+				c1=c2;
 			}
 		}
 		
 		return result;
+	}
+	
+	private BigDecimal getMaxElevation(Iterator<? extends CoordinatesObject> i){
+		BigDecimal maxElevation = BigDecimal.ZERO;
+		CoordinatesObject co = null;
+		while(i.hasNext()){
+			co = i.next();
+			if(co.getElevation().compareTo(maxElevation)==1) maxElevation = co.getElevation();
+		}
+		if(co==null)
+			return null;
+		else
+			return maxElevation;
+	}
+	
+	private BigDecimal getMinElevation(Iterator<? extends CoordinatesObject> i){
+		BigDecimal minElevation = null;
+		CoordinatesObject co = null;
+		if(i.hasNext()){
+			minElevation = i.next().getElevation();
+			while(i.hasNext()){
+				co = i.next();
+				if(co.getElevation().compareTo(minElevation)==-1)
+					minElevation = co.getElevation();
+			}
+		}
+		
+		return minElevation;
 	}
 	//END PRIVATE METHODS
 	
@@ -139,7 +171,7 @@ public abstract class AbstractRangefinder implements IRangefinder {
 
 	@Override
 	public BigDecimal[] getAscentDescent(PointsSequence ps) {
-		return this.getAscentDescent(ps.getPoints().toArray(new CoordinatesObject[ps.getPoints().size()]));
+		return this.getAscentDescent(ps.getPoints().iterator());
 	}
 
 	@Override
@@ -161,12 +193,72 @@ public abstract class AbstractRangefinder implements IRangefinder {
 
 	@Override
 	public BigDecimal[] getAscentDescent(TrackSegment ts) {
-		return this.getAscentDescent(ts.getWaypoints().toArray(new CoordinatesObject[ts.getWaypoints().size()]));
+		return this.getAscentDescent(ts.getWaypoints().iterator());
 	}
 
 	@Override
 	public BigDecimal[] getAscentDescent(Route r) {
-		return this.getAscentDescent(r.getWaypoints().toArray(new CoordinatesObject[r.getWaypoints().size()]));
+		return this.getAscentDescent(r.getWaypoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMaxElevation(Track t) {
+		BigDecimal maxElevation = BigDecimal.ZERO;
+		BigDecimal elevation;
+		Iterator<TrackSegment> i = t.getTrackSegments().iterator();
+		while(i.hasNext()){
+			elevation = this.getMaxElevation(i.next());
+			if(elevation.compareTo(maxElevation)==1) maxElevation = elevation;
+		}
+		
+		return maxElevation;
+	}
+
+	@Override
+	public BigDecimal getMaxElevation(TrackSegment ts) {
+		return this.getMaxElevation(ts.getWaypoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMaxElevation(Route r) {
+		return this.getMaxElevation(r.getWaypoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMaxElevation(PointsSequence ps) {
+		return this.getMaxElevation(ps.getPoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMinElevation(Track t) {
+		BigDecimal minElevation = null;
+		BigDecimal elevation = null;
+		Iterator<TrackSegment> i = t.getTrackSegments().iterator();
+		if(i.hasNext()){
+			minElevation = this.getMinElevation(i.next());
+			while(i.hasNext()){
+				elevation = this.getMinElevation(i.next());
+				if(elevation.compareTo(minElevation)==-1)
+					minElevation = elevation;
+			}
+		}
+		
+		return minElevation;
+	}
+
+	@Override
+	public BigDecimal getMinElevation(TrackSegment ts) {
+		return this.getMinElevation(ts.getWaypoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMinElevation(Route r) {
+		return this.getMinElevation(r.getWaypoints().iterator());
+	}
+
+	@Override
+	public BigDecimal getMinElevation(PointsSequence ps) {
+		return this.getMinElevation(ps.getPoints().iterator());
 	}
 	//End IRangefinder methods
 }

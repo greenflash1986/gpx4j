@@ -2,17 +2,22 @@ package org.casaca.gpx4j.tools.converter;
 
 import java.math.BigDecimal;
 
+import org.casaca.gpx4j.tools.util.Constants;
+
 public class Converter {
+	
+	public Converter(){
+	}
 
 	public String latitudeFromDecimalToSexagesimal(BigDecimal latitude){
 		if(latitude==null) return "00¼00'00\"N";
 		
-		BigDecimal[] d = latitude.divideAndRemainder(BigDecimal.valueOf(1));
+		BigDecimal[] d = latitude.divideAndRemainder(BigDecimal.valueOf(1), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT);
 		StringBuffer l = new StringBuffer();
 		l.append(d[0].intValue()).append("¼");
-		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/60.0));//NOT 1/60 --> 1/60.0 forces to double, 1/60 forces to int and divides by zero
+		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/60.0), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT);//NOT 1/60 --> 1/60.0 forces to double, 1/60 forces to int and divides by zero
 		l.append(d[0].intValue()).append("'");
-		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/3600.0));
+		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/3600.0), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT);
 		l.append(d[0].intValue())
 		.append((d[1].compareTo(BigDecimal.valueOf(0.0))==0)?"":"."+d[1].toPlainString().split("[.]")[1].substring(0,2))
 		.append("\"")
@@ -27,9 +32,9 @@ public class Converter {
 		BigDecimal[] d = longitude.divideAndRemainder(BigDecimal.valueOf(1));
 		StringBuffer l = new StringBuffer();
 		l.append(d[0].intValue()).append("¼");
-		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/60.0));//NOT 1/60 --> 1/60.0 forces to double, 1/60 forces to int and divides by zero
+		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/60.0), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT);//NOT 1/60 --> 1/60.0 forces to double, 1/60 forces to int and divides by zero
 		l.append(d[0].intValue()).append("'");
-		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/3600.0));
+		d=d[1].divideAndRemainder(BigDecimal.valueOf(1/3600.0), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT);
 		l.append(d[0].intValue())
 		.append((d[1].compareTo(BigDecimal.valueOf(0.0))==0)?"":"."+d[1].toPlainString().split("[.]")[1].substring(0,2))
 		.append("\"")

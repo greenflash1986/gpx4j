@@ -10,6 +10,8 @@ import org.casaca.gpx4j.core.data.TrackSegment;
 
 public interface IRangefinder {
 	
+	public String getUnit();
+	
 	public BigDecimal getDistance(BigDecimal lat1, BigDecimal lon1, BigDecimal lat2, BigDecimal lon2);
 	
 	public BigDecimal getDistance(CoordinatesObject c1, CoordinatesObject c2);
@@ -29,4 +31,20 @@ public interface IRangefinder {
 	public BigDecimal[] getAscentDescent(TrackSegment ts);
 	
 	public BigDecimal[] getAscentDescent(Route r);
+	
+	public BigDecimal getMaxElevation(Track t);
+	
+	public BigDecimal getMaxElevation(TrackSegment ts);
+	
+	public BigDecimal getMaxElevation(Route r);
+	
+	public BigDecimal getMaxElevation(PointsSequence ps);
+	
+	public BigDecimal getMinElevation(Track t);
+	
+	public BigDecimal getMinElevation(TrackSegment ts);
+	
+	public BigDecimal getMinElevation(Route r);
+	
+	public BigDecimal getMinElevation(PointsSequence ps);
 }

@@ -7,7 +7,9 @@ import java.util.Properties;
 
 import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
+import org.casaca.gpx4j.tools.chronometer.IChronometer;
 import org.casaca.gpx4j.tools.converter.Converter;
+import org.casaca.gpx4j.tools.exception.GpxChronometerException;
 import org.casaca.gpx4j.tools.exception.GpxRangefinderException;
 import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
@@ -32,6 +34,7 @@ public class GpxTools {
 	
 	private IRangefinder rf;
 	private ISpeedo sp;
+	private IChronometer ch;
 	private Converter co;
 	
 	private Properties toolsProp;
@@ -40,6 +43,7 @@ public class GpxTools {
 		this.rf = null;
 		this.sp = null;
 		this.co = null;
+		this.ch = null;
 	}
 	
 	public void loadToolsProperties(String filePath) throws GpxIOException{
@@ -92,11 +96,7 @@ public class GpxTools {
 				throw new GpxRangefinderException("Property "+Constants.TOOLS_RANGEFINDER_CLASS_NAME+" not found in properties file");
 			
 			try {
-				this.rf = (IRangefinder)Class.forName(className).newInstance();
-			} catch (InstantiationException e) {
-				throw new GpxRangefinderException(e);
-			} catch (IllegalAccessException e) {
-				throw new GpxRangefinderException(e);
+				this.rf = this.createRangefinder(Class.forName(className).asSubclass(IRangefinder.class));
 			} catch (ClassNotFoundException e) {
 				throw new GpxRangefinderException(e);
 			}
@@ -105,10 +105,9 @@ public class GpxTools {
 		return this.rf;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public IRangefinder createRangefinder(Class clazz) throws GpxRangefinderException{
+	public IRangefinder createRangefinder(Class<? extends IRangefinder> clazz) throws GpxRangefinderException{
 		try {
-			return (IRangefinder)clazz.newInstance();
+			return clazz.newInstance();
 		} catch (InstantiationException e) {
 			throw new GpxRangefinderException(e);
 		} catch (IllegalAccessException e) {
@@ -125,11 +124,7 @@ public class GpxTools {
 				throw new GpxSpeedoException("Property "+Constants.TOOLS_SPEEDO_CLASS_NAME+" not found in properties file");
 			
 			try {
-				this.sp = (ISpeedo)Class.forName(className).newInstance();
-			} catch (InstantiationException e) {
-				throw new GpxSpeedoException(e);
-			} catch (IllegalAccessException e) {
-				throw new GpxSpeedoException(e);
+				this.sp = this.createSpeedo(Class.forName(className).asSubclass(ISpeedo.class));
 			} catch (ClassNotFoundException e) {
 				throw new GpxSpeedoException(e);
 			}
@@ -138,14 +133,41 @@ public class GpxTools {
 		return this.sp;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public ISpeedo getSpeedo(Class clazz) throws GpxSpeedoException{
+	public ISpeedo createSpeedo(Class<? extends ISpeedo> clazz) throws GpxSpeedoException{
 		try {
-			return (ISpeedo)clazz.newInstance();
+			return clazz.newInstance();
 		} catch (InstantiationException e) {
 			throw new GpxSpeedoException(e);
 		} catch (IllegalAccessException e) {
 			throw new GpxSpeedoException(e);
+		}
+	}
+	
+	public IChronometer getChronometer() throws GpxPropertiesException, GpxChronometerException{
+		if(this.ch==null){
+			Properties toolsProp = this.getToolsProperties();
+			
+			String className = toolsProp.getProperty(Constants.TOOLS_CHRONOMETER_CLASS_NAME);
+			if(className == null)
+				throw new GpxChronometerException("Property "+Constants.TOOLS_CHRONOMETER_CLASS_NAME+" not found in properties file");
+			
+			try {
+				this.ch = this.createChronometer(Class.forName(className).asSubclass(IChronometer.class));
+			} catch (ClassNotFoundException e) {
+				throw new GpxChronometerException(e);
+			}
+		}
+		
+		return this.ch;
+	}
+	
+	public IChronometer createChronometer(Class<? extends IChronometer> clazz) throws GpxChronometerException {
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException e) {
+			throw new GpxChronometerException(e);
+		} catch (IllegalAccessException e) {
+			throw new GpxChronometerException(e);
 		}
 	}
 	

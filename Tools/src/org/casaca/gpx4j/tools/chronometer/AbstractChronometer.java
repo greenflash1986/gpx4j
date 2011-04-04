@@ -1,6 +1,8 @@
 package org.casaca.gpx4j.tools.chronometer;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Iterator;
 
@@ -9,6 +11,7 @@ import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.util.Constants;
 
 public abstract class AbstractChronometer implements IChronometer {
 	
@@ -58,8 +61,30 @@ public abstract class AbstractChronometer implements IChronometer {
 
 	@Override
 	public String getDuration(BigDecimal millis) {
-		// TODO Auto-generated method stub
-		return null;
+		if(millis.compareTo(BigDecimal.ZERO)==0) return "0 s";
+		
+		StringBuffer sb = new StringBuffer();
+	 	MathContext mc = new MathContext(Constants.APPLICATION_PRECISION_OPERATIONS, RoundingMode.DOWN);
+		boolean flag = false;
+		BigDecimal millisInDay = BigDecimal.valueOf(86400000);
+		BigDecimal millisInHour = BigDecimal.valueOf(3600000);
+		BigDecimal millisInMiunte = BigDecimal.valueOf(60000);
+		BigDecimal millisInSecond = BigDecimal.valueOf(1000);
+		int tmp = millis.divide(millisInDay, mc).shortValue();
+		if(tmp>0){ sb.append(tmp).append("d "); flag = true;}
+		millis = millis.remainder(millisInDay, mc);
+		tmp = millis.divide(millisInHour, mc).shortValue();
+		if(flag || tmp>0){ sb.append(tmp).append("h "); flag = true;}
+		millis = millis.remainder(millisInHour, mc);
+		tmp = millis.divide(millisInMiunte, mc).shortValue();
+		if(flag || tmp>0){ sb.append(tmp).append("m "); flag = true;}
+		millis = millis.remainder(millisInMiunte, mc);
+		tmp = millis.divide(millisInSecond, mc).shortValue();
+		if(flag || tmp>0){ sb.append(tmp).append("s "); flag = true;}
+		millis = millis.remainder(millisInSecond, mc);
+		if(millis.compareTo(BigDecimal.ZERO)==1) sb.append(millis).append(" millis");
+		
+		return sb.toString();
 	}
 
 	@Override

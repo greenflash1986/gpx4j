@@ -15,6 +15,6 @@ public class HaversineWithElevationRangefinder extends HaversineRangefinder {
 		BigDecimal d = super.getDistance(c1, c2);
 		if(Math.abs(c1.getElevation().doubleValue()-c2.getElevation().doubleValue())==0) return d;
 		
-		return new BigDecimal(Math.hypot(d.doubleValue(), Math.abs(c1.getElevation().doubleValue()-c2.getElevation().doubleValue())));
+		return new BigDecimal(Math.hypot(d.doubleValue(), Math.abs(c1.getElevation().doubleValue()-c2.getElevation().doubleValue()))*1000);
 	}
 }
