@@ -65,14 +65,6 @@ public class Route extends BaseObject {
 		return links;
 	}
 
-	public void setLinks(List<Link> links) {
-		this.links = links;
-	}
-	
-	public void addLink(Link link){
-		this.links.add(link);
-	}
-
 	public BigInteger getNumber() {
 		return number;
 	}
@@ -99,9 +91,5 @@ public class Route extends BaseObject {
 
 	public SortedList<Waypoint> getWaypoints() {
 		return this.waypoints;
-	}
-
-	public void setWaypoints(SortedList<Waypoint> waypoints) {
-		this.waypoints = waypoints;
 	}
 }

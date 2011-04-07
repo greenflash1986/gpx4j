@@ -118,15 +118,7 @@ public class Waypoint extends CoordinatesObject {
 	public List<Link> getLinks() {
 		return links;
 	}
-
-	public void setLinks(List<Link> links) {
-		this.links = links;
-	}
 	
-	public void addLink(Link link){
-		this.links.add(link);
-	}
-
 	public String getSym() {
 		return sym;
 	}

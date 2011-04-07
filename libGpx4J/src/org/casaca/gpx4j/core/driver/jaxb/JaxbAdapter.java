@@ -277,7 +277,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		m.setCopyright(this.toCopyright(mType.getCopyright()));
 		Iterator<LinkType> iterator = mType.getLink().iterator();
 		while(iterator.hasNext())
-			m.addLink(this.toLink(iterator.next()));
+			m.getLinks().add(this.toLink(iterator.next()));
 		m.setDate((mType.getTime()==null)?null:mType.getTime().toGregorianCalendar());
 		m.setKeywords(mType.getKeywords());
 		m.setBounds(this.toBounds(mType.getBounds()));
@@ -408,7 +408,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		r.setSrc(rType.getSrc());
 		Iterator<LinkType> iterator = rType.getLink().iterator();
 		while(iterator.hasNext())
-			r.addLink(this.toLink(iterator.next()));
+			r.getLinks().add(this.toLink(iterator.next()));
 		r.setNumber(rType.getNumber());
 		r.setType(rType.getType());
 		r.setExtensions(this.toExtensions(rType.getExtensions()));
@@ -455,7 +455,7 @@ public class JaxbAdapter implements IGpxAdapter {
 		t.setSrc(tType.getSrc());
 		Iterator<LinkType> iterator = tType.getLink().iterator();
 		while(iterator.hasNext())
-			t.addLink(this.toLink(iterator.next()));
+			t.getLinks().add(this.toLink(iterator.next()));
 		t.setNumber(tType.getNumber());
 		t.setType(tType.getType());
 		t.setExtensions(this.toExtensions(tType.getExtensions()));

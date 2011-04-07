@@ -10,8 +10,10 @@ import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.tools.chronometer.IChronometer;
 import org.casaca.gpx4j.tools.converter.Converter;
 import org.casaca.gpx4j.tools.exception.GpxChronometerException;
+import org.casaca.gpx4j.tools.exception.GpxExporterException;
 import org.casaca.gpx4j.tools.exception.GpxRangefinderException;
 import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
+import org.casaca.gpx4j.tools.exporter.IExporter;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
 import org.casaca.gpx4j.tools.speedo.ISpeedo;
 import org.casaca.gpx4j.tools.util.Constants;
@@ -35,6 +37,7 @@ public class GpxTools {
 	private IRangefinder rf;
 	private ISpeedo sp;
 	private IChronometer ch;
+	private IExporter xp;
 	private Converter co;
 	
 	private Properties toolsProp;
@@ -44,6 +47,7 @@ public class GpxTools {
 		this.sp = null;
 		this.co = null;
 		this.ch = null;
+		this.xp = null;
 	}
 	
 	public void loadToolsProperties(String filePath) throws GpxIOException{
@@ -91,7 +95,7 @@ public class GpxTools {
 		if(this.rf==null){
 			Properties toolsProp = this.getToolsProperties();
 			
-			String className = toolsProp.getProperty(Constants.TOOLS_RANGEFINDER_CLASS_NAME);
+			String className = toolsProp.getProperty(Constants.TOOLS_RANGEFINDER_CLASS_NAME, Constants.APPLICATION_DEFAULT_RANGEFINDER_CLASS_NAME);
 			if(className == null)
 				throw new GpxRangefinderException("Property "+Constants.TOOLS_RANGEFINDER_CLASS_NAME+" not found in properties file");
 			
@@ -119,7 +123,7 @@ public class GpxTools {
 		if(this.sp==null){
 			Properties toolsProp = this.getToolsProperties();
 			
-			String className = toolsProp.getProperty(Constants.TOOLS_SPEEDO_CLASS_NAME);
+			String className = toolsProp.getProperty(Constants.TOOLS_SPEEDO_CLASS_NAME, Constants.APPLICATION_DEFAULT_SPEEDO_CLASS_NAME);
 			if(className == null)
 				throw new GpxSpeedoException("Property "+Constants.TOOLS_SPEEDO_CLASS_NAME+" not found in properties file");
 			
@@ -147,7 +151,7 @@ public class GpxTools {
 		if(this.ch==null){
 			Properties toolsProp = this.getToolsProperties();
 			
-			String className = toolsProp.getProperty(Constants.TOOLS_CHRONOMETER_CLASS_NAME);
+			String className = toolsProp.getProperty(Constants.TOOLS_CHRONOMETER_CLASS_NAME, Constants.APPLICATION_DEFAULT_CHRONOMETER_CLASS_NAME);
 			if(className == null)
 				throw new GpxChronometerException("Property "+Constants.TOOLS_CHRONOMETER_CLASS_NAME+" not found in properties file");
 			
@@ -168,6 +172,34 @@ public class GpxTools {
 			throw new GpxChronometerException(e);
 		} catch (IllegalAccessException e) {
 			throw new GpxChronometerException(e);
+		}
+	}
+	
+	public IExporter getExporter() throws GpxPropertiesException, GpxExporterException{
+		if(this.xp==null){
+			Properties toolsProp = this.getToolsProperties();
+			
+			String className = toolsProp.getProperty(Constants.TOOLS_EXPORTER_CLASS_NAME, Constants.APPLICATION_DEFAULT_EXPORTER_CLASS_NAME);
+			if(className == null)
+				throw new GpxExporterException("Property "+Constants.TOOLS_EXPORTER_CLASS_NAME+" not found in properties file");
+			
+			try {
+				this.xp = this.createExporter(Class.forName(className).asSubclass(IExporter.class));
+			} catch (ClassNotFoundException e) {
+				throw new GpxExporterException(e);
+			}
+		}
+		
+		return this.xp;
+	}
+	
+	public IExporter createExporter(Class<? extends IExporter> clazz) throws GpxExporterException {
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException e) {
+			throw new GpxExporterException(e);
+		} catch (IllegalAccessException e) {
+			throw new GpxExporterException(e);
 		}
 	}
 	

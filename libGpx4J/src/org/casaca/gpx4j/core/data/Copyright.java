@@ -24,4 +24,9 @@ public class Copyright extends BaseObject {
 	public String getLicense() {
 		return license;
 	}
+
+	@Override
+	public String toString() {
+		return this.author+" "+this.year+" "+this.license;
+	}
 }

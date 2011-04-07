@@ -33,4 +33,9 @@ public class Bounds extends BaseObject {
 	public BigDecimal getMaxLongitude() {
 		return maxLongitude;
 	}
+
+	@Override
+	public String toString() {
+		return "("+minLatitude+", "+minLongitude+") ("+maxLatitude+", "+maxLongitude+")";
+	}
 }

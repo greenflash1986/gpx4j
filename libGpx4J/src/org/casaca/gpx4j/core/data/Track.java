@@ -63,14 +63,6 @@ public class Track extends BaseObject {
 		return links;
 	}
 
-	public void setLinks(List<Link> links) {
-		this.links = links;
-	}
-	
-	public void addLink(Link link){
-		this.links.add(link);
-	}
-
 	public BigInteger getNumber() {
 		return number;
 	}

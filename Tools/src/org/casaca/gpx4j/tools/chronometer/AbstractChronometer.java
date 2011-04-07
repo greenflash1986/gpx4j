@@ -5,6 +5,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
@@ -16,22 +17,13 @@ import org.casaca.gpx4j.tools.util.Constants;
 public abstract class AbstractChronometer implements IChronometer {
 	
 	//PRIVATE METHODS
-	private BigDecimal getDuration(CoordinatesObject[] array){
-		BigDecimal duration = BigDecimal.ZERO;
-		if(array.length>1)
-			for (int i = 0; i < array.length-1; i++)
-				duration = duration.add(this.getDuration(array[i], array[i+1]));
-		
-		return duration;
+	public BigDecimal getDuration(List<? extends CoordinatesObject> list){
+		return (list!=null && list.size()>1 && list.get(list.size()-1)!=null && list.get(0)!=null)?
+				this.getDuration(list.get(list.size()-1), list.get(0))
+				:
+				BigDecimal.ZERO;
 	}
 	//END PRIVATE METHODS
-
-	@Override
-	public BigDecimal getDuration(CoordinatesObject c1, CoordinatesObject c2) {
-		if(c1==null || c1.getTime()==null || c2==null || c2.getTime()==null) return BigDecimal.ZERO;
-		
-		return BigDecimal.valueOf(Math.abs(c1.getTime().getTimeInMillis()-c2.getTime().getTimeInMillis()));
-	}
 
 	@Override
 	public BigDecimal getDuration(Track t) {
@@ -46,17 +38,17 @@ public abstract class AbstractChronometer implements IChronometer {
 
 	@Override
 	public BigDecimal getDuration(TrackSegment ts) {
-		return this.getDuration(ts.getWaypoints().toArray(new CoordinatesObject[ts.getWaypoints().size()]));
+		return this.getDuration(ts.getWaypoints());
 	}
 
 	@Override
 	public BigDecimal getDuration(Route r) {
-		return this.getDuration(r.getWaypoints().toArray(new CoordinatesObject[r.getWaypoints().size()]));
+		return this.getDuration(r.getWaypoints());
 	}
 
 	@Override
 	public BigDecimal getDuration(PointsSequence ps) {
-		return this.getDuration(ps.getPoints().toArray(new CoordinatesObject[ps.getPoints().size()]));
+		return this.getDuration(ps.getPoints());
 	}
 
 	@Override

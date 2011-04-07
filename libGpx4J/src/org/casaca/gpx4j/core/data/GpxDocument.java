@@ -29,50 +29,42 @@ public class GpxDocument extends BaseObject {
 	public String getVersion() {
 		return version;
 	}
+	
 	public void setVersion(String version) {
 		this.version = version;
 	}
 	public String getCreator() {
 		return creator;
 	}
+	
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
+	
 	public List<Track> getTracks() {
 		return tracks;
 	}
-	public void setTracks(List<Track> tracks) {
-		this.tracks = tracks;
-	}
-	public void addTrack(Track track){
-		this.tracks.add(track);
-	}
+	
 	public SortedList<Waypoint> getWaypoints() {
 		return waypoints;
 	}
-	public void setWaypoints(SortedList<Waypoint> waypoints) {
-		this.waypoints = waypoints;
-	}
+	
 	public List<Route> getRoutes() {
 		return routes;
 	}
-	public void setRoutes(List<Route> routes) {
-		this.routes = routes;
-	}
-	public void addRoute(Route route){
-		this.routes.add(route);
-	}
+	
 	public Extensions getExtensions() {
 		return extensions;
 	}
+	
 	public void setExtensions(Extensions extensions) {
 		this.extensions = extensions;
 	}
-
+	
 	public Metadata getMetadata() {
 		return metadata;
 	}
-
+	
 	public void setMetadata(Metadata metadata) {
 		this.metadata = metadata;
 	}
