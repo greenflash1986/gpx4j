@@ -15,10 +15,6 @@ public class TrackSegment extends BaseObject {
 		return this.waypoints;
 	}
 
-	public void setWaypoints(SortedList<Waypoint> waypoints) {;
-		this.waypoints = waypoints;
-	}
-
 	public Extensions getExtensions() {
 		return extensions;
 	}

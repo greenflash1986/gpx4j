@@ -12,8 +12,4 @@ public class PointsSequence extends BaseObject {
 	public SortedList<Point> getPoints() {
 		return points;
 	}
-
-	public void setPoints(SortedList<Point> points) {
-		this.points = points;
-	}
 }
