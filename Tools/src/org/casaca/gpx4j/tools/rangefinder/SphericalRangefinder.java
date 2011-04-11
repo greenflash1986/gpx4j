@@ -1,15 +1,16 @@
 package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 public class SphericalRangefinder extends AbstractRangefinder {
 
-	public SphericalRangefinder() {
-		super(EARTH_MEAN_RADIUS);
+	public SphericalRangefinder(Properties props) {
+		super(props, EARTH_MEAN_RADIUS);
 	}
 	
-	public SphericalRangefinder(BigDecimal planetRadius){
-		super(planetRadius);
+	public SphericalRangefinder(Properties props, BigDecimal planetRadius){
+		super(props, planetRadius);
 	}
 
 	@Override

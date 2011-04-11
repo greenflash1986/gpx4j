@@ -2,6 +2,7 @@ package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.Point;
@@ -10,8 +11,9 @@ import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.data.Waypoint;
+import org.casaca.gpx4j.tools.Tool;
 
-public abstract class AbstractRangefinder implements IRangefinder {
+public abstract class AbstractRangefinder extends Tool implements IRangefinder {
 	public static final BigDecimal SUN_EQUATORIAL_RADIUS = new BigDecimal(695500);
 	
 	public static final BigDecimal MERCURY_MEAN_RADIUS = new BigDecimal(2439.7);
@@ -41,7 +43,9 @@ public abstract class AbstractRangefinder implements IRangefinder {
 	
 	private BigDecimal planetRadius;
 	
-	public AbstractRangefinder(BigDecimal planetRadius){
+	public AbstractRangefinder(Properties props, BigDecimal planetRadius){
+		super(props);
+		
 		this.planetRadius = planetRadius;
 	}
 

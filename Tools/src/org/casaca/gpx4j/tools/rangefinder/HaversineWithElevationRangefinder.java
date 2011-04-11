@@ -1,13 +1,14 @@
 package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 
 public class HaversineWithElevationRangefinder extends HaversineRangefinder {
 
-	public HaversineWithElevationRangefinder(BigDecimal planetRadius) {
-		super(planetRadius);
+	public HaversineWithElevationRangefinder(Properties props, BigDecimal planetRadius) {
+		super(props, planetRadius);
 	}
 
 	@Override

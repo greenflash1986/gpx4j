@@ -1,10 +1,15 @@
 package org.casaca.gpx4j.tools.chronometer;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 
 public class MillisChronometer extends AbstractChronometer {
+
+	public MillisChronometer(Properties props) {
+		super(props);
+	}
 
 	@Override
 	public BigDecimal getDuration(CoordinatesObject c1, CoordinatesObject c2) {

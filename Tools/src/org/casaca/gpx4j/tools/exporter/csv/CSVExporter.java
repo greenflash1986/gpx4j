@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.Properties;
 
 import org.casaca.gpx4j.tools.exception.GpxExporterException;
 import org.casaca.gpx4j.tools.exporter.AbstractExporter;
@@ -16,7 +17,9 @@ public class CSVExporter extends AbstractExporter {
 	private String sQuotes;
 	private String delimiter;
 	
-	public CSVExporter(){
+	public CSVExporter(Properties props){
+		super(props);
+		
 		this.quotes = true;
 		this.sQuotes = (this.quotes)?"\"":"";
 		this.delimiter = ",";

@@ -1,12 +1,15 @@
 package org.casaca.gpx4j.tools.converter;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
+import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.util.Constants;
 
-public class Converter {
+public class Converter extends Tool{
 	
-	public Converter(){
+	public Converter(Properties props) {
+		super(props);
 	}
 
 	public String latitudeFromDecimalToSexagesimal(BigDecimal latitude){

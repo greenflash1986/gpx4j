@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
@@ -13,6 +14,7 @@ import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.tools.GpxTools;
+import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.converter.Converter;
 import org.casaca.gpx4j.tools.data.ISpeed;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
@@ -22,13 +24,15 @@ import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
 import org.casaca.gpx4j.tools.util.Constants;
 
-public abstract class AbstractSpeedo implements ISpeedo {
+public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	
 	private GpxTools tools;
 	private IRangefinder rf;
 	private Converter cv;
 	
-	public AbstractSpeedo() throws GpxSpeedoException{
+	public AbstractSpeedo(Properties props) throws GpxSpeedoException{
+		super(props);
+		
 		this.tools = GpxTools.getTools();
 		try {
 			this.rf = this.tools.getRangefinder();

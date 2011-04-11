@@ -17,8 +17,8 @@ public class MtSegSpeedo extends AbstractSpeedo {
 	private BigDecimal mile;
 	private BigDecimal km;
 	
-	public MtSegSpeedo() throws GpxSpeedoException, GpxPropertiesException {
-		super();
+	public MtSegSpeedo(Properties props) throws GpxSpeedoException, GpxPropertiesException {
+		super(props);
 		this.toolsProp = this.getTools().getToolsProperties();
 		this.mile = BigDecimal.valueOf(Double.parseDouble(toolsProp.getProperty(Constants.TOOLS_CONVERSION_KM_TO_MILE, Constants.APPLICATION_DEFAULT_CONVERSION_KM_TO_MILE)));
 		this.km = BigDecimal.valueOf(Double.parseDouble(toolsProp.getProperty(Constants.TOOLS_CONVERSION_MILE_TO_KM, Constants.APPLICATION_DEFAULT_CONVERSION_MILE_TO_KM)));

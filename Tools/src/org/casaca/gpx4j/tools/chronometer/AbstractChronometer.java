@@ -6,15 +6,21 @@ import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.util.Constants;
 
-public abstract class AbstractChronometer implements IChronometer {
+public abstract class AbstractChronometer extends Tool implements IChronometer {
+	
+	public AbstractChronometer(Properties props) {
+		super(props);
+	}
 	
 	//PRIVATE METHODS
 	public BigDecimal getDuration(List<? extends CoordinatesObject> list){

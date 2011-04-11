@@ -1,6 +1,7 @@
 package org.casaca.gpx4j.tools.speedo;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
@@ -15,8 +16,8 @@ public class KmhSpeedo extends AbstractSpeedo {
 
 	private BigDecimal mile;
 	
-	public KmhSpeedo() throws GpxSpeedoException, NumberFormatException, GpxPropertiesException {
-		super();
+	public KmhSpeedo(Properties props) throws GpxSpeedoException, NumberFormatException, GpxPropertiesException {
+		super(props);
 		this.mile = BigDecimal.valueOf(Double.parseDouble(GpxTools.getTools().getToolsProperties().getProperty(Constants.TOOLS_CONVERSION_KM_TO_MILE, Constants.APPLICATION_DEFAULT_CONVERSION_KM_TO_MILE)));
 	}
 
