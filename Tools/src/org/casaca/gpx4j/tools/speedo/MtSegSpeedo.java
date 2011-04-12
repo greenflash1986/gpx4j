@@ -3,8 +3,8 @@ package org.casaca.gpx4j.tools.speedo;
 import java.math.BigDecimal;
 import java.util.Properties;
 
-import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
+import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.ISpeed;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.data.Speed;
@@ -25,8 +25,8 @@ public class MtSegSpeedo extends AbstractSpeedo {
 	}
 
 	@Override
-	public String getUnit() {
-		return "m/s";
+	public IMeasurementUnit getUnit() {
+		return MeasurementUnit.MT_SEG;
 	}
 	//CONVERTING SPEED
 	@Override
@@ -38,47 +38,40 @@ public class MtSegSpeedo extends AbstractSpeedo {
 	public ISpeed toMph(ISpeed speed) {		
 		if(speed==null || speed.compareTo(Speed.SPEED_ZERO_METERS_PER_SECOND)==0) return Speed.SPEED_ZERO_MPH;
 		
-		speed.setSpeed(speed.getSpeed().multiply(BigDecimal.valueOf(3.6)).multiply(this.mile));
-		speed.setUnit(MeasurementUnit.MPH);
+		ISpeed newSpeed = new Speed(speed.getSpeed().multiply(BigDecimal.valueOf(3.6)).multiply(this.mile), MeasurementUnit.MPH);
+		newSpeed.setCoordinates(speed.getCoordinates()[0], speed.getCoordinates()[1]);
 		
-		return speed;
+		return newSpeed;
 	}
 
 	@Override
 	public ISpeed toMinKm(ISpeed speed) {
 		if(speed==null || speed.compareTo(Speed.SPEED_ZERO_METERS_PER_SECOND)==0) return Speed.SPEED_ZERO_MINUTES_PER_KILOMETER;
 		
-		speed.setSpeed(BigDecimal.valueOf(1000).divide((speed.getSpeed().multiply(BigDecimal.valueOf(60))), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT));
-		speed.setUnit(MeasurementUnit.MT_SEG);
+		ISpeed newSpeed = new Speed(BigDecimal.valueOf(1000).divide((speed.getSpeed().multiply(BigDecimal.valueOf(60))), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT), MeasurementUnit.MIN_KM);
+		newSpeed.setCoordinates(speed.getCoordinates()[0], speed.getCoordinates()[1]);
 		
-		return speed;
+		return newSpeed;
 	}
 
 	@Override
 	public ISpeed toMinMile(ISpeed speed) {
 		if(speed==null || speed.compareTo(Speed.SPEED_ZERO_METERS_PER_SECOND)==0) return Speed.SPEED_ZERO_MINUTES_PER_MILE;
 		
-		speed.setSpeed((BigDecimal.valueOf(1000).multiply(km).divide(speed.getSpeed(), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT)).divide(BigDecimal.valueOf(60), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT));
-		speed.setUnit(MeasurementUnit.MT_SEG);
+		ISpeed newSpeed = new Speed((BigDecimal.valueOf(1000).multiply(km).divide(speed.getSpeed(), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT)).divide(BigDecimal.valueOf(60), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT), MeasurementUnit.MIN_MI);
+		newSpeed.setCoordinates(speed.getCoordinates()[0], speed.getCoordinates()[1]);
 		
-		return speed;
+		return newSpeed;
 	}
 
 	@Override
 	public ISpeed toKmh(ISpeed speed) {
 		if(speed==null || speed.compareTo(Speed.SPEED_ZERO_METERS_PER_SECOND)==0) return Speed.SPEED_ZERO_KMH;
 		
-		speed.setSpeed(speed.getSpeed().multiply(BigDecimal.valueOf(3.6)));
-		speed.setUnit(MeasurementUnit.KMH);
+		ISpeed newSpeed = new Speed(speed.getSpeed().multiply(BigDecimal.valueOf(3.6)), MeasurementUnit.KMH);
+		newSpeed.setCoordinates(speed.getCoordinates()[0], speed.getCoordinates()[1]);
 		
-		return speed;
+		return newSpeed;
 	}
 	//END CONVERTING SPEED
-	
-	//GET SPEED
-	@Override
-	public ISpeed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
-		return super.getSpeed(super.getRangefinder().getDistance(c1, c2), Math.abs(c2.getTime().getTimeInMillis()-c1.getTime().getTimeInMillis()));
-	}
-	//END GET SPEED
 }

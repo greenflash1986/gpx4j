@@ -1,20 +1,24 @@
 package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 
 public interface IRangefinder {
 	
-	public String getUnit();
+	public IMeasurementUnit getUnit();
 	
 	public BigDecimal getDistance(BigDecimal lat1, BigDecimal lon1, BigDecimal lat2, BigDecimal lon2);
 	
-	public BigDecimal getDistance(CoordinatesObject c1, CoordinatesObject c2);
+	public <T extends CoordinatesObject> BigDecimal getDistance(T c1, T c2);
+	
+	public BigDecimal getDistance(List<? extends CoordinatesObject> list);
 	
 	public BigDecimal getDistance(PointsSequence ps);
 	

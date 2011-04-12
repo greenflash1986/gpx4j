@@ -7,11 +7,12 @@ import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.ISpeed;
 
 public interface ISpeedo {
 	
-	public String getUnit();
+	public IMeasurementUnit getUnit();
 	
 	public ISpeed toMtSeg(ISpeed speed);
 	
