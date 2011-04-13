@@ -411,7 +411,7 @@ public class JaxbAdapter implements IGpxAdapter {
 			r.getLinks().add(this.toLink(iterator.next()));
 		r.setNumber(rType.getNumber());
 		r.setType(rType.getType());
-		r.setExtensions(this.toExtensions(rType.getExtensions()));
+		r.getExtensions().getExtensions().putAll(this.toExtensions(rType.getExtensions()).getExtensions());
 		Iterator<WptType> iterator2 = rType.getRtept().iterator();
 		while(iterator2.hasNext())
 			r.getWaypoints().add(this.toWaypoint(iterator2.next()));
@@ -458,7 +458,7 @@ public class JaxbAdapter implements IGpxAdapter {
 			t.getLinks().add(this.toLink(iterator.next()));
 		t.setNumber(tType.getNumber());
 		t.setType(tType.getType());
-		t.setExtensions(this.toExtensions(tType.getExtensions()));
+		t.getExtensions().getExtensions().putAll(this.toExtensions(tType.getExtensions()).getExtensions());
 		Iterator<TrksegType> iterator2 = tType.getTrkseg().iterator();
 		while(iterator2.hasNext())
 			t.getTrackSegments().add(this.toTrackSegment(iterator2.next()));

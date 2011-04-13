@@ -92,7 +92,7 @@ public class GpxWriter implements IGpxWriter {
 		if(routes!=null && routes.size()>0)
 			for(int i=0;i<routes.size();i++)
 				element.addContent(this.getElement(routes.get(i)));
-		if(extensions!=null && extensions.count()>0)
+		if(extensions!=null && extensions.getExtensions().size()>0)
 			element.addContent(this.getElement(extensions));
 		return element;
 	}
@@ -259,11 +259,11 @@ public class GpxWriter implements IGpxWriter {
 			throw new IllegalArgumentException("Error creating extensions element. Extensions must not be null");
 		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS));
-		Iterator<String> keys = extensions.getKeys().iterator();
+		Iterator<String> keys = extensions.getExtensions().keySet().iterator();
 		String key = null;
 		while(keys.hasNext()){
 			key = keys.next();
-			element.addContent(new Element(key).setText(extensions.getValue(key)));
+			element.addContent(new Element(key).setText(extensions.getExtensions().get(key).getValue()));
 		}
 		
 		return element;
@@ -339,7 +339,7 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_AGEOFDGPSDATA)).setText(String.valueOf(ageofdgpsdata)));
 		if(dgpsstation!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_DGPSID)).setText(String.valueOf(dgpsstation.getDgpsStation())));
-		if(extensions!=null && extensions.count()>0)
+		if(extensions!=null && extensions.getExtensions().size()>0)
 			element.addContent(this.getElement(extensions));
 		
 		return element;
@@ -414,7 +414,7 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_NUMBER)).setText(String.valueOf(number)));
 		if(type!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_TYPE)).setText(type));
-		if(extensions!=null && extensions.count()>0)
+		if(extensions!=null && extensions.getExtensions().size()>0)
 			element.addContent(this.getElement(extensions));
 		if(trackSegments!=null && trackSegments.size()>0)
 			for(int i=0;i<trackSegments.size();i++)

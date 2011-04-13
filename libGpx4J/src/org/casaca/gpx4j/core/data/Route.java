@@ -25,7 +25,7 @@ public class Route extends BaseObject {
 		this.links = new ArrayList<Link>();
 		this.number = null;
 		this.type = null;
-		this.extensions = null;
+		this.extensions = new Extensions();
 		this.waypoints = new SortedList<Waypoint>();
 	}
 
@@ -83,10 +83,6 @@ public class Route extends BaseObject {
 
 	public Extensions getExtensions() {
 		return extensions;
-	}
-
-	public void setExtensions(Extensions extensions) {
-		this.extensions = extensions;
 	}
 
 	public SortedList<Waypoint> getWaypoints() {
