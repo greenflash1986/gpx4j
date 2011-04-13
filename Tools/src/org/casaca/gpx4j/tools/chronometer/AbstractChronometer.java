@@ -62,7 +62,7 @@ public abstract class AbstractChronometer extends Tool implements IChronometer {
 		if(millis.compareTo(BigDecimal.ZERO)==0) return "0 s";
 		
 		StringBuffer sb = new StringBuffer();
-	 	MathContext mc = new MathContext(Constants.APPLICATION_PRECISION_OPERATIONS, RoundingMode.DOWN);
+	 	MathContext mc = new MathContext(Constants.APPLICATION_DEFAULT_PRECISION_OPERATIONS, RoundingMode.DOWN);
 		boolean flag = false;
 		BigDecimal millisInDay = BigDecimal.valueOf(86400000);
 		BigDecimal millisInHour = BigDecimal.valueOf(3600000);
