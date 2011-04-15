@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
@@ -13,29 +14,39 @@ import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.tools.GpxTools;
-import org.casaca.gpx4j.tools.converter.Converter;
+import org.casaca.gpx4j.tools.Tool;
+import org.casaca.gpx4j.tools.chronometer.IChronometer;
+import org.casaca.gpx4j.tools.chronometer.MillisChronometer;
 import org.casaca.gpx4j.tools.data.ISpeed;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.data.Speed;
+import org.casaca.gpx4j.tools.exception.GpxChronometerException;
 import org.casaca.gpx4j.tools.exception.GpxRangefinderException;
 import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
 import org.casaca.gpx4j.tools.util.Constants;
+import org.casaca.gpx4j.tools.util.Converter;
 
-public abstract class AbstractSpeedo implements ISpeedo {
+public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	
 	private GpxTools tools;
 	private IRangefinder rf;
+	private IChronometer ch;
 	private Converter cv;
 	
-	public AbstractSpeedo() throws GpxSpeedoException{
+	public AbstractSpeedo(Properties props) throws GpxSpeedoException{
+		super(props);
+		
 		this.tools = GpxTools.getTools();
 		try {
 			this.rf = this.tools.getRangefinder();
 			this.cv = this.tools.getConverter();
+			this.ch = this.tools.createChronometer(MillisChronometer.class);
 		} catch (GpxRangefinderException e) {
 			throw new GpxSpeedoException(e);
 		} catch (GpxPropertiesException e) {
+			throw new GpxSpeedoException(e);
+		} catch (GpxChronometerException e) {
 			throw new GpxSpeedoException(e);
 		}
 	}
@@ -64,21 +75,31 @@ public abstract class AbstractSpeedo implements ISpeedo {
 	//ENDS PROTECTED METHODS
 	
 	//PRIVATE METHODS
-    private ISpeed meanSpeed(Iterator<? extends CoordinatesObject> i){
-            BigDecimal speed = BigDecimal.ZERO;
-            CoordinatesObject c;
-            if(i.hasNext()){
-                    c = i.next();
-                    int count = 0;
-                    while(i.hasNext()){
-                            speed = speed.add(this.getSpeed(c, (c=i.next())).getSpeed());
-                            count++;
-                    }
-                    speed = speed.divide(BigDecimal.valueOf(count), Constants.APPLICATION_PRECISION_OPERATIONS, Constants.APPLICATION_ROUNDING_MODE);
-            }
-            
-            return new Speed(speed, MeasurementUnit.MT_SEG);
-    }
+//    private ISpeed meanSpeed(Iterator<? extends CoordinatesObject> i){
+//            BigDecimal speed = BigDecimal.ZERO;
+//            CoordinatesObject c;
+//            if(i.hasNext()){
+//                    c = i.next();
+//                    int count = 0;
+//                    while(i.hasNext()){
+//                            speed = speed.add(this.getSpeed(c, (c=i.next())).getSpeed());
+//                            count++;
+//                    }
+//                    speed = speed.divide(BigDecimal.valueOf(count), Constants.APPLICATION_PRECISION_OPERATIONS, Constants.APPLICATION_ROUNDING_MODE);
+//            }
+//            
+//            return new Speed(speed, MeasurementUnit.MT_SEG);
+//    }
+	
+	private ISpeed meanSpeed(List<? extends CoordinatesObject> list){
+		if(list.size()<2) return Speed.SPEED_ZERO_METERS_PER_SECOND;
+		
+		BigDecimal distance = this.rf.getDistance(list);
+		System.out.println(list.get(0).getTime().getTimeInMillis());
+		System.out.println(list.get(list.size()-1).getTime().getTimeInMillis());
+		BigDecimal time = this.ch.getDuration(list.get(0), list.get(list.size()-1));
+		return this.getSpeed(distance, time.longValue());
+	}
     
 	private ISpeed medianSpeed(List<ISpeed> speeds){
 		Collections.sort(speeds);
@@ -157,6 +178,15 @@ public abstract class AbstractSpeedo implements ISpeedo {
 	}
 	//END PRIVATE METHODS
 	
+	//GET SPEED
+	@Override
+	public ISpeed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
+		ISpeed speed = this.getSpeed(this.getRangefinder().getDistance(c1, c2), Math.abs(c2.getTime().getTimeInMillis()-c1.getTime().getTimeInMillis()));
+		speed.setCoordinates(c1, c2);
+		return speed;
+	}
+	//END GET SPEED
+	
 	//MEAN SPEED
 	@Override
 	public ISpeed meanSpeed(Track t) {
@@ -172,21 +202,21 @@ public abstract class AbstractSpeedo implements ISpeedo {
 	public ISpeed meanSpeed(TrackSegment ts) {
 		if(ts==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
-		return this.meanSpeed(ts.getWaypoints().iterator());
+		return this.meanSpeed(ts.getWaypoints());
 	}
 	
 	@Override
 	public ISpeed meanSpeed(Route r) {
 		if(r==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
-		return this.meanSpeed(r.getWaypoints().iterator());
+		return this.meanSpeed(r.getWaypoints());
 	}
 	
 	@Override
 	public ISpeed meanSpeed(PointsSequence ps) {
 		if(ps==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
-		return this.meanSpeed(ps.getPoints().iterator());
+		return this.meanSpeed(ps.getPoints());
 	}
 	//END MEAN SPEED
 	

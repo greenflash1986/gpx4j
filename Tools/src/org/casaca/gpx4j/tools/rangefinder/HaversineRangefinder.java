@@ -1,16 +1,20 @@
 package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
+import java.util.Properties;
+
+import org.casaca.gpx4j.tools.data.IMeasurementUnit;
+import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public class HaversineRangefinder extends AbstractRangefinder {
 	
-	public HaversineRangefinder(BigDecimal planetRadius) {
-		super(planetRadius);
+	public HaversineRangefinder(Properties props, BigDecimal planetRadius) {
+		super(props, planetRadius);
 	}
 
 	@Override
-	public String getUnit() {
-		return "m";
+	public IMeasurementUnit getUnit() {
+		return MeasurementUnit.METER;
 	}
 
 	@Override

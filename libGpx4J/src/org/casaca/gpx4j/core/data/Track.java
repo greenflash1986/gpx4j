@@ -83,10 +83,6 @@ public class Track extends BaseObject {
 		return extensions;
 	}
 
-	public void setExtensions(Extensions extensions) {
-		this.extensions = extensions;
-	}
-
 	public List<TrackSegment> getTrackSegments() {
 		return trackSegments;
 	}

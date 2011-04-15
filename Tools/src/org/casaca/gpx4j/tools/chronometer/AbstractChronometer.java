@@ -6,15 +6,21 @@ import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
+import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.util.Constants;
 
-public abstract class AbstractChronometer implements IChronometer {
+public abstract class AbstractChronometer extends Tool implements IChronometer {
+	
+	public AbstractChronometer(Properties props) {
+		super(props);
+	}
 	
 	//PRIVATE METHODS
 	public BigDecimal getDuration(List<? extends CoordinatesObject> list){
@@ -56,7 +62,7 @@ public abstract class AbstractChronometer implements IChronometer {
 		if(millis.compareTo(BigDecimal.ZERO)==0) return "0 s";
 		
 		StringBuffer sb = new StringBuffer();
-	 	MathContext mc = new MathContext(Constants.APPLICATION_PRECISION_OPERATIONS, RoundingMode.DOWN);
+	 	MathContext mc = new MathContext(Integer.parseInt(this.getProperties().getProperty(Constants.TOOLS_PRECISION_OPERATORS, String.valueOf(Constants.APPLICATION_DEFAULT_PRECISION_OPERATIONS))), RoundingMode.DOWN);
 		boolean flag = false;
 		BigDecimal millisInDay = BigDecimal.valueOf(86400000);
 		BigDecimal millisInHour = BigDecimal.valueOf(3600000);

@@ -5,16 +5,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.exception.GpxExporterException;
 
-public abstract class AbstractExporter implements IExporter {
+public abstract class AbstractExporter extends Tool implements IExporter {
 	
 	private List<IField> fields;
 	private List<Object> data;
 	private boolean showingHeader;
 	
-	public AbstractExporter(){
+	public AbstractExporter(Properties props){
+		super(props);
 		this.fields = new ArrayList<IField>();
 		this.data = new ArrayList<Object>();
 		this.showingHeader = true;

@@ -90,8 +90,4 @@ public class Metadata extends BaseObject {
 	public Extensions getExtensions() {
 		return extensions;
 	}
-
-	public void setExtensions(Extensions extensions) {
-		this.extensions = extensions;
-	}
 }

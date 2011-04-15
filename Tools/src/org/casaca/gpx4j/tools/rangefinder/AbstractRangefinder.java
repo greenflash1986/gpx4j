@@ -2,6 +2,8 @@ package org.casaca.gpx4j.tools.rangefinder;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.core.data.Point;
@@ -10,8 +12,11 @@ import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.data.Waypoint;
+import org.casaca.gpx4j.tools.Tool;
+import org.casaca.gpx4j.tools.data.IMeasurementUnit;
+import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
-public abstract class AbstractRangefinder implements IRangefinder {
+public abstract class AbstractRangefinder extends Tool implements IRangefinder {
 	public static final BigDecimal SUN_EQUATORIAL_RADIUS = new BigDecimal(695500);
 	
 	public static final BigDecimal MERCURY_MEAN_RADIUS = new BigDecimal(2439.7);
@@ -41,7 +46,9 @@ public abstract class AbstractRangefinder implements IRangefinder {
 	
 	private BigDecimal planetRadius;
 	
-	public AbstractRangefinder(BigDecimal planetRadius){
+	public AbstractRangefinder(Properties props, BigDecimal planetRadius){
+		super(props);
+		
 		this.planetRadius = planetRadius;
 	}
 
@@ -106,10 +113,35 @@ public abstract class AbstractRangefinder implements IRangefinder {
 	//END PRIVATE METHODS
 	
 	//IRangefinder methods
+	
 	@Override
 	public BigDecimal getDistance(CoordinatesObject c1, CoordinatesObject c2) {
 		if(c1==null || c2==null) return new BigDecimal(0.0);
 		return this.getDistance(c1.getLatitude(), c1.getLongitude(), c2.getLatitude(), c2.getLongitude());
+	}
+
+	@Override
+	public IMeasurementUnit getUnit() {
+		return MeasurementUnit.METER;
+	}
+
+	@Override
+	public BigDecimal getDistance(List<? extends CoordinatesObject> list) {
+		BigDecimal distance = BigDecimal.ZERO;
+		if(list.size()<2) return distance;
+		
+		Iterator<? extends CoordinatesObject> i = list.iterator();
+		CoordinatesObject c1, c2;
+		if(i.hasNext()){
+			c1 = i.next();
+			while(i.hasNext()){
+				c2 = i.next();
+				distance = distance.add(this.getDistance(c1, c2));
+				c1 = c2;
+			}
+		}
+		
+		return distance;
 	}
 
 	@Override

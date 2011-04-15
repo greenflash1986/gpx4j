@@ -3,6 +3,7 @@ package org.casaca.gpx4j.tools.data;
 import java.math.BigDecimal;
 
 import org.casaca.gpx4j.core.data.BaseObject;
+import org.casaca.gpx4j.core.data.CoordinatesObject;
 
 public class Speed extends BaseObject implements ISpeed{
 	
@@ -14,11 +15,13 @@ public class Speed extends BaseObject implements ISpeed{
 	
 	private BigDecimal speed;
 	private IMeasurementUnit unit;
+	private CoordinatesObject[] coordinates;
 	
 	public Speed(BigDecimal speed, IMeasurementUnit unit) {
 		super();
 		this.speed = speed;
 		this.unit = unit;
+		this.coordinates = new CoordinatesObject[2];
 	}
 
 	/* (non-Javadoc)
@@ -53,6 +56,29 @@ public class Speed extends BaseObject implements ISpeed{
 	public void setUnit(IMeasurementUnit unit) {
 		if(unit==null) throw new IllegalArgumentException("Null is not an allowed value for unit speed");
 		this.unit = unit;
+	}
+
+	@Override
+	public CoordinatesObject[] getCoordinates() {
+		return this.coordinates;
+	}
+
+	@Override
+	public void setCoordinates(CoordinatesObject c1, CoordinatesObject c2) {
+		if(c1==null && c2!=null){
+			this.coordinates[0] = null;
+			this.coordinates[1] = c2;
+		}
+		else if(c1==null && c2==null)
+			this.coordinates[0]=this.coordinates[1]=null;
+		else if(c1!=null && c2==null){
+			this.coordinates[0] = null;
+			this.coordinates[1] = c1;
+		}
+		else{
+			this.coordinates[0] = (c1.compareTo(c2)<=0)?c1:c2;
+			this.coordinates[1] = (c1.compareTo(c2)>0)?c1:c2;
+		}
 	}
 
 	@Override
@@ -99,6 +125,6 @@ public class Speed extends BaseObject implements ISpeed{
 
 	@Override
 	public String toString() {
-		return this.getSpeed().toString();
+		return this.getSpeed().toString()+" "+this.getUnit();
 	}
 }

@@ -3,7 +3,6 @@ package org.casaca.gpx4j.tools.exporter.implementation;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import org.casaca.gpx4j.core.data.GpxDocument;
 import org.casaca.gpx4j.core.data.Metadata;
@@ -11,10 +10,13 @@ import org.casaca.gpx4j.core.data.Point;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.Waypoint;
+import org.casaca.gpx4j.core.exception.GpxPropertiesException;
+import org.casaca.gpx4j.tools.GpxTools;
 import org.casaca.gpx4j.tools.exception.GpxExporterException;
 import org.casaca.gpx4j.tools.exporter.AbstractGeneratedField;
 import org.casaca.gpx4j.tools.exporter.IExporter;
 import org.casaca.gpx4j.tools.exporter.MethodClassField;
+import org.casaca.gpx4j.tools.util.Formatter;
 
 public class ExporterImplementation {
 	
@@ -69,7 +71,7 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					return (((GpxDocument)this.getObject()).getExtensions()==null)?"0":String.valueOf(((GpxDocument)this.getObject()).getExtensions().count());
+					return (((GpxDocument)this.getObject()).getExtensions()==null)?"0":String.valueOf(((GpxDocument)this.getObject()).getExtensions().getExtensions().size());
 				}
 			};
 			gField.setName("extensions");
@@ -126,10 +128,13 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					Locale l = Locale.getDefault();
-					DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, l);
-					DateFormat tf = DateFormat.getTimeInstance(DateFormat.MEDIUM, l);
-					return df.format(((Metadata)this.getObject()).getDate().getTime())+" "+tf.format(((Metadata)this.getObject()).getDate().getTime());
+					Formatter fm;
+					try {
+						fm = GpxTools.getTools().getFormatter();
+						return fm.formatDate(DateFormat.SHORT, ((Metadata)this.getObject()).getDate().getTime())+" "+fm.formatTime(DateFormat.MEDIUM, ((Metadata)this.getObject()).getDate().getTime());
+					} catch (GpxPropertiesException e) {
+						throw new GpxExporterException(e);
+					}
 				}
 			};
 			
@@ -147,7 +152,7 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					return String.valueOf(((Metadata)this.getObject()).getExtensions().count());
+					return String.valueOf(((Metadata)this.getObject()).getExtensions().getExtensions().size());
 				}
 			};
 			gField.setName("extensions");
@@ -214,7 +219,7 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					return (((Track)this.getObject()).getExtensions()!=null)?String.valueOf(((Track)this.getObject()).getExtensions().count()):"0";
+					return (((Track)this.getObject()).getExtensions()!=null)?String.valueOf(((Track)this.getObject()).getExtensions().getExtensions().size()):"0";
 				}
 			};
 			gField.setName("extensions");
@@ -289,7 +294,7 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					return (((Route)this.getObject()).getExtensions()!=null)?String.valueOf(((Route)this.getObject()).getExtensions().count()):"0";
+					return (((Route)this.getObject()).getExtensions()!=null)?String.valueOf(((Route)this.getObject()).getExtensions().getExtensions().size()):"0";
 				}
 			};
 			gField.setName("extensions");
@@ -341,10 +346,13 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					Locale l = Locale.getDefault();
-					DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, l);
-					DateFormat tf = DateFormat.getTimeInstance(DateFormat.MEDIUM, l);
-					return df.format(((Waypoint)this.getObject()).getTime().getTime())+" "+tf.format(((Waypoint)this.getObject()).getTime().getTime());
+					Formatter fm;
+					try {
+						fm = GpxTools.getTools().getFormatter();
+						return fm.formatDate(DateFormat.SHORT, ((Waypoint)this.getObject()).getTime().getTime())+" "+fm.formatTime(DateFormat.MEDIUM, ((Waypoint)this.getObject()).getTime().getTime());
+					} catch (GpxPropertiesException e) {
+						throw new GpxExporterException(e);
+					}
 				}
 			};
 			gField.setName("time");
@@ -439,7 +447,7 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					return (((Waypoint)this.getObject()).getExtensions()!=null)?String.valueOf(((Waypoint)this.getObject()).getExtensions().count()):"0";
+					return (((Waypoint)this.getObject()).getExtensions()!=null)?String.valueOf(((Waypoint)this.getObject()).getExtensions().getExtensions().size()):"0";
 				}
 			};
 			gField.setName("extensions");
@@ -481,10 +489,13 @@ public class ExporterImplementation {
 				
 				@Override
 				public String getContent() throws GpxExporterException {
-					Locale l = Locale.getDefault();
-					DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, l);
-					DateFormat tf = DateFormat.getTimeInstance(DateFormat.MEDIUM, l);
-					return df.format(((Point)this.getObject()).getTime().getTime())+" "+tf.format(((Point)this.getObject()).getTime().getTime());
+					Formatter fm;
+					try {
+						fm = GpxTools.getTools().getFormatter();
+						return fm.formatDate(DateFormat.SHORT, ((Waypoint)this.getObject()).getTime().getTime())+" "+fm.formatTime(DateFormat.MEDIUM, ((Waypoint)this.getObject()).getTime().getTime());
+					} catch (GpxPropertiesException e) {
+						throw new GpxExporterException(e);
+					}
 				}
 			};
 			gField.setName("time");

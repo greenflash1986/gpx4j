@@ -114,7 +114,7 @@ public class GpxReader implements IGpxReader {
 			metadata.setDate(this.readDate((child = element.getChild(this.tags.getProperty(Constants.TAG_METADATA_TIME), namespace))!=null?child.getText():null));
 			metadata.setKeywords(getChildText(element, Constants.TAG_METADATA_KEYWORDS));
 			metadata.setBounds(this.readBounds(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_BOUNDS), namespace)));
-			metadata.setExtensions(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_EXTENSIONS), namespace)));
+			metadata.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_EXTENSIONS), namespace)).getExtensions());
 			
 			return metadata;
 		}
@@ -185,7 +185,7 @@ public class GpxReader implements IGpxReader {
 			route.getLinks().addAll(this.readLinks(element.getChildren(this.tags.getProperty(Constants.TAG_RTE_LINK), namespace)));
 			route.setNumber((s=getChildText(element, Constants.TAG_RTE_NUMBER))!=null?BigInteger.valueOf(Long.valueOf(s)):null);
 			route.setType(getChildText(element, Constants.TAG_RTE_TYPE));
-			route.setExtensions(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_RTE_EXTENSIONS), namespace)));
+			route.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_RTE_EXTENSIONS), namespace)).getExtensions());
 			route.getWaypoints().addAll(this.readWaypoints(element.getChildren(this.tags.getProperty(Constants.TAG_RTE_RTEPT), namespace)));
 			
 			return route;
@@ -242,7 +242,7 @@ public class GpxReader implements IGpxReader {
 			TrackSegment trackSegment = new TrackSegment();
 			
 			trackSegment.getWaypoints().addAll(this.readWaypoints(element.getChildren(this.tags.getProperty(Constants.TAG_TRKSEG_TRKPT), namespace)));
-			trackSegment.setExtensions(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_TRKSEG_EXTENSIONS), namespace)));
+			trackSegment.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_TRKSEG_EXTENSIONS), namespace)).getExtensions());
 			
 			return trackSegment;
 		}
@@ -317,7 +317,7 @@ public class GpxReader implements IGpxReader {
 				waypoint.setPdop((s=getChildText(element, Constants.TAG_WPT_PDOP))!=null?BigDecimal.valueOf(Double.valueOf(s)):null);
 				waypoint.setAgeOfDgpsData((s=getChildText(element, Constants.TAG_WPT_AGEOFDGPSDATA))!=null?BigDecimal.valueOf(Double.valueOf(s)):null);
 				waypoint.setdGpsId(this.readDgpsStation(getChildText(element, Constants.TAG_WPT_DGPSID)));
-				waypoint.setExtensions(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_WPT_EXTENSIONS), namespace)));
+				waypoint.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_WPT_EXTENSIONS), namespace)).getExtensions());
 			}
 			catch(NumberFormatException except){
 				this.logger.error("Error reading waypoint information. Waypoint: "+latitude+" "+longitude+" Number format not valid");
@@ -533,7 +533,7 @@ public class GpxReader implements IGpxReader {
 			gpxDoc.getWaypoints().addAll(this.readWaypoints(root.getChildren(this.tags.getProperty(Constants.TAG_WPT), namespace)));
 			gpxDoc.getRoutes().addAll(this.readRoutes(root.getChildren(this.tags.getProperty(Constants.TAG_RTE), namespace)));
 			gpxDoc.getTracks().addAll(this.readTracks(root.getChildren(this.tags.getProperty(Constants.TAG_TRK), namespace)));
-			gpxDoc.setExtensions(this.readExtensions(root.getChild(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS), namespace)));
+			gpxDoc.getExtensions().getExtensions().putAll(this.readExtensions(root.getChild(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS), namespace)).getExtensions());
 			input.close();
 			
 			return gpxDoc;

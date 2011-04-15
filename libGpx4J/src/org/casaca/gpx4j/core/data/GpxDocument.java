@@ -22,7 +22,7 @@ public class GpxDocument extends BaseObject {
 		this.tracks = new ArrayList<Track>();
 		this.waypoints = new SortedList<Waypoint>();
 		this.routes = new ArrayList<Route>();
-		this.extensions = null;
+		this.extensions = new Extensions();
 		this.metadata = null;
 	}
 	
@@ -55,10 +55,6 @@ public class GpxDocument extends BaseObject {
 	
 	public Extensions getExtensions() {
 		return extensions;
-	}
-	
-	public void setExtensions(Extensions extensions) {
-		this.extensions = extensions;
 	}
 	
 	public Metadata getMetadata() {
