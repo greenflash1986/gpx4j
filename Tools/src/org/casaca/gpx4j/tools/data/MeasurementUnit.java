@@ -24,6 +24,11 @@ public class MeasurementUnit extends BaseObject implements IMeasurementUnit {
 	public static final IMeasurementUnit MIN_KM = new MeasurementUnit("min/km", "minutes per kilometer");
 	public static final IMeasurementUnit MIN_MI = new MeasurementUnit("min/mi", "minutes per mile");
 	
+	//BEARING
+	public static final IMeasurementUnit DEGREES = new MeasurementUnit("¼", "degrees");
+	public static final IMeasurementUnit DEGREES_MINUTES = new MeasurementUnit("'", "minutes");
+	public static final IMeasurementUnit DEGREES_SECONDS = new MeasurementUnit("\"", "seconds");
+	
 	private String symbol;
 	private String name;
 	

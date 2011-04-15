@@ -17,7 +17,6 @@ import org.casaca.gpx4j.tools.GpxTools;
 import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.chronometer.IChronometer;
 import org.casaca.gpx4j.tools.chronometer.MillisChronometer;
-import org.casaca.gpx4j.tools.converter.Converter;
 import org.casaca.gpx4j.tools.data.ISpeed;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.data.Speed;
@@ -26,6 +25,7 @@ import org.casaca.gpx4j.tools.exception.GpxRangefinderException;
 import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
 import org.casaca.gpx4j.tools.util.Constants;
+import org.casaca.gpx4j.tools.util.Converter;
 
 public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	

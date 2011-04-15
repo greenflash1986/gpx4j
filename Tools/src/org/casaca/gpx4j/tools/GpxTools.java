@@ -3,15 +3,15 @@ package org.casaca.gpx4j.tools;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.tools.chronometer.IChronometer;
-import org.casaca.gpx4j.tools.converter.Converter;
+import org.casaca.gpx4j.tools.compass.ICompass;
 import org.casaca.gpx4j.tools.exception.GpxChronometerException;
+import org.casaca.gpx4j.tools.exception.GpxCompassException;
 import org.casaca.gpx4j.tools.exception.GpxExporterException;
 import org.casaca.gpx4j.tools.exception.GpxRangefinderException;
 import org.casaca.gpx4j.tools.exception.GpxSpeedoException;
@@ -19,6 +19,8 @@ import org.casaca.gpx4j.tools.exporter.IExporter;
 import org.casaca.gpx4j.tools.rangefinder.IRangefinder;
 import org.casaca.gpx4j.tools.speedo.ISpeedo;
 import org.casaca.gpx4j.tools.util.Constants;
+import org.casaca.gpx4j.tools.util.Converter;
+import org.casaca.gpx4j.tools.util.Formatter;
 
 public class GpxTools {
 
@@ -40,7 +42,9 @@ public class GpxTools {
 	private ISpeedo sp;
 	private IChronometer ch;
 	private IExporter xp;
+	private ICompass cp;
 	private Converter co;
+	private Formatter fm;
 	
 	private Properties toolsProp;
 	
@@ -50,6 +54,8 @@ public class GpxTools {
 		this.co = null;
 		this.ch = null;
 		this.xp = null;
+		this.fm = null;
+		this.cp = null;
 	}
 	
 	public void loadToolsProperties(String filePath) throws GpxIOException{
@@ -241,10 +247,53 @@ public class GpxTools {
 		}
 	}
 	
+	public ICompass getCompass() throws GpxPropertiesException, GpxCompassException{
+		if(this.cp==null){
+			Properties toolsProp = this.getToolsProperties();
+			
+			String className = toolsProp.getProperty(Constants.TOOLS_COMPASS_CLASS_NAME, Constants.APPLICATION_DEFAULT_COMPASS_CLASS_NAME);
+			if(className == null)
+				throw new GpxCompassException("Property "+Constants.TOOLS_COMPASS_CLASS_NAME+" not found in properties file");
+			
+			try {
+				this.cp = this.createCompass(Class.forName(className).asSubclass(Tool.class));
+			} catch (ClassNotFoundException e) {
+				throw new GpxCompassException(e);
+			}
+		}
+		
+		return this.cp;
+	}
+	
+	public ICompass createCompass(Class<? extends Tool> clazz) throws GpxCompassException, GpxPropertiesException{
+		try {
+			return (ICompass) clazz.getConstructor(Properties.class).newInstance(this.getToolsProperties());
+		} catch (IllegalArgumentException e) {
+			throw new GpxCompassException(e);
+		} catch (SecurityException e) {
+			throw new GpxCompassException(e);
+		} catch (InstantiationException e) {
+			throw new GpxCompassException(e);
+		} catch (IllegalAccessException e) {
+			throw new GpxCompassException(e);
+		} catch (InvocationTargetException e) {
+			throw new GpxCompassException(e);
+		} catch (NoSuchMethodException e) {
+			throw new GpxCompassException(e);
+		}
+	}
+	
 	public Converter getConverter() throws GpxPropertiesException{
 		if(this.co==null)
 			this.co = new Converter(this.getToolsProperties());
 		
 		return this.co;
+	}
+	
+	public Formatter getFormatter() throws GpxPropertiesException{
+		if(this.fm==null)
+			this.fm = new Formatter(this.getToolsProperties());
+		
+		return this.fm;
 	}
 }
