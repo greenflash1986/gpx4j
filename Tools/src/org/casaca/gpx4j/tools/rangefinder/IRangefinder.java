@@ -8,11 +8,11 @@ import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
+import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public interface IRangefinder {
 	
-	public IMeasurementUnit getUnit();
+	public MeasurementUnit getUnit();
 	
 	public BigDecimal getDistance(BigDecimal lat1, BigDecimal lon1, BigDecimal lat2, BigDecimal lon2);
 	

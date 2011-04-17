@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.Bounds;
@@ -21,6 +22,7 @@ import org.casaca.gpx4j.core.data.Email;
 import org.casaca.gpx4j.core.data.Extensions;
 import org.casaca.gpx4j.core.data.Fix;
 import org.casaca.gpx4j.core.data.GpxDocument;
+import org.casaca.gpx4j.core.data.IExtensible;
 import org.casaca.gpx4j.core.data.Link;
 import org.casaca.gpx4j.core.data.Metadata;
 import org.casaca.gpx4j.core.data.Person;
@@ -254,6 +256,25 @@ public class GpxWriter implements IGpxWriter {
 		return element;
 	}
 	
+	private <T extends IExtensible> Element getElement(T extensible) throws IllegalArgumentException{
+		Element e = new Element(extensible.getName());
+		e.setAttribute(this.tags.getProperty(Constants.TAG_EXTENSIBLE_CANONICAL_NAME), extensible.getCanonicalClassName());
+		Map<String, Object> fields = extensible.getFields();
+		Iterator<String> keys = fields.keySet().iterator();
+		Object o;
+		String key;
+		while(keys. hasNext()){
+			key = keys.next();
+			o = fields.get(key);
+			if(o instanceof IExtensible)
+				e.addContent(this.getElement((T)o));
+			else
+				e.addContent(new Element(key).setText(o.toString()));
+		}
+
+		return e;
+	}
+	
 	private Element getElement(Extensions extensions) throws IllegalArgumentException{
 		if(extensions==null)
 			throw new IllegalArgumentException("Error creating extensions element. Extensions must not be null");
@@ -263,7 +284,7 @@ public class GpxWriter implements IGpxWriter {
 		String key = null;
 		while(keys.hasNext()){
 			key = keys.next();
-			element.addContent(new Element(key).setText(extensions.getExtensions().get(key).getValue()));
+			element.addContent(this.getElement(extensions.getExtensions().get(key).getValue()));
 		}
 		
 		return element;

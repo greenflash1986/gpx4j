@@ -226,16 +226,20 @@ public class GpxDriver {
 	}
 	
 	public IGpxWriter createWriter() throws GpxWriterException, GpxPropertiesException {
-		IGpxWriter writer = null;
-		if(this.driverProperties == null)
-			throw new GpxPropertiesException("Driver properties not loaded. Please load properties before use the writer");
-
-		String className = this.driverProperties.getProperty(Constants.DRIVER_WRITER_CLASS_NAME);
+		String className = this.getDriverProperties().getProperty(Constants.DRIVER_WRITER_CLASS_NAME);
 		if(className == null)
 			throw new GpxWriterException("Property "+Constants.DRIVER_WRITER_CLASS_NAME+" not found in properties file");
 
+		return this.createWriter(className);
+	}
+	
+	public IGpxWriter createWriter(String classname) throws GpxWriterException{
+		IGpxWriter writer = null;
+		if(classname == null)
+			throw new IllegalArgumentException("Error creating writer from a classname. Classname must not be null");
+
 		try {
-			writer = (IGpxWriter)Class.forName(className).newInstance();
+			writer = (IGpxWriter)Class.forName(classname).newInstance();
 			return writer;
 		} catch (InstantiationException e) {
 			throw new GpxWriterException(e);

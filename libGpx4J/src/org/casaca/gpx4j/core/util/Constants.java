@@ -92,6 +92,7 @@ public class Constants {
 	public static final String TAG_COPYRIGHT_AUTHOR = "COPYRIGHT_AUTHOR";
 	public static final String TAG_COPYRIGHT_YEAR = "COPYRIGHT_YEAR";
 	public static final String TAG_COPYRIGHT_LICENSE = "COPYRIGHT_LICENSE";
+	public static final String TAG_EXTENSIBLE_CANONICAL_NAME = "EXTENSIBLE_CANONICAL_NAME";
 	
 	public static final String APPLICATION_NAME = "gpx4j";
 	public static final String APPLICATION_GPX_VERSION = "1.1";

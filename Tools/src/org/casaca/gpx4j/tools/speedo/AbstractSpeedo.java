@@ -17,7 +17,6 @@ import org.casaca.gpx4j.tools.GpxTools;
 import org.casaca.gpx4j.tools.Tool;
 import org.casaca.gpx4j.tools.chronometer.IChronometer;
 import org.casaca.gpx4j.tools.chronometer.MillisChronometer;
-import org.casaca.gpx4j.tools.data.ISpeed;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.data.Speed;
 import org.casaca.gpx4j.tools.exception.GpxChronometerException;
@@ -64,7 +63,7 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 		return this.tools;
 	}
 	
-	protected ISpeed getSpeed(BigDecimal distance, long time){
+	protected Speed getSpeed(BigDecimal distance, long time){
 		//Distance in meters
 		//Time in milliseconds
 		if(time==0) return Speed.SPEED_ZERO_METERS_PER_SECOND;
@@ -75,7 +74,7 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	//ENDS PROTECTED METHODS
 	
 	//PRIVATE METHODS
-//    private ISpeed meanSpeed(Iterator<? extends CoordinatesObject> i){
+//    private Speed meanSpeed(Iterator<? extends CoordinatesObject> i){
 //            BigDecimal speed = BigDecimal.ZERO;
 //            CoordinatesObject c;
 //            if(i.hasNext()){
@@ -91,7 +90,7 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 //            return new Speed(speed, MeasurementUnit.MT_SEG);
 //    }
 	
-	private ISpeed meanSpeed(List<? extends CoordinatesObject> list){
+	private Speed meanSpeed(List<? extends CoordinatesObject> list){
 		if(list.size()<2) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
 		BigDecimal distance = this.rf.getDistance(list);
@@ -101,7 +100,7 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 		return this.getSpeed(distance, time.longValue());
 	}
     
-	private ISpeed medianSpeed(List<ISpeed> speeds){
+	private Speed medianSpeed(List<Speed> speeds){
 		Collections.sort(speeds);
 		int size = speeds.size();
 		if(size%2==0){
@@ -111,14 +110,14 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 			return speeds.get(size/2);
 	}
 	
-	private ISpeed minSpeed(List<ISpeed> speeds){
+	private Speed minSpeed(List<Speed> speeds){
 		return Collections.min(speeds);
 	}
 	
-	private ISpeed minSpeedNotZero(List<ISpeed> speeds){
+	private Speed minSpeedNotZero(List<Speed> speeds){
 		Collections.sort(speeds);
-		Iterator<ISpeed> i = speeds.iterator();
-		ISpeed speed;
+		Iterator<Speed> i = speeds.iterator();
+		Speed speed;
 		
 		while(i.hasNext()){
 			speed = i.next();
@@ -129,12 +128,12 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 		return Speed.SPEED_ZERO_METERS_PER_SECOND;
 	}
 	
-	private ISpeed maxSpeed(List<ISpeed> speeds){
+	private Speed maxSpeed(List<Speed> speeds){
 		return Collections.max(speeds);
 	}
 	
-	private List<ISpeed> getSpeeds(Iterator<? extends CoordinatesObject> ws){
-		List<ISpeed> speeds = new ArrayList<ISpeed>();
+	private List<Speed> getSpeeds(Iterator<? extends CoordinatesObject> ws){
+		List<Speed> speeds = new ArrayList<Speed>();
 		CoordinatesObject w1, w2;
 		
 		if(ws.hasNext()){
@@ -149,10 +148,10 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 		return speeds;
 	}
 	
-	private List<ISpeed> getSpeedPerSecond(List<? extends CoordinatesObject> array){
-		List<ISpeed> speeds = new ArrayList<ISpeed>();
-		ISpeed speed1 = Speed.SPEED_ZERO_METERS_PER_SECOND;
-		ISpeed speed2 = Speed.SPEED_ZERO_METERS_PER_SECOND;
+	private List<Speed> getSpeedPerSecond(List<? extends CoordinatesObject> array){
+		List<Speed> speeds = new ArrayList<Speed>();
+		Speed speed1 = Speed.SPEED_ZERO_METERS_PER_SECOND;
+		Speed speed2 = Speed.SPEED_ZERO_METERS_PER_SECOND;
 		BigDecimal increment = BigDecimal.ZERO;
 		long seconds;
 		CoordinatesObject c1, c2;
@@ -180,8 +179,8 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	
 	//GET SPEED
 	@Override
-	public ISpeed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
-		ISpeed speed = this.getSpeed(this.getRangefinder().getDistance(c1, c2), Math.abs(c2.getTime().getTimeInMillis()-c1.getTime().getTimeInMillis()));
+	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
+		Speed speed = this.getSpeed(this.getRangefinder().getDistance(c1, c2), Math.abs(c2.getTime().getTimeInMillis()-c1.getTime().getTimeInMillis()));
 		speed.setCoordinates(c1, c2);
 		return speed;
 	}
@@ -189,7 +188,7 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	
 	//MEAN SPEED
 	@Override
-	public ISpeed meanSpeed(Track t) {
+	public Speed meanSpeed(Track t) {
 		BigDecimal speed = BigDecimal.ZERO;
 		Iterator<TrackSegment> ts = t.getTrackSegments().iterator();
 		while(ts.hasNext())
@@ -199,21 +198,21 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	}
 
 	@Override
-	public ISpeed meanSpeed(TrackSegment ts) {
+	public Speed meanSpeed(TrackSegment ts) {
 		if(ts==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
 		return this.meanSpeed(ts.getWaypoints());
 	}
 	
 	@Override
-	public ISpeed meanSpeed(Route r) {
+	public Speed meanSpeed(Route r) {
 		if(r==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
 		return this.meanSpeed(r.getWaypoints());
 	}
 	
 	@Override
-	public ISpeed meanSpeed(PointsSequence ps) {
+	public Speed meanSpeed(PointsSequence ps) {
 		if(ps==null) return Speed.SPEED_ZERO_METERS_PER_SECOND;
 		
 		return this.meanSpeed(ps.getPoints());
@@ -222,31 +221,31 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	
 	//MEDIAN SPEED
 	@Override
-	public ISpeed medianSpeed(Track t) {
+	public Speed medianSpeed(Track t) {
 		return this.medianSpeed(this.getSpeeds(t));
 	}
 
 	@Override
-	public ISpeed medianSpeed(TrackSegment ts) {
+	public Speed medianSpeed(TrackSegment ts) {
 		return this.medianSpeed(this.getSpeeds(ts));
 	}
 	
 	@Override
-	public ISpeed medianSpeed(Route r) {
+	public Speed medianSpeed(Route r) {
 		return this.medianSpeed(this.getSpeeds(r));
 	}
 	
 	@Override
-	public ISpeed medianSpeed(PointsSequence ps) {
+	public Speed medianSpeed(PointsSequence ps) {
 		return this.medianSpeed(this.getSpeeds(ps));
 	}
 	//END MEDIAN SPEED
 	
 	//MIN SPEED
 	@Override
-	public ISpeed minSpeed(Track t) {
-		ISpeed minSpeed = null;
-		ISpeed speed;
+	public Speed minSpeed(Track t) {
+		Speed minSpeed = null;
+		Speed speed;
 		Iterator<TrackSegment> ts = t.getTrackSegments().iterator();
 		if(ts.hasNext()){
 			minSpeed = this.minSpeed(ts.next());
@@ -260,26 +259,26 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	}
 
 	@Override
-	public ISpeed minSpeed(TrackSegment ts) {
+	public Speed minSpeed(TrackSegment ts) {
 		return this.minSpeed(this.getSpeeds(ts));
 	}
 
 	@Override
-	public ISpeed minSpeed(Route r) {
+	public Speed minSpeed(Route r) {
 		return this.minSpeed(this.getSpeeds(r));
 	}
 	
 	@Override
-	public ISpeed minSpeed(PointsSequence ps) {
+	public Speed minSpeed(PointsSequence ps) {
 		return this.minSpeed(this.getSpeeds(ps));
 	}
 	//END MIN SPEED
 	
 	//MIN SPEED NOT ZERO
 	@Override
-	public ISpeed minSpeedNotZero(Track t) {
-		ISpeed minSpeed = Speed.SPEED_ZERO_METERS_PER_SECOND;
-		ISpeed speed = Speed.SPEED_ZERO_METERS_PER_SECOND;
+	public Speed minSpeedNotZero(Track t) {
+		Speed minSpeed = Speed.SPEED_ZERO_METERS_PER_SECOND;
+		Speed speed = Speed.SPEED_ZERO_METERS_PER_SECOND;
 		Iterator<TrackSegment> ts = t.getTrackSegments().iterator();
 		if(ts.hasNext()){
 			minSpeed = this.minSpeedNotZero(this.getSpeeds(ts.next()));
@@ -294,26 +293,26 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	}
 	
 	@Override
-	public ISpeed minSpeedNotZero(TrackSegment ts) {
+	public Speed minSpeedNotZero(TrackSegment ts) {
 		return this.minSpeedNotZero(this.getSpeeds(ts));
 	}
 	
 	@Override
-	public ISpeed minSpeedNotZero(Route r) {
+	public Speed minSpeedNotZero(Route r) {
 		return this.minSpeedNotZero(this.getSpeeds(r));
 	}
 	
 	@Override
-	public ISpeed minSpeedNotZero(PointsSequence ps) {
+	public Speed minSpeedNotZero(PointsSequence ps) {
 		return this.minSpeedNotZero(this.getSpeeds(ps));
 	}
 	//END MIN SPEED NOT ZERO
 	
 	//MAX SPEED
 	@Override
-	public ISpeed maxSpeed(Track t) {
-		ISpeed maxSpeed = null;
-		ISpeed speed;
+	public Speed maxSpeed(Track t) {
+		Speed maxSpeed = null;
+		Speed speed;
 		Iterator<TrackSegment> ts = t.getTrackSegments().iterator();
 		if(ts.hasNext()){
 			maxSpeed = this.maxSpeed(ts.next());
@@ -327,25 +326,25 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	}
 
 	@Override
-	public ISpeed maxSpeed(Route r) {
+	public Speed maxSpeed(Route r) {
 		return this.maxSpeed(this.getSpeeds(r));
 	}
 	
 	@Override
-	public ISpeed maxSpeed(PointsSequence ps) {
+	public Speed maxSpeed(PointsSequence ps) {
 		return this.maxSpeed(this.getSpeeds(ps));
 	}
 	
 	@Override
-	public ISpeed maxSpeed(TrackSegment ts) {
+	public Speed maxSpeed(TrackSegment ts) {
 		return this.maxSpeed(this.getSpeeds(ts));
 	}
 	//END MAX SPEED
 	
 	//GET SPEEDS
 	@Override
-	public List<ISpeed> getSpeeds(Track t) {
-		List<ISpeed> speeds = new ArrayList<ISpeed>();
+	public List<Speed> getSpeeds(Track t) {
+		List<Speed> speeds = new ArrayList<Speed>();
 		Iterator<TrackSegment> ts = t.getTrackSegments().iterator();
 		while(ts.hasNext()){
 			speeds.addAll(this.getSpeeds(ts.next()));
@@ -355,34 +354,34 @@ public abstract class AbstractSpeedo extends Tool implements ISpeedo {
 	}
 
 	@Override
-	public List<ISpeed> getSpeeds(TrackSegment ts) {
+	public List<Speed> getSpeeds(TrackSegment ts) {
 		return this.getSpeeds(ts.getWaypoints().iterator());
 	}
 	
 	@Override
-	public List<ISpeed> getSpeeds(Route r) {
+	public List<Speed> getSpeeds(Route r) {
 		return this.getSpeeds(r.getWaypoints().iterator());
 	}
 	
 	@Override
-	public List<ISpeed> getSpeeds(PointsSequence ps) {
+	public List<Speed> getSpeeds(PointsSequence ps) {
 		return this.getSpeeds(ps.getPoints().iterator());
 	}
 	//END GET SPEEDS
 	
 	//GET SPEED PER SECOND
 	@Override
-	public List<ISpeed> getSpeedPerSecond(TrackSegment ts) {
+	public List<Speed> getSpeedPerSecond(TrackSegment ts) {
 		return this.getSpeedPerSecond(ts.getWaypoints());
 	}
 
 	@Override
-	public List<ISpeed> getSpeedPerSecond(Route r) {
+	public List<Speed> getSpeedPerSecond(Route r) {
 		return this.getSpeedPerSecond(r.getWaypoints());
 	}
 
 	@Override
-	public List<ISpeed> getSpeedPerSecond(PointsSequence ps) {
+	public List<Speed> getSpeedPerSecond(PointsSequence ps) {
 		return this.getSpeedPerSecond(ps.getPoints());
 	}
 	//END GET SPEED PER SECOND

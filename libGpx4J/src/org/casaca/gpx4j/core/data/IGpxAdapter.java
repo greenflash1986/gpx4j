@@ -21,9 +21,9 @@ public interface IGpxAdapter {
 	
 	public Object fromEmail(Email email);
 	
-	public Extension toExtension(Object extension);
+	public Extension<? extends IExtensible> toExtension(Object extension);
 	
-	public Object fromExtension(Extension extension);
+	public Object fromExtension(Extension<? extends IExtensible> extension);
 	
 	public Extensions toExtensions(Object extensions);
 	

@@ -13,7 +13,6 @@ import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.data.Waypoint;
 import org.casaca.gpx4j.tools.Tool;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public abstract class AbstractRangefinder extends Tool implements IRangefinder {
@@ -121,7 +120,7 @@ public abstract class AbstractRangefinder extends Tool implements IRangefinder {
 	}
 
 	@Override
-	public IMeasurementUnit getUnit() {
+	public MeasurementUnit getUnit() {
 		return MeasurementUnit.METER;
 	}
 
