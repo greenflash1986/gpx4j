@@ -21,13 +21,15 @@ public class Converter {
 		l.append(d[0].intValue())
 		.append((d[1].compareTo(BigDecimal.valueOf(0.0))==0)?"":"."+d[1].toPlainString().split("[.]")[1].substring(0,2))
 		.append("\"")
-		.append((latitude.signum()>0)?"N":"S");
+		.append((latitude.signum()>=0)?"N":"S");
 		
 		return l.toString();
 	}
 	
 	public String longitudeFromDecimalToSexagesimal(BigDecimal longitude){
 		if(longitude==null) return "00¼00'00\"E";
+		String cardinal = (longitude.signum()>=0)?"E":"W";
+		longitude = longitude.abs();
 		
 		BigDecimal[] d = longitude.divideAndRemainder(BigDecimal.valueOf(1));
 		StringBuffer l = new StringBuffer();
@@ -38,15 +40,15 @@ public class Converter {
 		l.append(d[0].intValue())
 		.append((d[1].compareTo(BigDecimal.valueOf(0.0))==0)?"":"."+d[1].toPlainString().split("[.]")[1].substring(0,2))
 		.append("\"")
-		.append((longitude.signum()>0)?"E":"W");
+		.append(cardinal);
 		
 		return l.toString();
 	}
 	
 	public BigDecimal latitudeFromSexagesimalToDecimal(String latitude) throws NumberFormatException{
-		if(latitude==null) return new BigDecimal(0);
+		if(latitude==null) return BigDecimal.ZERO;
 		
-		BigDecimal r = new BigDecimal(0.0);
+		BigDecimal r = BigDecimal.ZERO;
 		r = r.add(BigDecimal.valueOf(Long.valueOf(latitude.substring(0, latitude.indexOf("¼")))));
 		String tmp = latitude.substring(latitude.indexOf("¼")+1);
 		if(tmp.contains("'")){
@@ -62,9 +64,9 @@ public class Converter {
 	}
 	
 	public BigDecimal longitudeFromSexagesimalToDecimal(String longitude) throws NumberFormatException{
-		if(longitude==null) return new BigDecimal(0);
+		if(longitude==null) return BigDecimal.ZERO;
 		
-		BigDecimal r = new BigDecimal(0.0);
+		BigDecimal r = BigDecimal.ZERO;
 		r = r.add(BigDecimal.valueOf(Long.valueOf(longitude.substring(0, longitude.indexOf("¼")))));
 		String tmp = longitude.substring(longitude.indexOf("¼")+1);
 		if(tmp.contains("'")){

@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.casaca.gpx4j.core.driver.GpxDriver;
 import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
+import org.casaca.gpx4j.core.logging.Logger;
 import org.casaca.gpx4j.tools.chronometer.IChronometer;
 import org.casaca.gpx4j.tools.converter.Converter;
 import org.casaca.gpx4j.tools.exception.GpxChronometerException;
@@ -22,6 +24,7 @@ public class GpxTools {
 
 	//STATIC
 	private static GpxTools tools;
+	
 	static{
 		tools = null;
 	}
@@ -208,5 +211,9 @@ public class GpxTools {
 			this.co = new Converter();
 		
 		return this.co;
+	}
+	
+	public Logger getLogger(){
+		return this.getLogger();
 	}
 }

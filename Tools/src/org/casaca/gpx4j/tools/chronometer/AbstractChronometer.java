@@ -17,7 +17,7 @@ import org.casaca.gpx4j.tools.util.Constants;
 public abstract class AbstractChronometer implements IChronometer {
 	
 	//PRIVATE METHODS
-	public BigDecimal getDuration(List<? extends CoordinatesObject> list){
+	private BigDecimal getDuration(List<? extends CoordinatesObject> list){
 		return (list!=null && list.size()>1 && list.get(list.size()-1)!=null && list.get(0)!=null)?
 				this.getDuration(list.get(list.size()-1), list.get(0))
 				:
