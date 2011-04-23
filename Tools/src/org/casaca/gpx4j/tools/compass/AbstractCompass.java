@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
+import org.casaca.gpx4j.core.data.Extension;
 import org.casaca.gpx4j.tools.Tool;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
+import org.casaca.gpx4j.tools.data.Bearing;
+import org.casaca.gpx4j.tools.data.CardinalDirection;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.util.Constants;
 
@@ -16,25 +18,28 @@ public class AbstractCompass extends Tool implements ICompass {
 	}
 
 	@Override
-	public IMeasurementUnit getUnit() {
+	public MeasurementUnit getUnit() {
 		return MeasurementUnit.DEGREES;
 	}
 
 	@Override
-	public <T extends CoordinatesObject> BigDecimal getBearing(T c1, T c2) {
+	public <T extends CoordinatesObject> Bearing getBearing(T c1, T c2, boolean storeBearing) {
 		double rLat1 = Math.toRadians(c1.getLatitude().doubleValue());
 		double rLon1 = Math.toRadians(c1.getLongitude().doubleValue());
 		double rLat2 = Math.toRadians(c2.getLatitude().doubleValue());
 		double rLon2 = Math.toRadians(c2.getLongitude().doubleValue());
 		double dLon = rLon2-rLon1;
 		
-		double bearing = Math.atan2(
+		double b = Math.atan2(
 				Math.sin(dLon)*Math.cos(rLat2),
 				Math.cos(rLat1)*Math.sin(rLat2)-Math.sin(rLat1)*Math.cos(rLat2)*Math.cos(dLon));
 		
-		bearing = Math.toDegrees(bearing);
-		bearing = (bearing+360)%360;
-		return new BigDecimal(Double.toString(bearing));
+		b = Math.toDegrees(b);
+		b = (b+360)%360;
+		
+		Bearing bearing = new Bearing(BigDecimal.valueOf(b), this.getCardinalDirection(BigDecimal.valueOf(b)));
+		c2.getExtensions().addExtension(new Extension<Bearing>(Constants.APPLICATION_TAG_BEARING, bearing));
+		return bearing;
 	}
 
 	@Override
