@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
@@ -27,10 +30,12 @@ import org.casaca.gpx4j.core.data.Extension;
 import org.casaca.gpx4j.core.data.Extensions;
 import org.casaca.gpx4j.core.data.Fix;
 import org.casaca.gpx4j.core.data.GpxDocument;
+import org.casaca.gpx4j.core.data.IExtensible;
 import org.casaca.gpx4j.core.data.Link;
 import org.casaca.gpx4j.core.data.Metadata;
 import org.casaca.gpx4j.core.data.Person;
 import org.casaca.gpx4j.core.data.Route;
+import org.casaca.gpx4j.core.data.StringExtensible;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
 import org.casaca.gpx4j.core.data.Waypoint;
@@ -114,9 +119,99 @@ public class GpxReader implements IGpxReader {
 			metadata.setDate(this.readDate((child = element.getChild(this.tags.getProperty(Constants.TAG_METADATA_TIME), namespace))!=null?child.getText():null));
 			metadata.setKeywords(getChildText(element, Constants.TAG_METADATA_KEYWORDS));
 			metadata.setBounds(this.readBounds(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_BOUNDS), namespace)));
-			metadata.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_EXTENSIONS), namespace)).getExtensions());
+			Extensions ext = this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_METADATA_EXTENSIONS), namespace));
+			if(ext!=null && ext.getExtensions()!=null) metadata.getExtensions().getExtensions().putAll(ext.getExtensions());
 			
 			return metadata;
+		}
+	}
+	
+	private IExtensible readExtensible(Element element) throws GpxReaderException{
+		String classname = element.getAttributeValue(this.tags.getProperty(Constants.TAG_EXTENSIBLE_CANONICAL_NAME));
+		
+		if(classname==null)
+			throw new GpxReaderException("Unknown element. No class name defined");
+
+		try {
+			Constructor<? extends IExtensible> constructor = Class.forName(classname).asSubclass(IExtensible.class).getDeclaredConstructor(null);
+			boolean accesible = constructor.isAccessible();
+			constructor.setAccessible(true);
+			IExtensible extensible = constructor.newInstance(null);
+			constructor.setAccessible(accesible);
+			List<Element> children = element.getChildren();
+			String name;
+			for (Element element2 : children) {
+				name = element2.getName();
+				Field f = extensible.getClass().getDeclaredField(name);
+				accesible = f.isAccessible();
+				f.setAccessible(true);
+				if(element2.getChildren().size()>0)
+					f.set(extensible, this.readExtensible(element2));
+				else{
+					try{
+						Constructor cons = f.getType().getDeclaredConstructor(String.class);
+						boolean flag = cons.isAccessible();
+						cons.setAccessible(true);
+						Object o = cons.newInstance(element2.getText());
+						f.set(extensible, o);
+						cons.setAccessible(flag);
+					}
+					catch(NoSuchMethodException except){
+						//TODO: IMPROVE THIS PORTION OF CODE
+						if(f.getType().equals(int.class))
+							f.setInt(extensible, Integer.parseInt(element2.getText()));
+						else if(f.getType().equals(boolean.class))
+							f.setBoolean(extensible, Boolean.parseBoolean(element2.getText()));
+						else if(f.getType().equals(char.class))
+							f.setChar(extensible, (element2.getText().length()>0)?element2.getText().charAt(0):' ');
+						else if(f.getType().equals(byte.class))
+							f.setByte(extensible, Byte.parseByte(element2.getText()));
+						else if(f.getType().equals(short.class))
+							f.setShort(extensible, Short.parseShort(element2.getText()));
+						else if(f.getType().equals(long.class))
+							f.setLong(extensible, Long.parseLong(element2.getText()));
+						else if(f.getType().equals(float.class))
+							f.setFloat(extensible, Float.parseFloat(element2.getText()));
+						else if(f.getType().equals(double.class))
+							f.setDouble(extensible, Double.parseDouble(element2.getText()));
+						else
+							throw new GpxReaderException(f.getType().getClass().getCanonicalName()+" has no constructor wich accepts a string as a parameter", except);
+					}
+				}
+				f.setAccessible(accesible);
+			}
+			
+			return extensible;
+		} catch(ClassCastException e) {
+			throw new GpxReaderException(classname+" not implements "+IExtensible.class.getCanonicalName()+" interface", e);
+		} catch (IllegalArgumentException e) {
+			throw new GpxReaderException(e);
+		} catch (SecurityException e) {
+			throw new GpxReaderException(e);
+		} catch (InstantiationException e) {
+			throw new GpxReaderException(e);
+		} catch (IllegalAccessException e) {
+			throw new GpxReaderException(e);
+		} catch (InvocationTargetException e) {
+			throw new GpxReaderException(e);
+		} catch (NoSuchMethodException e) {
+			throw new GpxReaderException(e);
+		} catch (ClassNotFoundException e) {
+			throw new GpxReaderException(e);
+		} catch (NoSuchFieldException e) {
+			throw new GpxReaderException(e);
+		}
+	}
+	
+	private Extension<? extends IExtensible> readExtension(Element element) throws GpxReaderException{
+		if(element.getChildren().size()==0){
+			StringExtensible s = new StringExtensible(element.getName(), element.getValue());
+			Extension<StringExtensible> extension = new Extension<StringExtensible>(element.getName()+"_"+System.currentTimeMillis(), s);
+			return extension;
+		}
+		else{
+			Extension<IExtensible> extension = new Extension<IExtensible>(element.getName(), this.readExtensible(element));
+			return extension;
 		}
 	}
 	
@@ -133,7 +228,11 @@ public class GpxReader implements IGpxReader {
 			Element e;
 			while(iterator.hasNext()){
 				e = iterator.next();
-				extensions.addExtension(new Extension(e.getName(), e.getText()));
+				try {
+					extensions.addExtension(this.readExtension(e));
+				} catch (GpxReaderException e1) {
+					this.logger.info("Element "+e.getName()+" has not been read. "+e1.getMessage());
+				}
 			}
 			
 			return extensions;
@@ -185,7 +284,8 @@ public class GpxReader implements IGpxReader {
 			route.getLinks().addAll(this.readLinks(element.getChildren(this.tags.getProperty(Constants.TAG_RTE_LINK), namespace)));
 			route.setNumber((s=getChildText(element, Constants.TAG_RTE_NUMBER))!=null?BigInteger.valueOf(Long.valueOf(s)):null);
 			route.setType(getChildText(element, Constants.TAG_RTE_TYPE));
-			route.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_RTE_EXTENSIONS), namespace)).getExtensions());
+			Extensions ext = this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_RTE_EXTENSIONS), namespace));
+			if(ext!=null && ext.getExtensions()!=null) route.getExtensions().getExtensions().putAll(ext.getExtensions());
 			route.getWaypoints().addAll(this.readWaypoints(element.getChildren(this.tags.getProperty(Constants.TAG_RTE_RTEPT), namespace)));
 			
 			return route;
@@ -242,7 +342,8 @@ public class GpxReader implements IGpxReader {
 			TrackSegment trackSegment = new TrackSegment();
 			
 			trackSegment.getWaypoints().addAll(this.readWaypoints(element.getChildren(this.tags.getProperty(Constants.TAG_TRKSEG_TRKPT), namespace)));
-			trackSegment.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_TRKSEG_EXTENSIONS), namespace)).getExtensions());
+			Extensions ext = this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_TRKSEG_EXTENSIONS), namespace));
+			if(ext!=null && ext.getExtensions()!=null) trackSegment.getExtensions().getExtensions().putAll(ext.getExtensions());
 			
 			return trackSegment;
 		}
@@ -317,7 +418,8 @@ public class GpxReader implements IGpxReader {
 				waypoint.setPdop((s=getChildText(element, Constants.TAG_WPT_PDOP))!=null?BigDecimal.valueOf(Double.valueOf(s)):null);
 				waypoint.setAgeOfDgpsData((s=getChildText(element, Constants.TAG_WPT_AGEOFDGPSDATA))!=null?BigDecimal.valueOf(Double.valueOf(s)):null);
 				waypoint.setdGpsId(this.readDgpsStation(getChildText(element, Constants.TAG_WPT_DGPSID)));
-				waypoint.getExtensions().getExtensions().putAll(this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_WPT_EXTENSIONS), namespace)).getExtensions());
+				Extensions ext = this.readExtensions(element.getChild(this.tags.getProperty(Constants.TAG_WPT_EXTENSIONS), namespace));
+				if(ext!=null && ext.getExtensions()!=null) waypoint.getExtensions().getExtensions().putAll(ext.getExtensions());
 			}
 			catch(NumberFormatException except){
 				this.logger.error("Error reading waypoint information. Waypoint: "+latitude+" "+longitude+" Number format not valid");
@@ -533,7 +635,8 @@ public class GpxReader implements IGpxReader {
 			gpxDoc.getWaypoints().addAll(this.readWaypoints(root.getChildren(this.tags.getProperty(Constants.TAG_WPT), namespace)));
 			gpxDoc.getRoutes().addAll(this.readRoutes(root.getChildren(this.tags.getProperty(Constants.TAG_RTE), namespace)));
 			gpxDoc.getTracks().addAll(this.readTracks(root.getChildren(this.tags.getProperty(Constants.TAG_TRK), namespace)));
-			gpxDoc.getExtensions().getExtensions().putAll(this.readExtensions(root.getChild(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS), namespace)).getExtensions());
+			Extensions ext =  this.readExtensions(root.getChild(this.tags.getProperty(Constants.TAG_GPX_EXTENSIONS), namespace));
+			if(ext!=null && ext.getExtensions()!=null) gpxDoc.getExtensions().getExtensions().putAll(ext.getExtensions());
 			input.close();
 			
 			return gpxDoc;

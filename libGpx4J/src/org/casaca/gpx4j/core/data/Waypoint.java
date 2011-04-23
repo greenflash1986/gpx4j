@@ -28,7 +28,6 @@ public class Waypoint extends CoordinatesObject {
 	private BigDecimal pdop;
 	private BigDecimal ageOfDgpsData;
 	private DgpsStation dGpsId;
-	private Extensions extensions;
 	
 	public Waypoint(BigDecimal latitude, BigDecimal longitude) throws IllegalArgumentException{
 		super(latitude, longitude);
@@ -64,7 +63,6 @@ public class Waypoint extends CoordinatesObject {
 		this.pdop = null;
 		this.ageOfDgpsData = null;
 		this.dGpsId = null;
-		this.extensions = new Extensions();
 	}
 
 	public Degrees getMagvar() {
@@ -189,9 +187,5 @@ public class Waypoint extends CoordinatesObject {
 
 	public void setdGpsId(DgpsStation dGpsId) {
 		this.dGpsId = dGpsId;
-	}
-
-	public Extensions getExtensions() {
-		return extensions;
 	}
 }

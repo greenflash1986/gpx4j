@@ -7,76 +7,76 @@ import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
-import org.casaca.gpx4j.tools.data.ISpeed;
+import org.casaca.gpx4j.tools.data.MeasurementUnit;
+import org.casaca.gpx4j.tools.data.Speed;
 
 public interface ISpeedo {
 	
-	public IMeasurementUnit getUnit();
+	public MeasurementUnit getUnit();
 	
-	public ISpeed toMtSeg(ISpeed speed);
+	public Speed toMtSeg(Speed speed);
 	
-	public ISpeed toMph(ISpeed speed);
+	public Speed toMph(Speed speed);
 	
-	public ISpeed toMinKm(ISpeed speed);
+	public Speed toMinKm(Speed speed);
 	
-	public ISpeed toMinMile(ISpeed speed);
+	public Speed toMinMile(Speed speed);
 	
-	public ISpeed toKmh(ISpeed speed);
+	public Speed toKmh(Speed speed);
 
-	public ISpeed meanSpeed(Track t);
+	public Speed meanSpeed(Track t);
 	
-	public ISpeed medianSpeed(Track t);
+	public Speed medianSpeed(Track t);
 	
-	public ISpeed minSpeed(Track t);
+	public Speed minSpeed(Track t);
 	
-	public ISpeed minSpeedNotZero(Track t);
+	public Speed minSpeedNotZero(Track t);
 	
-	public ISpeed maxSpeed(Track t);
+	public Speed maxSpeed(Track t);
 	
-	public List<ISpeed> getSpeeds(Track t);
+	public List<Speed> getSpeeds(Track t, boolean storeSpeed);
 	
-	public ISpeed meanSpeed(TrackSegment ts);
+	public Speed meanSpeed(TrackSegment ts);
 	
-	public ISpeed medianSpeed(TrackSegment ts);
+	public Speed medianSpeed(TrackSegment ts);
 	
-	public ISpeed minSpeed(TrackSegment ts);
+	public Speed minSpeed(TrackSegment ts);
 	
-	public ISpeed minSpeedNotZero(TrackSegment ts);
+	public Speed minSpeedNotZero(TrackSegment ts);
 	
-	public ISpeed maxSpeed(TrackSegment ts);
+	public Speed maxSpeed(TrackSegment ts);
 	
-	public List<ISpeed> getSpeeds(TrackSegment ts);
+	public List<Speed> getSpeeds(TrackSegment ts, boolean storeSpeed);
 	
-	public List<ISpeed> getSpeedPerSecond(TrackSegment ts);
+	public List<Speed> getSpeedPerSecond(TrackSegment ts, boolean storeSpeed);
 	
-	public ISpeed meanSpeed(Route r);
+	public Speed meanSpeed(Route r);
 	
-	public ISpeed medianSpeed(Route r);
+	public Speed medianSpeed(Route r);
 	
-	public ISpeed minSpeed(Route r);
+	public Speed minSpeed(Route r);
 	
-	public ISpeed minSpeedNotZero(Route r);
+	public Speed minSpeedNotZero(Route r);
 	
-	public ISpeed maxSpeed(Route r);
+	public Speed maxSpeed(Route r);
 	
-	public List<ISpeed> getSpeeds(Route r);
+	public List<Speed> getSpeeds(Route r, boolean storeSpeed);
 	
-	public List<ISpeed> getSpeedPerSecond(Route r);
+	public List<Speed> getSpeedPerSecond(Route r, boolean storeSpeed);
 	
-	public ISpeed meanSpeed(PointsSequence ps);
+	public Speed meanSpeed(PointsSequence ps);
 	
-	public ISpeed medianSpeed(PointsSequence ps);
+	public Speed medianSpeed(PointsSequence ps);
 	
-	public ISpeed minSpeed(PointsSequence ps);
+	public Speed minSpeed(PointsSequence ps);
 	
-	public ISpeed minSpeedNotZero(PointsSequence ps);
+	public Speed minSpeedNotZero(PointsSequence ps);
 	
-	public ISpeed maxSpeed(PointsSequence ps);
+	public Speed maxSpeed(PointsSequence ps);
 	
-	public List<ISpeed> getSpeeds(PointsSequence ps);
+	public List<Speed> getSpeeds(PointsSequence ps, boolean storeSpeed);
 	
-	public List<ISpeed> getSpeedPerSecond(PointsSequence ps);
+	public List<Speed> getSpeedPerSecond(PointsSequence ps, boolean storeSpeed);
 	
-	public ISpeed getSpeed(CoordinatesObject c1, CoordinatesObject c2);
+	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2, boolean storeSpeed);
 }

@@ -3,7 +3,6 @@ package org.casaca.gpx4j.tools.rangefinder;
 import java.math.BigDecimal;
 import java.util.Properties;
 
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public class HaversineRangefinder extends AbstractRangefinder {
@@ -13,7 +12,7 @@ public class HaversineRangefinder extends AbstractRangefinder {
 	}
 
 	@Override
-	public IMeasurementUnit getUnit() {
+	public MeasurementUnit getUnit() {
 		return MeasurementUnit.METER;
 	}
 

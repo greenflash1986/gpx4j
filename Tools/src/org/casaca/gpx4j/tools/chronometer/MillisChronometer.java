@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public class MillisChronometer extends AbstractChronometer {
@@ -14,7 +13,7 @@ public class MillisChronometer extends AbstractChronometer {
 	}
 
 	@Override
-	public IMeasurementUnit getUnit() {
+	public MeasurementUnit getUnit() {
 		return MeasurementUnit.MILLISECOND;
 	}
 

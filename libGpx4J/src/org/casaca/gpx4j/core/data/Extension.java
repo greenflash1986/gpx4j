@@ -1,10 +1,11 @@
 package org.casaca.gpx4j.core.data;
 
-public class Extension extends BaseObject {
-	private String key;
-	private String value;
+public class Extension<T extends IExtensible> extends BaseObject {
 	
-	public Extension(String key, String value) throws IllegalArgumentException{
+	private String key;
+	private T value;
+	
+	public Extension(String key, T value) throws IllegalArgumentException{
 		if(key == null || value == null) throw new IllegalArgumentException("Key and value must not be null");
 		
 		this.key = key;
@@ -15,7 +16,12 @@ public class Extension extends BaseObject {
 		return key;
 	}
 
-	public String getValue() {
+	public T getValue() {
 		return value;
+	}
+
+	@Override
+	public String toString() {
+		return this.key+": "+this.value;
 	}
 }

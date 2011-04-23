@@ -92,12 +92,16 @@ public class Constants {
 	public static final String TAG_COPYRIGHT_AUTHOR = "COPYRIGHT_AUTHOR";
 	public static final String TAG_COPYRIGHT_YEAR = "COPYRIGHT_YEAR";
 	public static final String TAG_COPYRIGHT_LICENSE = "COPYRIGHT_LICENSE";
+	public static final String TAG_EXTENSIBLE_CANONICAL_NAME = "EXTENSIBLE_CANONICAL_NAME";
 	
 	public static final String APPLICATION_NAME = "gpx4j";
 	public static final String APPLICATION_GPX_VERSION = "1.1";
 	public static final String APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME = "gpx4j_default.properties";
 	public static final String APPLICATION_DEFAULT_LOGGER_PROPERTIES_FILENAME = "log4j_default.properties";
 	public static final String APPLICATION_DEFAULT_GPX_DTD_1_1_FILENAME = "gpx_1.1.xsd";
+	public static final String APPLICATION_DEFAULT_DRIVER_WRITER_IDENTATION_TEXT = "\t";
+	public static final boolean APPLICATION_DEFAULT_DRIVER_WRITER_NEW_LINE = true;
+	public static final boolean APPLICATION_DEFAULT_DRIVER_WRITER_EXPAND_EMPTY_ELEMENTS = false;
 	public static final String APPLICATION_KEYS_FILE_PREFIX_FILENAME = "GpxKeys_";
 	public static final String APPLICATION_KEYS_FILE_DEFAULT_BODY_FILENAME = "Default";
 	public static final String APPLICATION_KEYS_FILE_SUFIX_FILENAME = ".properties";

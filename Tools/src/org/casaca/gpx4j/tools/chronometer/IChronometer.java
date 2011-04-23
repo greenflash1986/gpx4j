@@ -8,11 +8,11 @@ import org.casaca.gpx4j.core.data.PointsSequence;
 import org.casaca.gpx4j.core.data.Route;
 import org.casaca.gpx4j.core.data.Track;
 import org.casaca.gpx4j.core.data.TrackSegment;
-import org.casaca.gpx4j.tools.data.IMeasurementUnit;
+import org.casaca.gpx4j.tools.data.MeasurementUnit;
 
 public interface IChronometer {
 	
-	public IMeasurementUnit getUnit();
+	public MeasurementUnit getUnit();
 	
 	public BigDecimal getDuration(CoordinatesObject c1, CoordinatesObject c2);
 	
