@@ -18,7 +18,6 @@ public class Constants {
 	public static final String APPLICATION_DEFAULT_TOOLS_PROPERTIES_FILENAME = "gpx4jTools_default.properties";
 	public static final int APPLICATION_DEFAULT_PRECISION_OPERATIONS = 8;
 	public static final RoundingMode APPLICATION_DEFAULT_ROUNDING_MODE = RoundingMode.HALF_UP;
-	public static final MathContext APPLICATION_BIGDECIMAL_MATH_CONTEXT = MathContext.DECIMAL128;
 	public static final String APPLICATION_DEFAULT_CONVERSION_MILE_TO_KM = "1.609344";
 	public static final String APPLICATION_DEFAULT_CONVERSION_KM_TO_MILE = "0,6213711922";
 	public static final String APPLICATION_DEFAULT_LOCALE = "DEFAULT";
@@ -26,10 +25,28 @@ public class Constants {
 	public static final String APPLICATION_DEFAULT_EXPORTER_CLASS_NAME = CSVExporter.class.getCanonicalName();
 	public static final String APPLICATION_DEFAULT_RANGEFINDER_CLASS_NAME = SphericalRangefinder.class.getCanonicalName();
 	public static final String APPLICATION_DEFAULT_SPEEDO_CLASS_NAME = MtSegSpeedo.class.getCanonicalName();
+	public static final boolean APPLICATION_DEFAULT_SPEEDO_STORE_SPEED = true;
 	public static final String APPLICATION_DEFAULT_COMPASS_CLASS_NAME = Compass.class.getCanonicalName();
+	public static final boolean APPLICATION_DEFAULT_COMPASS_STORE_BEARING = true;
+	
+	public static final MathContext APPLICATION_BIGDECIMAL_MATH_CONTEXT = MathContext.DECIMAL128;
+	
+	//ISpeedo tags
+	public static final String APPLICATION_TAG_POINT_SPEED = "pointSpeed";
+	public static final String APPLICATION_TAG_MEAN_SPEED = "meanSpeed";
+	public static final String APPLICATION_TAG_MEDIAN_SPEED = "medianSpeed";
+	public static final String APPLICATION_TAG_MIN_SPEED = "minSpeed";
+	public static final String APPLICATION_TAG_MAX_SPEED = "maxSpeed";
+	//End ISpeedo tags
+	
+	//ICompass tags
+	public static final String APPLICATION_TAG_BEARING = "bearing";
+	public static final String APPLICATION_TAG_CARDINAL_DIRECTION = "cardinalDirection";
+	//End ICompass tags
 	
 	public static final String TOOLS_RANGEFINDER_CLASS_NAME = "TOOLS_RANGEFINDER_CLASS_NAME";
 	public static final String TOOLS_SPEEDO_CLASS_NAME = "TOOLS_SPEEDO_CLASS_NAME";
+	public static final String TOOLS_SPEEDO_STORE_SPEED = "TOOLS_SPEEDO_STORE_SPEED";
 	public static final String TOOLS_CHRONOMETER_CLASS_NAME = "TOOLS_CHRONOMETER_CLASS_NAME";
 	public static final String TOOLS_EXPORTER_CLASS_NAME = "TOOLS_EXPORTER_CLASS_NAME";
 	public static final String TOOLS_COMPASS_CLASS_NAME = "TOOLS_COMPASS_CLASS_NAME";

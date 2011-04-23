@@ -73,10 +73,10 @@ public class KmhSpeedo extends AbstractSpeedo {
 	//END CONVERTING METHODS
 	
 	@Override
-	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
+	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2, boolean storeSpeed) {
 		if(c1==null || c2==null) return Speed.SPEED_ZERO_KMH;
 		
-		Speed speed = super.getSpeed(c1, c2);
+		Speed speed = super.getSpeed(c1, c2, storeSpeed);
 		speed.setUnit(MeasurementUnit.KMH);
 		speed.setSpeed((speed==null || speed.compareTo(Speed.SPEED_ZERO_KMH)==0)?Speed.SPEED_ZERO_KMH.getSpeed():speed.getSpeed().multiply(BigDecimal.valueOf(3.6)));
 		

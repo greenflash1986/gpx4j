@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -50,11 +49,15 @@ public class GpxWriter implements IGpxWriter {
 	private GpxDriver driver;
 	private Logger logger;
 	
+	private SimpleDateFormat sdf;
+	
 	public GpxWriter() throws GpxFileNotFoundException, GpxPropertiesException{		
 			this.logger = Logger.getLogger(GpxReader.class);
 			this.driver = GpxDriver.getGpxDriver();
 			this.tags = driver.getTagsProperties();
 			this.appProperties = driver.getDriverProperties();
+			
+			this.sdf = new SimpleDateFormat(this.appProperties.getProperty(Constants.DRIVER_DATE_FORMAT));
 	}
 	
 	private Element getElement(GpxDocument doc) throws IllegalArgumentException{
@@ -74,9 +77,6 @@ public class GpxWriter implements IGpxWriter {
 		element.setAttribute(this.tags.getProperty(Constants.TAG_GPX_VERSION), version);
 		
 		Metadata metadata = doc.getMetadata();
-		List<Waypoint> waypoints = doc.getWaypoints();
-		List<Route> routes = doc.getRoutes();
-		List<Track> tracks = doc.getTracks();
 		Extensions extensions = doc.getExtensions();
 		
 		if(metadata!=null){
@@ -85,17 +85,21 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(met);
 		}
 			//element.addContent(this.getElement(metadata));
-		if(tracks!=null && tracks.size()>0)
-			for(int i=0;i<tracks.size();i++)
-				element.addContent(this.getElement(tracks.get(i)));
-		if(waypoints!=null && waypoints.size()>0)
-			for(int i=0;i<waypoints.size();i++)
-				element.addContent(this.getElement(waypoints.get(i)));
-		if(routes!=null && routes.size()>0)
-			for(int i=0;i<routes.size();i++)
-				element.addContent(this.getElement(routes.get(i)));
-		if(extensions!=null && extensions.getExtensions().size()>0)
-			element.addContent(this.getElement(extensions));
+
+		Iterator<Track> tracks = doc.getTracks().iterator();
+		while(tracks.hasNext())
+			element.addContent(this.getElement(tracks.next()));
+		
+		Iterator<Waypoint> waypoints = doc.getWaypoints().iterator();
+		while(waypoints.hasNext())
+			element.addContent(this.getElement(waypoints.next()));
+		
+		Iterator<Route> routes = doc.getRoutes().iterator();
+		while(routes.hasNext())
+			element.addContent(this.getElement(routes.next()));
+
+		element.addContent(this.getElement(extensions));
+		
 		return element;
 	}
 	
@@ -107,7 +111,6 @@ public class GpxWriter implements IGpxWriter {
 		String desc = metadata.getDesc();
 		Person author = metadata.getAuthor();
 		Copyright copyright = metadata.getCopyright();
-		List<Link> links = metadata.getLinks();
 		Calendar time = metadata.getDate();
 		String keywords = metadata.getKeywords();
 		Bounds bounds = metadata.getBounds();
@@ -122,9 +125,11 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(this.getElement(author).setName(this.tags.getProperty(Constants.TAG_METADATA_AUTHOR)));
 		if(copyright!=null)
 			element.addContent(this.getElement(copyright));
-		if(links!=null && links.size()>0)
-			for(int i=0;i<links.size();i++)
-				element.addContent(this.getElement(links.get(i)));
+		
+		Iterator<Link> links = metadata.getLinks().iterator();
+		while(links.hasNext())
+			element.addContent(this.getElement(links.next()));
+		
 		if(time!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_METADATA_TIME)).setText(this.dateToString(time)));
 		if(keywords!=null)
@@ -141,8 +146,7 @@ public class GpxWriter implements IGpxWriter {
 		if(date==null)
 			throw new IllegalArgumentException("Error converting from date to string. Date must not be null");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat(this.appProperties.getProperty(Constants.DRIVER_DATE_FORMAT));
-		return sdf.format(date.getTime());
+		return this.sdf.format(date.getTime());
 	}
 	
 	private Calendar stringToDate(String date) throws ParseException{
@@ -179,20 +183,12 @@ public class GpxWriter implements IGpxWriter {
 		if(bounds==null)
 			throw new IllegalArgumentException("Error creating bounds element. Bounds must not be null");
 		
-		BigDecimal minLat = bounds.getMinLatitude();
-		BigDecimal minLon = bounds.getMinLongitude();
-		BigDecimal maxLat = bounds.getMaxLatitude();
-		BigDecimal maxLon = bounds.getMaxLongitude();
-		
-		if(minLat==null || minLon==null || maxLat==null || maxLon==null)
-			throw new IllegalArgumentException("Bounds content must not be null");
-		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_BOUNDS));
 		
-		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MINLAT), String.valueOf(minLat));
-		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MINLON), String.valueOf(minLon));
-		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MAXLAT), String.valueOf(maxLat));
-		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MAXLON), String.valueOf(maxLon));
+		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MINLAT), bounds.getMinLatitude().toString());
+		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MINLON), bounds.getMinLongitude().toString());
+		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MAXLAT), bounds.getMaxLatitude().toString());
+		element.setAttribute(this.tags.getProperty(Constants.TAG_BOUNDS_MAXLON), bounds.getMaxLongitude().toString());
 		
 		return element;
 	}
@@ -201,15 +197,9 @@ public class GpxWriter implements IGpxWriter {
 		if(email==null)
 			throw new IllegalArgumentException("Error creating email element. Email must not be null");
 		
-		String user = email.getUser();
-		String domain = email.getDomain();
-		
-		if(user==null || domain==null)
-			throw new IllegalArgumentException("Error creating email element. Email content must not be null.");
-		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_EMAIL));
-		element.setAttribute(this.tags.getProperty(Constants.TAG_EMAIL_ID), user);
-		element.setAttribute(this.tags.getProperty(Constants.TAG_EMAIL_DOMAIN), domain);
+		element.setAttribute(this.tags.getProperty(Constants.TAG_EMAIL_ID), email.getUser());
+		element.setAttribute(this.tags.getProperty(Constants.TAG_EMAIL_DOMAIN), email.getDomain());
 		
 		return element;
 	}
@@ -239,19 +229,10 @@ public class GpxWriter implements IGpxWriter {
 		if(copyright==null)
 			throw new IllegalArgumentException("Error creating copyright element. Copyright must not be null");
 		
-		String author = copyright.getAuthor();
-		Calendar year = copyright.getYear();
-		String license = copyright.getLicense();
-		
-		if(author==null)
-			throw new IllegalArgumentException("Error creating copyright element. Author must not be null");
-		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_COPYRIGHT));
-		element.setAttribute(this.tags.getProperty(Constants.TAG_COPYRIGHT_AUTHOR), author);
-		if(year!=null)
-			element.addContent(new Element(this.tags.getProperty(Constants.TAG_COPYRIGHT_YEAR)).setText(String.valueOf(year)));
-		if(license!=null)
-			element.addContent(new Element(this.tags.getProperty(Constants.TAG_COPYRIGHT_LICENSE)).setText(license));
+		element.setAttribute(this.tags.getProperty(Constants.TAG_COPYRIGHT_AUTHOR), copyright.getAuthor());
+		element.addContent(new Element(this.tags.getProperty(Constants.TAG_COPYRIGHT_YEAR)).setText(String.valueOf(copyright.getYear())));
+		element.addContent(new Element(this.tags.getProperty(Constants.TAG_COPYRIGHT_LICENSE)).setText(copyright.getLicense()));
 		
 		return element;
 	}
@@ -311,7 +292,6 @@ public class GpxWriter implements IGpxWriter {
 		String cmt = waypoint.getCmt();
 		String desc = waypoint.getDescription();
 		String src = waypoint.getSrc();
-		List<Link> links = waypoint.getLinks();
 		String sym = waypoint.getSym();
 		String type = waypoint.getType();
 		Fix fix = waypoint.getFix();
@@ -321,7 +301,6 @@ public class GpxWriter implements IGpxWriter {
 		BigDecimal pdop = waypoint.getPdop();
 		BigDecimal ageofdgpsdata = waypoint.getAgeOfDgpsData();
 		DgpsStation dgpsstation = waypoint.getdGpsId();
-		Extensions extensions = waypoint.getExtensions();
 		
 		if(elevation!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_ELE)).setText(String.valueOf(elevation)));
@@ -339,9 +318,11 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_DESC)).setText(desc));
 		if(src!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_SRC)).setText(src));
-		if(links!=null && links.size()>0)
-			for(int i=0;i<links.size();i++)
-				element.addContent(this.getElement(links.get(i)));
+		
+		Iterator<Link> links = waypoint.getLinks().iterator();
+		while(links.hasNext())
+			element.addContent(this.getElement(links.next()));
+		
 		if(sym!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_SYM)).setText(sym));
 		if(type!=null)
@@ -360,8 +341,8 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_AGEOFDGPSDATA)).setText(String.valueOf(ageofdgpsdata)));
 		if(dgpsstation!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_WPT_DGPSID)).setText(String.valueOf(dgpsstation.getDgpsStation())));
-		if(extensions!=null && extensions.getExtensions().size()>0)
-			element.addContent(this.getElement(extensions));
+		
+		element.addContent(this.getElement(waypoint.getExtensions()));
 		
 		return element;
 	}
@@ -374,11 +355,8 @@ public class GpxWriter implements IGpxWriter {
 		String cmt = route.getCmt();
 		String desc = route.getDesc();
 		String src = route.getSrc();
-		List<Link> links = route.getLinks();
 		BigInteger number = route.getNumber();
 		String type = route.getType();
-		Extensions extensions = route.getExtensions();
-		List<Waypoint> waypoints = route.getWaypoints();
 		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_RTE));
 		if(name!=null)
@@ -389,18 +367,21 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_RTE_DESC)).setText(desc));
 		if(src!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_RTE_SRC)).setText(src));
-		if(links!=null && links.size()>0)
-			for(int i=0;i<links.size();i++)
-				element.addContent(this.getElement(links.get(i)));
+		
+		Iterator<Link> links = route.getLinks().iterator();
+		while(links.hasNext())
+			element.addContent(this.getElement(links.next()));
+		
 		if(number!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_RTE_NUMBER)).setText(String.valueOf(number)));
 		if(type!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_RTE_TYPE)).setText(type));
-		if(extensions!=null)
-			element.addContent(this.getElement(extensions));
-		if(waypoints!=null && waypoints.size()>0)
-			for(int i=0;i<waypoints.size();i++)
-				element.addContent(this.getElement(waypoints.get(i)).setName(this.tags.getProperty(Constants.TAG_RTE_RTEPT)));
+		
+		element.addContent(this.getElement(route.getExtensions()));
+		
+		Iterator<Waypoint> waypoints = route.getWaypoints().iterator();
+		while(waypoints.hasNext())
+			element.addContent(this.getElement(waypoints.next()).setName(this.tags.getProperty(Constants.TAG_RTE_RTEPT)));
 		
 		return element;
 	}
@@ -413,11 +394,8 @@ public class GpxWriter implements IGpxWriter {
 		String cmt = track.getCmt();
 		String desc = track.getDesc();
 		String src = track.getSrc();
-		List<Link> links = track.getLinks();
 		BigInteger number = track.getNumber();
 		String type = track.getType();
-		Extensions extensions = track.getExtensions();
-		List<TrackSegment> trackSegments = track.getTrackSegments();
 		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_TRK));
 		if(name!=null)
@@ -428,18 +406,21 @@ public class GpxWriter implements IGpxWriter {
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_DESC)).setText(desc));
 		if(src!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_SRC)).setText(src));
-		if(links!=null && links.size()>0)
-			for(int i=0;i<links.size();i++)
-				this.getElement(links.get(i));
+		
+		Iterator<Link> links = track.getLinks().iterator();
+		while(links.hasNext())
+			this.getElement(links.next());
+		
 		if(number!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_NUMBER)).setText(String.valueOf(number)));
 		if(type!=null)
 			element.addContent(new Element(this.tags.getProperty(Constants.TAG_TRK_TYPE)).setText(type));
-		if(extensions!=null && extensions.getExtensions().size()>0)
-			element.addContent(this.getElement(extensions));
-		if(trackSegments!=null && trackSegments.size()>0)
-			for(int i=0;i<trackSegments.size();i++)
-				element.addContent(this.getElement(trackSegments.get(i)));
+
+		element.addContent(this.getElement(track.getExtensions()));
+		
+		Iterator<TrackSegment> trackSegments = track.getTrackSegments().iterator();
+		while(trackSegments.hasNext())
+			element.addContent(this.getElement(trackSegments.next()));
 		
 		return element;
 	}
@@ -448,15 +429,13 @@ public class GpxWriter implements IGpxWriter {
 		if(trackSegment==null)
 			throw new IllegalArgumentException("Error creating tracksegment element. TrackSegment must not be null");
 		
-		List<Waypoint> waypoints = trackSegment.getWaypoints();
-		Extensions extensions = trackSegment.getExtensions();
-		
 		Element element = new Element(this.tags.getProperty(Constants.TAG_TRKSEG));
-		if(waypoints!=null && waypoints.size()>0)
-			for(int i=0;i<waypoints.size();i++)
-				element.addContent(this.getElement(waypoints.get(i)).setName(this.tags.getProperty(Constants.TAG_TRKSEG_TRKPT)));
-		if(extensions!=null)
-			element.addContent(this.getElement(extensions));
+		
+		Iterator<Waypoint> waypoints = trackSegment.getWaypoints().iterator();
+		while(waypoints.hasNext())
+			element.addContent(this.getElement(waypoints.next()).setName(this.tags.getProperty(Constants.TAG_TRKSEG_TRKPT)));
+		
+		element.addContent(this.getElement(trackSegment.getExtensions()));
 		
 		return element;
 	}
@@ -475,9 +454,9 @@ public class GpxWriter implements IGpxWriter {
 		Document root = new Document(this.getElement(doc));
 		
 		Format format = Format.getPrettyFormat();
-		format.setIndent(this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, "\t"));
-		format.setLineSeparator((Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_WRITER_NEW_LINE, "true")))?"\n":"");
-		format.setExpandEmptyElements(Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_EXPAND_EMPTY_ELEMENTS, "false")));
+		format.setIndent(this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, Constants.APPLICATION_DEFAULT_DRIVER_WRITER_IDENTATION_TEXT));
+		format.setLineSeparator((Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_WRITER_NEW_LINE, String.valueOf(Constants.APPLICATION_DEFAULT_DRIVER_WRITER_NEW_LINE))))?"\n":"");
+		format.setExpandEmptyElements(Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_EXPAND_EMPTY_ELEMENTS, String.valueOf(Constants.APPLICATION_DEFAULT_DRIVER_WRITER_EXPAND_EMPTY_ELEMENTS))));
 		XMLOutputter outputter = new XMLOutputter(format);
 		
 		try {

@@ -73,10 +73,10 @@ public class MinMileSpeedo extends AbstractSpeedo {
 	}
 
 	@Override
-	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2) {
+	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2, boolean storeSpeed) {
 		if(c1==null || c2==null) return Speed.SPEED_ZERO_MINUTES_PER_MILE;
 		
-		Speed speed = super.getSpeed(c1, c2);
+		Speed speed = super.getSpeed(c1, c2, storeSpeed);
 		speed.setSpeed((speed==null || speed.compareTo(Speed.SPEED_ZERO_METERS_PER_SECOND)==0)?Speed.SPEED_ZERO_MINUTES_PER_MILE.getSpeed():BigDecimal.valueOf(1000).multiply(km).divide((speed.getSpeed().multiply(BigDecimal.valueOf(60))), Constants.APPLICATION_BIGDECIMAL_MATH_CONTEXT));
 		speed.setUnit(MeasurementUnit.MIN_MI);
 		

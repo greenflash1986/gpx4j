@@ -9,6 +9,8 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 	private BigDecimal longitude;
 	private Calendar time;
 	
+	private Extensions extensions;
+	
 	public CoordinatesObject(BigDecimal latitude, BigDecimal longitude){
 		if(latitude == null || longitude == null) throw new IllegalArgumentException("Error creating CoordinatesObject. Latitude and longitude must not be null");
 		
@@ -16,6 +18,8 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 		this.longitude = longitude;
 		this.elevation = null;
 		this.time = null;
+		
+		this.extensions = new Extensions();
 	}
 	
 	public CoordinatesObject(BigDecimal latitude, BigDecimal longitude, BigDecimal elevation){
@@ -25,6 +29,8 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 		this.longitude = longitude;
 		this.elevation = elevation;
 		this.time = null;
+		
+		this.extensions = new Extensions();
 	}
 	
 	public CoordinatesObject(BigDecimal latitude, BigDecimal longitude, BigDecimal elevation, Calendar time){
@@ -34,31 +40,37 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 		this.longitude = longitude;
 		this.elevation = elevation;
 		this.time = time;
+		
+		this.extensions = new Extensions();
 	}
 	
 	public BigDecimal getElevation() {
-		return elevation;
+		return this.elevation;
 	}
 	public void setElevation(BigDecimal elevation) {
 		this.elevation = elevation;
 	}
 	public BigDecimal getLatitude() {
-		return latitude;
+		return this.latitude;
 	}
 	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 	public BigDecimal getLongitude() {
-		return longitude;
+		return this.longitude;
 	}
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 	public Calendar getTime() {
-		return time;
+		return this.time;
 	}
 	public void setTime(Calendar time) {
 		this.time = time;
+	}
+
+	public Extensions getExtensions() {
+		return this.extensions;
 	}
 
 	//Comparable method

@@ -69,8 +69,8 @@ public class CardinalDirection extends BaseObject implements IExtensible{
 		SSW.setMaxAngle(BigDecimal.valueOf(213.75));
 		
 		SW.setCardinalId(11);
-		SSW.setMinAngle(BigDecimal.valueOf(213.75));
-		SSW.setMaxAngle(BigDecimal.valueOf(236.25));
+		SW.setMinAngle(BigDecimal.valueOf(213.75));
+		SW.setMaxAngle(BigDecimal.valueOf(236.25));
 		
 		WSW.setCardinalId(12);
 		WSW.setMinAngle(BigDecimal.valueOf(236.25));

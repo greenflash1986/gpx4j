@@ -34,7 +34,7 @@ public interface ISpeedo {
 	
 	public Speed maxSpeed(Track t);
 	
-	public List<Speed> getSpeeds(Track t);
+	public List<Speed> getSpeeds(Track t, boolean storeSpeed);
 	
 	public Speed meanSpeed(TrackSegment ts);
 	
@@ -46,9 +46,9 @@ public interface ISpeedo {
 	
 	public Speed maxSpeed(TrackSegment ts);
 	
-	public List<Speed> getSpeeds(TrackSegment ts);
+	public List<Speed> getSpeeds(TrackSegment ts, boolean storeSpeed);
 	
-	public List<Speed> getSpeedPerSecond(TrackSegment ts);
+	public List<Speed> getSpeedPerSecond(TrackSegment ts, boolean storeSpeed);
 	
 	public Speed meanSpeed(Route r);
 	
@@ -60,9 +60,9 @@ public interface ISpeedo {
 	
 	public Speed maxSpeed(Route r);
 	
-	public List<Speed> getSpeeds(Route r);
+	public List<Speed> getSpeeds(Route r, boolean storeSpeed);
 	
-	public List<Speed> getSpeedPerSecond(Route r);
+	public List<Speed> getSpeedPerSecond(Route r, boolean storeSpeed);
 	
 	public Speed meanSpeed(PointsSequence ps);
 	
@@ -74,9 +74,9 @@ public interface ISpeedo {
 	
 	public Speed maxSpeed(PointsSequence ps);
 	
-	public List<Speed> getSpeeds(PointsSequence ps);
+	public List<Speed> getSpeeds(PointsSequence ps, boolean storeSpeed);
 	
-	public List<Speed> getSpeedPerSecond(PointsSequence ps);
+	public List<Speed> getSpeedPerSecond(PointsSequence ps, boolean storeSpeed);
 	
-	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2);
+	public Speed getSpeed(CoordinatesObject c1, CoordinatesObject c2, boolean storeSpeed);
 }
