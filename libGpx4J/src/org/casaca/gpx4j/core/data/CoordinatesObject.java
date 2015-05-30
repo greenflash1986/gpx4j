@@ -84,17 +84,9 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 			else
 				return this.getTime().compareTo(o.getTime());
 	}
-<<<<<<< .working
 
 	@Override
 	public String toString() {
 		return "lat: "+this.latitude+" lon: "+this.longitude+" elevation: "+this.elevation+" date: "+this.time.getTimeInMillis();
 	}
 }
-=======
-
-	@Override
-	public String toString() {
-		return "lat: "+this.latitude+" lon: "+this.longitude+" elevation: "+this.elevation+" date: "+this.time.getTimeInMillis();
-	}
-}>>>>>>> .merge-right.r70
