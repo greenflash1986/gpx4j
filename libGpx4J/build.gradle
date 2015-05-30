@@ -1,0 +1,4 @@
+dependencies {
+    compile 'log4j:log4j:1.2.16', 'com.sun.xml.bind:jaxb-impl:2.2.3-2', 'jdom:jdom:1.1'
+    testCompile 'junit:junit:4.12'
+}
