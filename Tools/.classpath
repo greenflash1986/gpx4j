@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry exported="true" kind="src" path="/libGpx4J"/>
 	<classpathentry kind="output" path="bin"/>
-	<classpathentry kind="src" path="/libGpx4J" exported="true"/>
 </classpath>

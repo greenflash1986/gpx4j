@@ -5,5 +5,10 @@
 // Generated on: 2011.03.03 at 07:41:19 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.topografix.com/GPX/1/1", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(
+		namespace = "http://www.topografix.com/GPX/1/1",
+		elementFormDefault = XmlNsForm.QUALIFIED)
 package org.casaca.gpx4j.core.driver.jaxb;
+
+import javax.xml.bind.annotation.*;
+
