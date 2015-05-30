@@ -9,6 +9,8 @@ import org.casaca.gpx4j.core.data.GpxDocument;
 import org.casaca.gpx4j.core.data.Waypoint;
 import org.casaca.gpx4j.core.driver.GpxDriver;
 import org.casaca.gpx4j.core.driver.IGpxWriter;
+import org.casaca.gpx4j.core.exception.GpxFileNotFoundException;
+import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.core.exception.GpxWriterException;
 import org.casaca.gpx4j.core.util.SortedList;
@@ -22,7 +24,7 @@ public class JaxbGPXWriterTest {
 		driver.loadDefaultDriverProperties();
 		GpxDocument doc = new GpxDocument();
 		SortedList<Waypoint> wpts = doc.getWaypoints();
-		wpts.add(new Waypoint(new BigDecimal(13.34), new BigDecimal(54.32)));
+		wpts.add(new Waypoint(new BigDecimal("13.34"), new BigDecimal("54.32")));
 		
 		IGpxWriter writer = driver.createWriter();
 		String gpx = writer.writeToString(doc);
@@ -42,5 +44,26 @@ public class JaxbGPXWriterTest {
 			}
 		}
 		System.out.println("The complete gpx was:\n" + gpx);
+	}
+	
+	@Test
+	public void formatBigDecimal() throws GpxFileNotFoundException, GpxPropertiesException, GpxWriterException, GpxIOException {
+		GpxDriver driver = GpxDriver.getGpxDriver();
+		driver.loadDefaultDriverProperties();
+		GpxDocument doc = new GpxDocument();
+		SortedList<Waypoint> wpts = doc.getWaypoints();
+		wpts.add(new Waypoint(new BigDecimal("13.37"), new BigDecimal("54.31")));
+		
+		IGpxWriter writer = driver.createWriter();
+		String gpx = writer.writeToString(doc);
+		
+		String[] lines = gpx.split("\n");
+		for (String line : lines) {
+			if (line.contains("<wpt")) {
+				if (!line.contains("lat=\"13.37\"") && !line.contains("lon=\"54.31\"")) {
+					fail("Format not correct. Line was: \n\n" + line + "\n\nAnd the complete gpx was:\n\n" + gpx);
+				}
+			}
+		}
 	}
 }
