@@ -556,6 +556,8 @@ public class JaxbAdapter implements IGpxAdapter {
 			return null;
 		
 		WptType wType = new WptType();
+		wType.setLat(waypoint.getLatitude());
+		wType.setLon(waypoint.getLongitude());
 		wType.setEle(waypoint.getElevation());
 		try {
 			wType.setTime((waypoint.getTime()==null)?null:DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar)waypoint.getTime()));
