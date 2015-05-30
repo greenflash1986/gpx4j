@@ -10,4 +10,18 @@ subprojects {
 	repositories {
     	mavenCentral()
 	}
+	
+	configurations {
+		provided
+	}
+
+	//Include provided for compilation
+	sourceSets.main.compileClasspath += [configurations.provided]
+
+	// optional: if using 'eclipse' plugin
+	eclipse {
+		classpath {
+			plusConfigurations += [configurations.provided]
+  		}
+	}
 }
