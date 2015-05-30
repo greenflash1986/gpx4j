@@ -2,8 +2,11 @@ package org.casaca.gpx4j.core.driver.jaxb;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
@@ -44,24 +47,23 @@ public class GpxWriter implements IGpxWriter {
 
 	@Override
 	public void write(GpxDocument doc, OutputStream output) throws GpxPropertiesException, GpxIOException, GpxWriterException {
-		if(this.appProperties==null)
-			 throw new GpxPropertiesException("Driver properties not loaded. Please load properties from driver");
-		
+		String formatted = writeToString(doc);
+		OutputStreamWriter out = null;
 		try {
-			JAXBContext jc = JAXBContext.newInstance(GpxType.class.getPackage().getName());
-			Marshaller marshaller = jc.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_WRITER_NEW_LINE, "true")));
-			marshaller.setProperty("com.sun.xml.bind.indentString", this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, "\t"));
-			marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, this.appProperties.getProperty(Constants.DRIVER_DTD_URL_GPX_1_1));
-			marshaller.setProperty(Marshaller.JAXB_ENCODING, this.appProperties.getProperty(Constants.DRIVER_WRITER_ENCODING, "UTF-8"));
-			//marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, this.appProperties.getProperty(Constants.DRIVER_DTD_URL_GPX_1_1));
-			marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new JaxbNamespacePrefixMapper());
-			
-			JAXBElement<GpxType> element = new JAXBElement<GpxType>(new QName(this.tagProperties.getProperty(Constants.TAG_GPX)), GpxType.class, (GpxType)new JaxbAdapter().fromGpxDocument(doc));
-			
-			marshaller.marshal(element, output);
-		} catch (JAXBException e) {
-			throw new GpxWriterException(e);
+			out = new OutputStreamWriter(output, "UTF-8");
+			out.write(formatted);
+		} catch (UnsupportedEncodingException e1) {
+			throw new GpxWriterException(e1);
+		} catch (IOException e) {
+			throw new GpxIOException(e);
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+			} catch (IOException e) {
+				throw new GpxIOException(e);
+			}
 		}
 	}
 
@@ -74,8 +76,10 @@ public class GpxWriter implements IGpxWriter {
 			JAXBContext jc = JAXBContext.newInstance(GpxType.class.getPackage().getName());
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_WRITER_NEW_LINE, "true")));
+			marshaller.setProperty("com.sun.xml.bind.indentString", this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, "\t"));
 			marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, this.appProperties.getProperty(Constants.DRIVER_DTD_URL_GPX_1_1));
 			marshaller.setProperty(Marshaller.JAXB_ENCODING, this.appProperties.getProperty(Constants.DRIVER_WRITER_ENCODING, "UTF-8"));
+			//marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new JaxbNamespacePrefixMapper());
 			
 			StringWriter sw = new StringWriter();
 			JAXBElement<GpxType> element = new JAXBElement<GpxType>(new QName(this.tagProperties.getProperty(Constants.TAG_GPX)), GpxType.class, (GpxType)new JaxbAdapter().fromGpxDocument(doc));
