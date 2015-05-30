@@ -76,7 +76,7 @@ public class GpxWriter implements IGpxWriter {
 			JAXBContext jc = JAXBContext.newInstance(GpxType.class.getPackage().getName());
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.valueOf(this.appProperties.getProperty(Constants.DRIVER_WRITER_NEW_LINE, "true")));
-			//marshaller.setProperty("com.sun.xml.bind.indentString", this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, "\t"));
+			marshaller.setProperty("com.sun.xml.bind.indentString", this.appProperties.getProperty(Constants.DRIVER_WRITER_INDENTATION_TEXT, "\t"));
 			marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, this.appProperties.getProperty(Constants.DRIVER_DTD_URL_GPX_1_1));
 			marshaller.setProperty(Marshaller.JAXB_ENCODING, this.appProperties.getProperty(Constants.DRIVER_WRITER_ENCODING, "UTF-8"));
 			//marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new JaxbNamespacePrefixMapper());
