@@ -30,11 +30,17 @@ public class JaxbGPXWriterTest {
 		String[] lines = gpx.split("\n");
 		for (String line : lines) {
 			if (line.contains("wpt")) {
-				if (!line.contains("<wpt>") && !line.contains("</wpt>")) {
-					System.out.println(gpx);
-					fail();
+				if (!line.contains("<wpt ") && !line.contains("</wpt>")) {
+					fail("Namespace not correct. Line was: \n\n" + line + "\n\nAnd the complete gpx was:\n\n" + gpx);
+				}
+			}
+			
+			if (line.contains("gpx")) {
+				if (!line.contains("<gpx") && !line.contains("</gpx>")) {
+					fail("Namespace not correct. Line was: \n\n" + line + "\n\nAnd the complete gpx was:\n\n" + gpx);
 				}
 			}
 		}
+		System.out.println("The complete gpx was:\n" + gpx);
 	}
 }
