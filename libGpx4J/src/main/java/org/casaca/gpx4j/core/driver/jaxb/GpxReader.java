@@ -46,7 +46,7 @@ public class GpxReader implements IGpxReader {
 	private boolean validateDocumentLocal(InputStream input) throws GpxValidationException{
 		try {
 			SchemaFactory schFact = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
-			Schema sch = schFact.newSchema(Constants.class.getResource(Constants.APPLICATION_DEFAULT_GPX_DTD_1_1_FILENAME));
+			Schema sch = schFact.newSchema(GpxReader.class.getClassLoader().getResource(Constants.APPLICATION_DEFAULT_GPX_DTD_1_1_FILENAME));
 			Validator validator = sch.newValidator();
 			validator.validate(new StreamSource(input));
 			

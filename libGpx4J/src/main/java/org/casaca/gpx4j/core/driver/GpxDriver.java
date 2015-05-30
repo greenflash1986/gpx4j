@@ -38,7 +38,7 @@ public class GpxDriver {
 		this.loggerProperties = null;
 		try {
 			this.tagProperties = new Properties();
-			this.tagProperties.load(this.getClass().getResourceAsStream(defaultTagsFileName));
+			this.tagProperties.load(GpxDriver.class.getClassLoader().getResourceAsStream(defaultTagsFileName));
 		} catch (IOException e) {
 			throw new GpxFileNotFoundException(defaultTagsFileName+" properties file does not found.\n"+e.getMessage());
 		}
@@ -72,7 +72,7 @@ public class GpxDriver {
 	
 	public void loadDefaultDriverProperties() throws GpxFileNotFoundException, GpxIOException {
 		try {
-			this.loadDriverProperties(Constants.class.getResourceAsStream(Constants.APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME));
+			this.loadDriverProperties(GpxDriver.class.getClassLoader().getResourceAsStream(Constants.APPLICATION_DEFAULT_DRIVER_PROPERTIES_FILENAME));
 		}catch (IOException e) {
 			throw new GpxIOException("Error loading default driver properties.", e);
 		}
