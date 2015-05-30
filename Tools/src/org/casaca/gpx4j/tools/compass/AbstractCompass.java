@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
 import org.casaca.gpx4j.tools.Tool;
+import org.casaca.gpx4j.tools.data.CardinalDirection;
 import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 import org.casaca.gpx4j.tools.data.MeasurementUnit;
 import org.casaca.gpx4j.tools.util.Constants;

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.casaca.gpx4j.core.data.BaseObject;
 import org.casaca.gpx4j.core.data.IExtensible;
 
-public class MeasurementUnit extends BaseObject implements IExtensible, Comparable<MeasurementUnit> {
+public class MeasurementUnit extends BaseObject implements IMeasurementUnit, IExtensible {
 	
 	//DISTANCE
 	public static final MeasurementUnit METER = new MeasurementUnit("m", "meter");
@@ -56,7 +56,7 @@ public class MeasurementUnit extends BaseObject implements IExtensible, Comparab
 	}
 
 	@Override
-	public int compareTo(MeasurementUnit o) {
+	public int compareTo(IMeasurementUnit o) {
 		if(this.symbol==null) return 1;
 		
 		if(o==null || o.getSymbol()==null)

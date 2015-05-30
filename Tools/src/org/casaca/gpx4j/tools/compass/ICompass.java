@@ -3,6 +3,7 @@ package org.casaca.gpx4j.tools.compass;
 import java.math.BigDecimal;
 
 import org.casaca.gpx4j.core.data.CoordinatesObject;
+import org.casaca.gpx4j.tools.data.CardinalDirection;
 import org.casaca.gpx4j.tools.data.IMeasurementUnit;
 
 public interface ICompass {
