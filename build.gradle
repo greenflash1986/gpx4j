@@ -1,4 +1,7 @@
-version = '0.8-SNAPSHOT'
+allprojects {
+	group = 'com.github.greenflash1986'
+	version = '0.1.0-SNAPSHOT'
+}
 
 subprojects {
 	apply plugin: 'java'
