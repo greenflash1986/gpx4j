@@ -1,18 +1,28 @@
+plugins {
+  id 'net.researchgate.release' version '2.1.0'
+}
+
+release {
+	tagTemplate = 'v$version'
+}
+
+// common config
 allprojects {
 	group = 'com.github.greenflash1986'
 	version = '0.1.0-SNAPSHOT'
+
+	repositories {
+		mavenCentral()
+	}
 }
 
+// subprojects
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 
 	sourceCompatibility = 1.6
 	targetCompatibility = 1.6
-
-	repositories {
-    	mavenCentral()
-	}
 	
 	configurations {
 		provided
