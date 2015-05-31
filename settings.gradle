@@ -1,1 +1,1 @@
-include 'libGpx4J', 'Tools'
+include 'libGpx4J', 'libGpx4JTools'

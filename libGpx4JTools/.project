@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Tools</name>
+	<name>libGpx4JTools</name>
 	<comment/>
 	<projects/>
 	<natures>
+		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 	<buildSpec>
