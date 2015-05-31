@@ -44,6 +44,16 @@ This library is based on the work of [superkas83](https://code.google.com/u/supe
 and the original work can be found under <https://code.google.com/p/gpx4j/>. I fixed
 some build / merge problems in his work and fixed some bugs.
 
+# Dependencies
+* compileTime:
+  * ['log4j:log4j:1.2.16'](http://mvnrepository.com/artifact/log4j/log4j/1.2.16)
+* runtime:
+  * either ['com.sun.xml.bind:jaxb-impl:2.2.3-2'](http://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl/2.2.3-2)
+  * or ['jdom:jdom:1.1'](http://mvnrepository.com/artifact/jdom/jdom/1.1)
+  depending on your configuration (could be changed by providing a
+  `gpx4j_default.properties` with `DRIVER_WRITER_CLASS_NAME=org.casaca.gpx4j.core.driver.jdom.GpxWriter`
+  and `DRIVER_READER_CLASS_NAME=org.casaca.gpx4j.core.driver.jdom.GpxReader` -properties
+
 # Changelog
 * JaxbAdapter: added two lines provided by a patch from
 [will.qu...@gmail.com](https://code.google.com/u/115281083828137929151/) to transfer
