@@ -1,0 +1,3 @@
+[submodule "wikiGithub"]
+	path = wikiGithub
+	url = https://github.com/greenflash1986/gpx4j.wiki.git
