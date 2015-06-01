@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.casaca.gpx4j.core.data.GpxDocument;
 import org.casaca.gpx4j.core.data.Waypoint;
@@ -13,7 +14,6 @@ import org.casaca.gpx4j.core.exception.GpxFileNotFoundException;
 import org.casaca.gpx4j.core.exception.GpxIOException;
 import org.casaca.gpx4j.core.exception.GpxPropertiesException;
 import org.casaca.gpx4j.core.exception.GpxWriterException;
-import org.casaca.gpx4j.core.util.SortedList;
 import org.junit.Test;
 
 public class JaxbGPXWriterTest {
@@ -23,7 +23,7 @@ public class JaxbGPXWriterTest {
 		GpxDriver driver = GpxDriver.getGpxDriver();
 		driver.loadDefaultDriverProperties();
 		GpxDocument doc = new GpxDocument();
-		SortedList<Waypoint> wpts = doc.getWaypoints();
+		List<Waypoint> wpts = doc.getWaypoints();
 		wpts.add(new Waypoint(new BigDecimal("13.34"), new BigDecimal("54.32")));
 		
 		IGpxWriter writer = driver.createWriter();
@@ -51,7 +51,7 @@ public class JaxbGPXWriterTest {
 		GpxDriver driver = GpxDriver.getGpxDriver();
 		driver.loadDefaultDriverProperties();
 		GpxDocument doc = new GpxDocument();
-		SortedList<Waypoint> wpts = doc.getWaypoints();
+		List<Waypoint> wpts = doc.getWaypoints();
 		wpts.add(new Waypoint(new BigDecimal("13.37"), new BigDecimal("54.31")));
 		
 		IGpxWriter writer = driver.createWriter();
