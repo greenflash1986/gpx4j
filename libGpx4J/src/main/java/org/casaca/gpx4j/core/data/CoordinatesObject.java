@@ -76,13 +76,17 @@ public abstract class CoordinatesObject extends BaseObject implements Comparable
 	//Comparable method
 	@Override
 	public int compareTo(CoordinatesObject o) {
-		if(this.time==null)
-			return 1;
-		else
-			if(o==null || o.getTime()==null)
-				return -1;
+		if (time == null) {
+			if (o.time == null) 
+				return 0;
 			else
+				return -1;
+		} else {
+			if (o.time == null)
+				return 1;
+			else						
 				return this.getTime().compareTo(o.getTime());
+		}
 	}
 
 	@Override
