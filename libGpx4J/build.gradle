@@ -1,5 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+	
+repositories {
+	mavenCentral()
+}
+
 dependencies {
-    compile 'log4j:log4j:1.2.16'
-    provided 'com.sun.xml.bind:jaxb-impl:2.2.3-2', 'jdom:jdom:1.1'
-    testCompile 'junit:junit:4.12', 'com.sun.xml.bind:jaxb-impl:2.2.3-2'
+	compile 'log4j:log4j:1.2.16'
+	compile 'com.sun.xml.bind:jaxb-impl:2.2.3-2', 'org.jdom:jdom:1.1'
+	testCompile 'junit:junit:4.12'
 }
